@@ -1,0 +1,88 @@
+CREATE DATABASE proyectoInfoAplicada;
+USE proyectoInfoAplicada
+Use master
+
+
+CREATE TABLE Sexo(
+idSexo TINYINT IDENTITY(1,1) PRIMARY KEY,
+descripcion char(15)
+)
+
+CREATE TABLE Departamento(
+idDepartamento TINYINT IDENTITY(1,1) PRIMARY KEY,
+descripcion VARCHAR(50)
+)
+
+CREATE TABLE Trimestre(
+  idTrimestre TINYINT IDENTITY(1,1),
+  descripcion VARCHAR(30),
+  PRIMARY KEY (idTrimestre)
+);
+
+CREATE TABLE Transaccion(
+idTransaccion TINYINT,
+PRIMARY KEY (idTransaccion),
+descripcion VARCHAR(50)
+);
+
+CREATE TABLE Funcionario(
+  idFuncionario INT IDENTITY(1,1),
+  idDepartamento TINYINT,
+  idSexo TINYINT,
+  nombre VARCHAR(30),
+  apellidos VARCHAR(30),
+  fechaNacimiento DATE,
+  foto VARBINARY(MAX),
+  loginName VARCHAR(30),
+  [password] VARCHAR(30)
+  PRIMARY KEY (idFuncionario),
+  CONSTRAINT FK_IdDepartamento FOREIGN KEY  (idDepartamento) REFERENCES Departamento(idDepartamento),
+  CONSTRAINT FK_IdSexo FOREIGN KEY  (idSexo) REFERENCES Sexo(idSexo) 
+);
+
+
+CREATE TABLE Solicitud(
+idSolicitud SMALLINT IDENTITY(1,1) PRIMARY KEY,
+fechaHora SMALLDATETIME,
+idUsuarioAplicativo INT,
+idResponsableTI INT,
+fechaInicio DATE,
+fechaFin DATE,
+idResponsableUsuarioFinal INT,
+documentoActaConstitutiva VARCHAR(100)
+
+CONSTRAINT FK_usuarioAplicativoFuncionario FOREIGN KEY (idUsuarioAplicativo)
+REFERENCES Funcionario(idFuncionario),
+CONSTRAINT FK_responsableTI FOREIGN KEY (idResponsableTI)
+REFERENCES Funcionario(idFuncionario),
+CONSTRAINT FK_responsableUsuarioFinal FOREIGN KEY (idResponsableUsuarioFinal)
+REFERENCES Funcionario(idFuncionario)
+
+)
+
+CREATE TABLE Avance(
+  idAvance TINYINT IDENTITY(1,1),
+  idTrimestre TINYINT,
+  idUsuarioAplicativo INT,
+  idSolicitud SMALLINT,
+  documento VARCHAR(30),
+  fechaHora SMALLDATETIME,
+  PRIMARY KEY (idAvance),
+  CONSTRAINT FK_idTrimestre FOREIGN KEY (idTrimestre) REFERENCES Trimestre(idTrimestre), 
+  CONSTRAINT FK_idUsuarioAplicativo FOREIGN KEY (idUsuarioAplicativo) REFERENCES Funcionario(idFuncionario),
+  CONSTRAINT FK_idSolicitud FOREIGN KEY (idSolicitud) REFERENCES Solicitud(idSolicitud)
+
+);
+
+CREATE TABLE BitacoraAuditoria(
+  idBitacoraAuditoria SMALLINT IDENTITY(1,1),
+  idTransaccion SMALLINT,
+  idUsuarioAplicativo INT,
+  idSolicitud SMALLINT,
+  descripcion VARCHAR(30),
+  fechaHora SMALLDATETIME,
+  PRIMARY KEY (idBitacoraAuditoria),
+  CONSTRAINT FK_idTransaccion FOREIGN KEY (idTransaccion) REFERENCES Transaccion(idTransaccion), 
+  CONSTRAINT FK_idUsuarioAplicativo2 FOREIGN KEY (idUsuarioAplicativo) REFERENCES Funcionario(idFuncionario),
+  CONSTRAINT FK_idSolicitud2 FOREIGN KEY (idSolicitud) REFERENCES Solicitud(idSolicitud)
+);
