@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { HeaderComponent } from './componentes/header/header.component';
+import { LoginService } from './servicios/login.service';
+import { FormsModule } from '@angular/forms';
+import { FlashMessagesModule} from 'angular2-flash-messages';
 
 @NgModule({
   declarations: [
@@ -14,9 +17,11 @@ import { HeaderComponent } from './componentes/header/header.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    AppRoutingModule,
+    FlashMessagesModule.forRoot()
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
