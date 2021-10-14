@@ -8,18 +8,20 @@ import { HeaderComponent } from './componentes/header/header.component';
 import { LoginService } from './servicios/login.service';
 import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule} from 'angular2-flash-messages';
+import { SidebarComponent } from './componentes/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     AppRoutingModule,
-    FlashMessagesModule.forRoot()
+      FormsModule,
+      FlashMessagesModule.forRoot()
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]
