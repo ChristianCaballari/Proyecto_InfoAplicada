@@ -16,7 +16,7 @@ funcionarioController.eliminar
 );
 
 // Consultar vuelo
-router.get('/consultar',
+router.get('/consultar/:correo/:password',
 funcionarioController.obtener
 );
 

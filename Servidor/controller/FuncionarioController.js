@@ -29,7 +29,21 @@ exports.eliminar  = (req, res) => {
 
 exports.obtener = (req, res) => {
 
+const { correo } = req.params;
+    
+const { password } = req.params;
+
+console.log(correo);
+
+console.log(password);
+
+   let transaccion = `EXEC [dbo].[sp_selectFuncionarioLogin] @loginName =N'${correo}',@password =N'${password}'`;
+
+   let data = new DataFuncionario();
+   data.transaccion2(transaccion,res);
+
 } 
 
 exports.editar = (req, res) => {
+    
 }

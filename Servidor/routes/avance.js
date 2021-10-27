@@ -16,7 +16,7 @@ router.delete('/:id',
 );
 
 // Consultar vuelo
-router.get('/consultar',
+router.get('/obtener/:id',
     solicitudController.obtener
 );
 
