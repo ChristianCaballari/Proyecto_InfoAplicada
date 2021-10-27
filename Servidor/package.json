@@ -1,0 +1,20 @@
+{
+  "name": "apinodejs",
+  "version": "1.0.0",
+  "description": "API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "author": "Abigail Gonzalez",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mssql": "^7.2.1"
+  }
+}
