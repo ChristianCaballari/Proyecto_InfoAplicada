@@ -27,3 +27,7 @@ export interface Funcionario1{
      apellidos:string;
      fechaNacimiento?:string;
 }
+export interface FuncionarioLogin{
+     loginName?:string;
+     password?:string;
+}

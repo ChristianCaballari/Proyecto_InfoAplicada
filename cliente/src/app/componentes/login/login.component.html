@@ -7,16 +7,26 @@
         <div class="col-12 user-img">
           <img src="/assets/avatar.jpg" />
         </div>
-        <form (submit)="login()" class="col-12 mt-4">
+        <!--#funcionarioForm="ngForm" (ngSubmit)="agregar(funcionarioForm)"  (ngSubmit)="login()"-->
+        <form #funcionarioLogin="ngForm" (ngSubmit)="login(funcionarioLogin)" class="col-12 mt-4">
           <div class="form-group m-3" id="user-group">
             <input
               type="email"
               placeholder="Username"
               class="form-control"
-              name="email"
-              [(ngModel)]="email"
-              required
+              name="loginName"
+              #loginName="ngModel"
+                [(ngModel)]="funcionario.loginName"
+                [ngClass]="{'is-invalid': loginName.errors && loginName.touched}"
+                required
+                minlength="2" 
             />
+            <div [hidden]="!loginName.errors?.required" class="invalid-feedback">
+              <span class="label danger">* Campo requerido</span>
+            </div> 
+            <div [hidden]="!loginName.errors?.minlength" class="invalid-feedback">
+              <span class="label danger">* Debe contener al menos 2 caracteres </span>
+            </div>
           </div>
           <div class="form-group m-3" id="contrasena-group">
             <input
@@ -24,9 +34,18 @@
               placeholder="Password"
               class="form-control"
               name="password"
-              [(ngModel)]="password"
+              #password="ngModel"
+              [(ngModel)]="funcionario.password"
+              [ngClass]="{'is-invalid': password.errors && password.touched}"
               required
+              minlength="2" 
             />
+
+            <div [hidden]="!password.errors?.required" class="invalid-feedback">
+              <span class="label danger">* Campo requerido</span>
+            </div> 
+           
+
           </div>
           <div class="form-group m-3">
             <button type="submit" class="btn btn-primary form-control">
