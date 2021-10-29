@@ -25,5 +25,9 @@ router.put('/editar/:id',
 funcionarioController.editar
 );
 
+router.get('/obtenerFuncionarios',
+     funcionarioController.obtenerFuncionarios
+);
+
 
 module.exports = router; //exportar porque se usa en index

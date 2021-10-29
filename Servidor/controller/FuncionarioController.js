@@ -47,3 +47,11 @@ console.log(password);
 exports.editar = (req, res) => {
     
 }
+
+exports.obtenerFuncionarios = (req, res) =>{
+    
+    let transaccion = `EXEC [dbo].[sp_selectFuncionarios];`
+    let data = new DataFuncionario();
+    data.transaccion2(transaccion,res);
+    
+}

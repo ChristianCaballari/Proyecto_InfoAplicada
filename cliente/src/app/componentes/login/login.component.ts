@@ -1,8 +1,10 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FlashMessagesService } from 'angular2-flash-messages';
 import { LoginService } from 'src/app/servicios/login.service';
+import Swal from 'sweetalert2'
+//@sweetalert2/theme-dark
+
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,7 @@ export class LoginComponent implements OnInit {
  // loginName: string = '';
 
   constructor(private router: Router,
-              private flashMessages: FlashMessagesService,
+             
               private loginService: LoginService) { }
 
   ngOnInit(): void {
@@ -30,26 +32,27 @@ export class LoginComponent implements OnInit {
       console.log(Object.keys(rest).length);
 
         if(Object.keys(rest).length === 1){
-          this.flashMessages.show("Datos Incorrectos",{
-            cssClass: 'alert-danger', timeout: 4000
-          });
+          Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            title: 'Datos Incorrectos',
+            showConfirmButton: false,
+            timer: 2500
+          })
         }else{
           //loginName = Object.values(rest)[0]; 
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         }     
      });
     }else{
-      this.flashMessages.show("Correo o Contraseña Incorrecta",{
-        cssClass: 'alert-danger', timeout: 4000
-      });
+      Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        title: 'Todos los campos son obligatorios',
+        showConfirmButton: false,
+        timer: 3500
+      })
+      
     }
   }
 }
-    /*if(this.loginService.login(this.email,this.password)){
-      this.router.navigate(['/']);
-    }else{
-      this.flashMessages.show("Correo o Contraseña Incorrecta",{
-        cssClass: 'alert-danger', timeout: 4000
-      });
-    }
-  }*/

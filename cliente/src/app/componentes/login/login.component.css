@@ -47,8 +47,8 @@
      background-repeat: no-repeat ;
      background-position: center center;
      background-attachment: fixed;   
-    padding: 160px;
-    height:auto;
+     padding: 200px;
+     height:auto;
 }
 .alert-top{
 position: absolute;

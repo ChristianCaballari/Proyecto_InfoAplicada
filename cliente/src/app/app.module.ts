@@ -1,3 +1,4 @@
+import { FuncionarioService } from './servicios/funcionario.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -9,21 +10,28 @@ import { LoginService } from './servicios/login.service';
 import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule} from 'angular2-flash-messages';
 import { SidebarComponent } from './componentes/sidebar/sidebar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomeComponent } from './componentes/home/home.component';
+import { FuncionariosComponent } from './componentes/funcionarios/funcionarios.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    HomeComponent,
+    FuncionariosComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
       FormsModule,
-      FlashMessagesModule.forRoot()
+      FlashMessagesModule.forRoot(),
+  
+      NgbModule
   ],
-  providers: [LoginService],
+  providers: [LoginService,FuncionarioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

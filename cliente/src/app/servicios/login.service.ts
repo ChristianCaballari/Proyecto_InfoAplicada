@@ -1,50 +1,37 @@
-import { Injectable } from "@angular/core";
-import { HttpHeaders } from '@angular/common/http';
-import clienteAxios from "../componentes/ClienteAxios/Axios";
-import axios from "axios";
+import { Injectable } from '@angular/core';
+import clienteAxios from '../componentes/ClienteAxios/Axios';
 @Injectable()
-export class LoginService{
-     valid: Boolean = false;
+export class LoginService {
+  loginName: string = '';
 
-     constructor(){
-    
-     };
+  constructor() {}
 
-   async  login(email:string, password: string){
-         
-       let funcionario;
-       let fun = {};
+  async login(email: string, password: string) {
+    let funcionario;
+    let fun = {};
 
-      // console.log(email);
-      // console.log(password);
+    try {
+      let rest = await clienteAxios.get(
+        `funcionario/consultar/${email}/${password}`
+      );
+      let obj = rest.data[0]['loginName'];
+      let pas = rest.data[0]['password'];
+      this.loginName = obj;
 
-     
-     
-       try {
-         let rest = await clienteAxios.get(`funcionario/consultar/${email}/${password}`);
+      console.log("Login Name : "+obj);
 
-        
-
-         console.log("Holakkkk");
-         console.log(rest.data);
-         console.log("Holakkkk");
-
-         let obj = (rest.data[0]['loginName']);
-         let pas = (rest.data[0]['password']);
-         console.log(obj);
-         console.log(pas);
-         
-
-
-         funcionario = rest.data[0];
-         fun = funcionario;
-
-        // console.log(fun);
-
-       } catch (error) {
-         
-  
-      }
-       return fun;
-     }
+      funcionario = rest.data[0];
+      fun = funcionario;
+    } catch (error) {
+      console.log(error);
+    }
+    return fun;
+  }
+  getAutenicacion() {
+    console.log(this.loginName);
+    return this.loginName;
+  }
+  logout(){
+    this.loginName = '';
+  }
 }

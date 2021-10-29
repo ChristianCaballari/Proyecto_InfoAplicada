@@ -1,0 +1,173 @@
+<div class="container mt-2">
+  <section id="actions" class="py-4 mb-4 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <a
+            href="#"
+            class="btn btn-dark btn-block"
+            data-bs-toggle="modal"
+            data-bs-target="#agregarClienteModal"
+            ><i class="fas fa-plus"></i> Agregar Funcionario
+          </a>
+        </div>
+      </div>
+    </div>
+ 
+  </section>
+
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4>Listado de Funcionarios</h4>
+      </div>
+      <table class="table table-striped">
+        <thead class="bg-dark text-white">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Fecha Nacimiento</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Departamento</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let funcionario of funcionarios">
+            
+            <td>{{ funcionario.nombre }}</td>
+            <td>{{ funcionario.apellidos }}</td>
+            <td>{{ funcionario.fechaNacimiento }}</td>
+            <td>{{ funcionario.sexo }}</td>
+            <td>{{ funcionario.departamento }}</td>
+            <td>
+               <a routerLink="/funcionario/editar/{{funcionario.idFuncionario}}" class="btn btn-secondary">
+                    <i class="fas fa-edit"></i>
+               </a>
+             </td>
+             <td>
+               <a routerLink="/funcionario/eliminar/{{funcionario.idFuncionario}}" class="btn btn-secondary">
+                    <i class="fas fa-trash-alt"></i>
+               </a>
+             </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <a>{{collectionSize}}</a>
+  <div class="d-flex justify-content-between p-2">
+     <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshFuncionarios()">
+     </ngb-pagination>
+   
+     <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshFuncionarios()">
+       <option [ngValue]="2">2 items per page</option>
+       <option [ngValue]="4">4 items per page</option>
+       <option [ngValue]="6">6 items per page</option>
+     </select>
+   </div>
+
+<!--Agregar cliente modal-->
+<div class="modal fade" id="agregarClienteModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title">Agregar Funcionario</h5>
+        <button
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          #botonCerrar
+        ></button>
+      </div>
+
+      <flash-messages></flash-messages>
+
+      <form #clienteForm="ngForm">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" class="form-control" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+               <label for="apellidos">Apellidos</label>
+               <input type="text" name="apellidos" class="form-control" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="foto">Foto</label>
+                <input type="text" name="foto" class="form-control" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="fechaNacimiento">Fecha Nacimiento</label>
+                <input type="date" name="fechaNacimiento" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="loginName">Nombre de Usuario</label>
+                <input type="text" name="loginName" class="form-control" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" name="password" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+               <label for="departamento">Departamento</label>
+               <select class="form-select" aria-label="Default select example">
+                 <option selected>Seleccion el Departamento</option>
+                 <option value="1">Gerencia</option>
+                 <option value="2">Transporte</option>
+                 <option value="3">RH</option>
+                 <option value="4">Contabilidad</option>
+                 <option value="5">TI</option>
+                 <option value="6">Proveeduria</option>
+                 <option value="7">Finanzas</option>
+                 <option value="8">Tesoreria</option>
+                 <option value="9">Legal</option>
+                 <option value="10">Mantenimiento</option>
+                 <option value="11">Recepcion</option>
+                 <option value="12">Doctor empresa</option>
+                 <option value="13">Servicio al cliente</option>
+                 <option value="14">Auditoria</option>
+                 <option value="15">Seguridad</option>
+                 <option value="16">Subgerencia</option>
+                 <option value="17">Contraloria</option>
+                 <option value="18">Mensajeria</option>
+                 <option value="19">Archivo</option>
+               </select>
+          </div>
+          <div class="form-group">
+               <label for="sexo">Sexo</label>
+               <select class="form-select" aria-label="Default select example">
+                 <option selected>Seleccion el Sexo</option>
+                 <option value="0">Hombre</option>
+                 <option value="1">Mujer</option>
+                 <option value="2">Otro</option>
+               </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-dark">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

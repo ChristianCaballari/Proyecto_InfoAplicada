@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark p-3">
+<nav class="navbar navbar-expand-sm bg-black p-3">
  <div class="container">
     <a class="nav-link btn-secondary btn text-white" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-      <i class="fas fa-cog"></i> Administracion
+      <i class="fas fa-bars"></i>
     </a>
     <button
       class="navbar-toggler"
@@ -11,6 +11,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
   </div>
+
+
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav">
       <li class="nav-item px-2">
@@ -18,17 +20,23 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown mr-3">
+      <li  class="nav-item dropdown mr-3">
           <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-               <i class="fas fa-user"></i>Bienvenido
-             </a>
-     
+               <i class="fas fa-user"></i>Bienvenido {{loggerUser}}
+          </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <li><a routerLink="/configuracion" class="dropdown-item">
             <i class="fas fa-cog"></i>Congiguracion</a
           ></li>
         </div>
       </li>
+    </ul>
+    <ul class="navbar-nav p-1">
+    <li *ngIf="isLoggin" class="nav-item">
+      <a style="cursor: pointer;"  (click)="logout()" class="btn btn-secondary"><span>Salir</span>
+       
+      </a>
+    </li>
     </ul>
   </div>
 </nav>
