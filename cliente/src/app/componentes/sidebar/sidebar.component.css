@@ -1,3 +1,8 @@
 .offcanvas-start{
      width: 270px;
 }
+
+.fa-building,.fa-user-circle,
+.fa-sign-out-alt{
+    font-size: 1.5rem;
+}

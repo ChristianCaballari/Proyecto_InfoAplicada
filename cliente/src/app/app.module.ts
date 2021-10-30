@@ -14,6 +14,7 @@ import { HomeComponent } from './componentes/home/home.component';
 import { FuncionariosComponent } from './componentes/funcionarios/funcionarios.component';
 import { FuncionarioService } from './servicios/funcionario.service';
 import { LoginService } from './servicios/login.service';
+import { DepartamentoComponent } from './componentes/departamento/departamento.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LoginService } from './servicios/login.service';
     HeaderComponent,
     SidebarComponent,
     HomeComponent,
-    FuncionariosComponent
+    FuncionariosComponent,
+    DepartamentoComponent
   ],
   imports: [
     BrowserModule,

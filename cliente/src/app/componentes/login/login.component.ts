@@ -34,11 +34,14 @@ export class LoginComponent implements OnInit {
 
      
       let loginName=funcionarioLogin.value['loginName'];
-      let password= funcionarioLogin.value['password']
+      let password= funcionarioLogin.value['password'];
+
+      console.log(funcionarioLogin.value);
      
      
       this.loginService.login(loginName,password).then(rest =>{
         console.log(Object.keys(rest).length);
+        console.log(rest);
         if(Object.keys(rest).length==1){
           Swal.fire({
             title:'Usuario no existe',
@@ -50,6 +53,14 @@ export class LoginComponent implements OnInit {
             )
         }else{
           this.router.navigate(['/home']);
+          Swal.fire({
+            title:'Bienvenido',
+            position: 'top-end',
+            icon:'success',
+            showConfirmButton: false,
+            timer: 2000
+            }
+            )
         }
       });
 
