@@ -1,8 +1,51 @@
 <app-header></app-header>
 <app-sidebar></app-sidebar>
 
-<div class="container">
-     <div class="center">
-     <p>departamento works!</p>
-</div>
-</div>
+
+<div class="container mt-2">
+     <section id="actions" class="py-4 mb-4 bg-light">
+       <div class="container">
+         <div class="row">
+           <div class="col-md-3">
+             <a
+               href="#"
+               class="btn btn-dark btn-block"
+               data-bs-toggle="modal"
+               data-bs-target="#agregarClienteModal"
+               ><i class="fas fa-plus"></i> Agregar
+             </a>
+           </div>
+         </div>
+       </div>
+     </section>
+
+     <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h4>Listado de Funcionarios</h4>
+            </div>
+            <table class="table table-striped">
+              <thead class="bg-dark text-white">
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Descripci&oacute;n</th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dep of departamentos">
+                  
+                  <td>{{ dep.idDepartamento }}</td>
+                  <td>{{ dep.descripcion }}</td>
+                 
+                  <td>
+                     
+                   </td>
+                   <td>
+                    
+                   </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>

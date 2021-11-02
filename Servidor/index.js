@@ -20,6 +20,7 @@ const PORT = process.env.PORT || 4000;
 
 //app.use('/api/', require('./routes/avance')); 
 app.use('/api/funcionario', require('./routes/funcionario'));
+app.use('/api/departamento', require('./routes/departamento'));
 
 app.listen(PORT, () =>{
     console.log('Servidor Activo');

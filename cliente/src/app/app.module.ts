@@ -15,6 +15,7 @@ import { FuncionariosComponent } from './componentes/funcionarios/funcionarios.c
 import { FuncionarioService } from './servicios/funcionario.service';
 import { LoginService } from './servicios/login.service';
 import { DepartamentoComponent } from './componentes/departamento/departamento.component';
+import { DepartamentoService } from './servicios/departamento.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { DepartamentoComponent } from './componentes/departamento/departamento.c
   
       NgbModule
   ],
-  providers: [LoginService,FuncionarioService],
+  providers: [LoginService,FuncionarioService,DepartamentoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
