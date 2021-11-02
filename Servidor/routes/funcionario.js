@@ -10,17 +10,17 @@ router.post('/',
 funcionarioController.crear
    
 );
-// Eliminar un vuelo (api/id)
+// Eliminar (api/id)
 router.delete('/:id',
 funcionarioController.eliminar
 );
 
-// Consultar vuelo
+// Consultar 
 router.get('/consultar/:correo/:password',
 funcionarioController.obtener
 );
 
-// Actualizar vuelo
+// Actualizar
 router.put('/editar/:id',
 funcionarioController.editar
 );

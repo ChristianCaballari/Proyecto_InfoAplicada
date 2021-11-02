@@ -62,11 +62,8 @@ export class LoginComponent implements OnInit {
             }
             )
         }
-      });
-
-     
-         // this.router.navigate(['/home']);
-
+      });   
+         // this.router.navigate(['/home'])
     }else{
       Swal.fire({
         title:'Campos obligatorios',
@@ -78,37 +75,4 @@ export class LoginComponent implements OnInit {
         )
     }
   }
-
-  /*login(){
-
-    if(this.email != '' && this.password != ''){
-
-     this.loginService.login(this.email,this.password).then(rest =>{
-         
-      console.log(Object.keys(rest).length);
-
-        if(Object.keys(rest).length === 1){
-          Swal.fire({
-            position: 'top-end',
-            icon: 'warning',
-            title: 'Datos Incorrectos',
-            showConfirmButton: false,
-            timer: 2500
-          })
-        }else{
-          //loginName = Object.values(rest)[0]; 
-          this.router.navigate(['/home']);
-        }     
-     });
-    }else{
-      Swal.fire({
-        position: 'top-end',
-        icon: 'warning',
-        title: 'Todos los campos son obligatorios',
-        showConfirmButton: false,
-        timer: 3500
-      })
-      
-    }
-  }*/
 }
