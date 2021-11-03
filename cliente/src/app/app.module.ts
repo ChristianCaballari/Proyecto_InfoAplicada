@@ -1,3 +1,5 @@
+import { Swal2 } from './mensajes/mensajes';
+import { GuardianGuard } from './guards/guardian.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -7,7 +9,7 @@ import { HeaderComponent } from './componentes/header/header.component';
 import { FormsModule } from '@angular/forms';
 
 
-import { FlashMessagesModule} from 'angular2-flash-messages';
+import { HttpClientModule} from '@angular/common/http';
 import { SidebarComponent } from './componentes/sidebar/sidebar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './componentes/home/home.component';
@@ -30,12 +32,11 @@ import { DepartamentoService } from './servicios/departamento.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
       FormsModule,
-      FlashMessagesModule.forRoot(),
-  
       NgbModule
   ],
-  providers: [LoginService,FuncionarioService,DepartamentoService],
+  providers: [LoginService,FuncionarioService,DepartamentoService,GuardianGuard,Swal2],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -37,13 +37,21 @@ funcionario: Funcionario = {
   funcionarios1: any={};
 
   constructor(private funcionarioService: FuncionarioService) { 
-    console.log("Hola Perro");
+   
    // this.refreshFuncionarios(); 
    this.refreshFuncionarios();  
+   console.log("Hola ------------o");
+   this.funcionarioService. getAllFuncionarios().subscribe((res) => {
+    console.log("Hola ------------okjkj");
+       console.log(res);
+       
+    console.log("Hola ------------okjkjk");
+   });
+   console.log("Hola ------------o");
   }
 
   ngOnInit(): void {
-    console.log("Hola Perro");
+   
     this.funcionarioService.getFuncionarios().then(rest =>{
       console.log(rest);
       this.funcionarios1 = rest;
@@ -53,6 +61,8 @@ funcionario: Funcionario = {
       FUNCIONARIOS2 = this.funcionarios;
       console.log(this.collectionSize);
       console.log(this.funcionarios);
+
+     
     });   
   }
 

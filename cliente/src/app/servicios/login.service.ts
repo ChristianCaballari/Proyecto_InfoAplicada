@@ -1,37 +1,78 @@
+
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { IResponse } from './../modelo/Respuesta.models';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import clienteAxios from '../componentes/ClienteAxios/Axios';
+import { ILogin } from '../modelo/login.model';
+import { Router } from '@angular/router';
+import {Swal2}  from '../mensajes/mensajes';
+import { environment } from '../environment';
+import { catchError, map } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+const helper = new JwtHelperService();
+
 @Injectable()
 export class LoginService {
-  loginName: string = '';
+ 
+   loggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor() {}
+  constructor(private http: HttpClient,
+    private router: Router,
+    private swal: Swal2) {}
 
-  async login(email: string, password: string) {
-    let funcionario;
-    let fun = {};
+  login2(ilogin: ILogin): Observable<IResponse | void>{
+   
+    this.verificarToken();
+ 
+    return this.http
+    .post<IResponse>(`${environment.API_URL}/auth`,ilogin)
+    .pipe(
+      map((res:IResponse) =>{
+       //saveToke()
+      // console.log(res);
+       if(res.noValido){
+        console.log(res);
+       }else{
+       this.saveToken(res.token);
+       this.loggedIn.next(true);
+       }
+       
+       return res;
+      }),
+      catchError((error) =>this.hanlerError(error))
+    );
+  }
+  logout():void {
+    localStorage.removeItem('token');
+    this.loggedIn.next(false);
+  }
+  
+  getIsLogged():Observable<boolean>{
+  return this.loggedIn.asObservable();
+  }
 
-    try {
-      let rest = await clienteAxios.get(
-        `funcionario/consultar/${email}/${password}`
-      );
-      let obj = rest.data[0]['loginName'];
-      let pas = rest.data[0]['password'];
-      this.loginName = obj;
-
-      console.log("Login Name : "+obj);
-
-      funcionario = rest.data[0];
-      fun = funcionario;
-    } catch (error) {
-      console.log(error);
+  private verificarToken(): void {
+    const token = localStorage.getItem("token");
+    const isExpired = helper.isTokenExpired(token?.toString());
+    if(isExpired){
+      this.logout();
+    }else{
+      this.loggedIn.next(true);
     }
-    return fun;
+    console.log("isExpired : "+isExpired);
+
   }
-  getAutenicacion() {
-    console.log(this.loginName);
-    return this.loginName;
+
+  private saveToken(token:string): void{
+   localStorage.setItem('token', token);
   }
-  logout(){
-    this.loginName = '';
+  private hanlerError(error:any): Observable<never>{
+    let errorMessage = 'An error ocurred retrienvin data';
+    if(error){
+      errorMessage = `Error: code ${error.message}`
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
   }
 }

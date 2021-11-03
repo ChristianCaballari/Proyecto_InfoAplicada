@@ -1,78 +1,44 @@
-
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { FuncionarioLogin } from 'src/app/modelo/Funcionario.model';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from 'src/app/servicios/login.service';
+import { ILogin } from './../../modelo/login.model';
 import { NgForm } from '@angular/forms';
-import Swal from 'sweetalert2'
-//@sweetalert2/theme-dark
-
+import { Router } from '@angular/router';
+//import { Subscription } from 'rxjs';
+import { Swal2 } from 'src/app/mensajes/mensajes';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
-  funcionario: FuncionarioLogin = {
+ // private subscripcion: Subscription;
+  funcionario: ILogin = {
     loginName: '',
-    password: '',     
-};
+    password: '',
+  };
+  @ViewChild('funcionarioLogin') funcionarioLogin: NgForm;
 
-  @ViewChild("funcionarioLogin") funcionarioLogin: NgForm;
+  constructor(private loginService: LoginService, private router: Router, private swal:Swal2 ) {}
+  ngOnInit(): void {}
+  // ngOnDestroy(): void {
+  //   this.subscripcion.unsubscribe();
+  // }
 
-  constructor(private router: Router,
-             
-              private loginService: LoginService) { }
-
-  ngOnInit(): void {
-  }
-
-  login(funcionarioLogin: NgForm){
-    if(funcionarioLogin.valid){
-
-     
-      let loginName=funcionarioLogin.value['loginName'];
-      let password= funcionarioLogin.value['password'];
-
-      console.log(funcionarioLogin.value);
-     
-     
-      this.loginService.login(loginName,password).then(rest =>{
-        console.log(Object.keys(rest).length);
-        console.log(rest);
-        if(Object.keys(rest).length==1){
-          Swal.fire({
-            title:'Usuario no existe',
-            position: 'top-end',
-            icon:'warning',
-            showConfirmButton: false,
-            timer: 2000
-            }
-            )
-        }else{
-          this.router.navigate(['/home']);
-          Swal.fire({
-            title:'Bienvenido',
-            position: 'top-end',
-            icon:'success',
-            showConfirmButton: false,
-            timer: 2000
-            }
-            )
-        }
-      });   
-         // this.router.navigate(['/home'])
-    }else{
-      Swal.fire({
-        title:'Campos obligatorios',
-        position: 'top-end',
-        icon:'warning',
-        showConfirmButton: false,
-        timer: 2000
-        }
-        )
+  login(funcionarioLogin: NgForm) {
+    if (funcionarioLogin.valid) {
+      console.log("Hola");
+    //  this.subscripcion.add(
+        this.loginService.login2(this.funcionario).subscribe((res) => {
+        
+         if (Object(res)['noValido'] == 'No') {
+            this.swal.error(Object(res)['msg']);
+         }else{
+          this.swal.exitoso("Bienvenido al Sistema");
+           this.router.navigate(['/home']);
+         }
+        })
+    //  );
     }
   }
 }

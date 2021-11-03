@@ -18,15 +18,7 @@ export class HeaderComponent implements OnInit {
            private  Routerer: Router) {}
 
   ngOnInit(): void {
-    console.log("Esta o no esta");
-     console.log(this.loginService.getAutenicacion());
-     console.log("Esta o no esta");
-    if(this.loginService.getAutenicacion() != ''){
-      this.isLoggin = true;
-      this.loggerUser = this.loginService.getAutenicacion();
-    }else{
-      this.isLoggin = false;
-    }
+   
   }
   logout(){
     this.loginService.logout();
