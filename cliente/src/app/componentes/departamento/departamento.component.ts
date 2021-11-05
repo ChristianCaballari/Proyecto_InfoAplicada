@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Departamento } from 'src/app/modelo/Departamento.model';
 import { DepartamentoService } from './../../servicios/departamento.service';
 import { NgForm } from '@angular/forms';
+import { Swal2 } from 'src/app/mensajes/mensajes';
 import  Swal  from 'sweetalert2';
 
-let DEPARTAMENTOS2: Departamento[]=[]
+
 @Component({
   selector: 'app-departamento',
   templateUrl: './departamento.component.html',
@@ -17,9 +18,9 @@ export class DepartamentoComponent implements OnInit {
     descripcion: ''     
 };
 
-  //@ViewChild("departamentoForm") funcionarioForm: NgForm;
+  @ViewChild("departamentoForm") funcionarioForm: NgForm;
 
-  //@ViewChild("botonCerrar") botonCerrar: ElementRef;
+  @ViewChild("botonCerrar") botonCerrar: ElementRef;
 
   page = 1;
   pageSize = 4;
@@ -29,22 +30,53 @@ export class DepartamentoComponent implements OnInit {
   departamentos: Departamento[];
   departamentos1: any={};
 
-  constructor(private departamentoService: DepartamentoService) { 
+  constructor(private departamentoService: DepartamentoService,private swal: Swal2) { 
 
   }
 
   ngOnInit(): void {
-    this.departamentoService.getDepartamentos().then(rest =>{
-      console.log(rest);
-      this.departamentos1 = rest;
-      this.departamentos = this.departamentos1;
-      this.collectionSize = this.departamentos.length;
-     
-      DEPARTAMENTOS2 = this.departamentos;
-      console.log(this.collectionSize);
-      console.log(this.departamentos);
-    }); 
+  
+    this.obtenerDepartamentos();
 
+  }
+
+  agregarDepartamento(departamentoForm: NgForm){
+    console.log(departamentoForm.value);
+    //this.departamentoService.addDepartament(departamentoForm)
+  }
+  obtenerDepartamentos(): void{
+      this.departamentoService.getAllDepartament().subscribe((response)=>{
+
+      this.departamentos1=response;
+      this.departamentos=this.departamentos1;
+ 
+     })
+  }
+
+  eliminarDepartamento(dep: Departamento){
+    console.log("Departamento-> ",dep);
+    ///this.departamentoService.deleteDepartament(dep);
+      Swal.fire({
+        title: 'Estas seguro que desea eliminar el siguiente funcionario?',
+        text: 'Funcionario',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.departamentoService.deleteDepartament(dep);
+          this.obtenerDepartamentos();
+          Swal.fire(
+            'Eliminado',
+            'Eliminado correctamente.',
+            'success'   
+          )
+        }
+      })
+    
+      
   }
 
   

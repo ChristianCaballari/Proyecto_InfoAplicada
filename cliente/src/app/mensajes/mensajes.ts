@@ -30,4 +30,25 @@ export class Swal2 {
       timer: 2000,
     });
   }
+//'Estas seguro que desea eliminar el siguiente funcionario?'
+  delete(msg: string,text: string){
+  Swal.fire({
+    title: msg,
+    text: text,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Eliminar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Eliminado',
+        'Eliminado correctamente.',
+        'success'
+      )
+    }
+  })
+}
+
 }
