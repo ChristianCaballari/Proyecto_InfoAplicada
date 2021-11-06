@@ -4,6 +4,7 @@ const Data = require("../dataModel/Data");
 exports.crear = (req, res) => {
 
     const descripcion = req.body.descripcion; 
+    console.log("backend-> descripcion ",descripcion);
 
     let transaccion = `EXEC [dbo].[sp_insertDepartment] @descripcion =N'${descripcion}'`;
 
@@ -17,9 +18,10 @@ exports.crear = (req, res) => {
 exports.eliminar  = (req, res) => {
       const idDepartamento = req.params.id;   
 
-      let trasaccion = `EXEC [dbo].[sp_deleteDepartment] @idDepartamento =N'${idDepartamento}'`;
+      let transaccion = `EXEC [dbo].[sp_deleteDepartment] @idDepartamento =N'${idDepartamento}'`;
       let data = new Data();
-      data.transaccion2(trasaccion,res);
+      data.transaccion2(transaccion,res);
+      console.log(res);
 }
 
 exports.obtener = (req, res) => {

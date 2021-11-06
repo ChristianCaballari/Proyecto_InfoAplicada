@@ -5,11 +5,26 @@
            <div class="col-md-3">
              <a
                href="#"
-               class="btn btn-dark btn-block"
+               class="btn btn-agregar btn-block"
+               data-toggle="tooltip" data-placement="top" title="Agregar departamento"
                data-bs-toggle="modal"
                data-bs-target="#agregarClienteModal"
+               #botonAbrir
                ><i class="fas fa-plus"></i> Agregar
              </a>
+           </div>
+
+           <div class="col-md-3">
+             <form>
+              <input
+              type="text" 
+              name="busqueda" 
+              class="form-control"
+              id="busqueda"
+             
+              class="rounded border border-white"  
+              />
+             </form>
            </div>
          </div>
        </div>
@@ -20,8 +35,8 @@
             <div class="card-header">
               <h4>Listado de departamentos</h4>
             </div>
-            <table class="table table-striped">
-              <thead class="bg-dark text-white">
+            <table class="table table-responsive table-hover">
+              <thead class="bg-light">
                 <tr>
                   <th scope="col">Id</th>
                   <th scope="col">Descripci&oacute;n</th>
@@ -37,12 +52,13 @@
                   <td>{{ dep.descripcion }}</td>
                  
                   <td>
-                    <a routerLink="/departamento/editar/{{dep.idDepartamento}}" class="btn btn-secondary">
+                    <a (click)="editarDepartamento(dep)" class="btn btn-edit ">
                       <i class="fas fa-edit"></i>
                  </a>
+                
                    </td>
                    <td>
-                    <a (click)="eliminarDepartamento(dep)" class="btn btn-secondary">
+                    <a (click)="eliminarDepartamento(dep)" class="btn btn-danger">
                          <i class="fas fa-trash-alt"></i>
                     </a>
                   </td>
@@ -56,11 +72,12 @@
   <div class="modal fade" id="agregarClienteModal">
    <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header bg-dark text-white">
+      <div class="modal-header text-white">
         <h5 class="modal-title">Agregar Departamento</h5>
         <button
           class="btn-close btn-close-white"
           data-bs-dismiss="modal"
+          data-toggle="tooltip" data-placement="top" title="Cerrar"
           #botonCerrar
         ></button>
       </div>
@@ -68,7 +85,9 @@
      <!--(ngSubmit)="agregar(funcionarioForm)" -->
 
       <form #departamentoForm="ngForm" (ngSubmit)="agregarDepartamento(departamentoForm)">
-
+<input type="hidden" name="idDepartamento"
+#idDepartamento="ngModel"
+[(ngModel)]="departamento.idDepartamento">
         <div class="modal-body">
           <div class="row">
             <div class="col">
@@ -97,7 +116,7 @@
         </div>
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-dark">Guardar</button>
+          <button type="submit" class="btn btn-modal" data-toggle="tooltip" data-placement="top" title="Guardar">Guardar</button>
         </div>
         </form>
       </div>

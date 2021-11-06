@@ -11,3 +11,13 @@ ngb-pagination .page-item.active .page-link{
      background-color:#000 !important;
      border-color: #000 !important;
 }
+.h4{
+     text-align: center;
+}
+.card-header{
+
+     background-color: #4169E1;
+     color:white;
+     text-align: center;
+     font-family: var(--bs-body-font-family);
+ }

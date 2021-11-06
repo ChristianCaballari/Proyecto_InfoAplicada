@@ -19,6 +19,7 @@ import { LoginService } from './servicios/login.service';
 import { DepartamentoComponent } from './componentes/departamento/departamento.component';
 import { DepartamentoService } from './servicios/departamento.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { DepartamentoService } from './servicios/departamento.service';
     SidebarComponent,
     HomeComponent,
     FuncionariosComponent,
-    DepartamentoComponent
+    DepartamentoComponent,
+    
   ],
   imports: [
     BrowserModule,

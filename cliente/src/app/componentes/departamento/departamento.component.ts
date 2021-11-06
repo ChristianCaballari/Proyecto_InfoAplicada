@@ -19,8 +19,8 @@ export class DepartamentoComponent implements OnInit {
 };
 
   @ViewChild("departamentoForm") funcionarioForm: NgForm;
-
   @ViewChild("botonCerrar") botonCerrar: ElementRef;
+  @ViewChild("botonAbrir") botonAbrir: ElementRef;
 
   page = 1;
   pageSize = 4;
@@ -41,10 +41,18 @@ export class DepartamentoComponent implements OnInit {
   }
 
   agregarDepartamento(departamentoForm: NgForm){
-    console.log(departamentoForm.value);
-    //this.departamentoService.addDepartament(departamentoForm)
+    console.log(this.departamento);
+
+    /*if(departamentoForm.valid){
+      this.departamentoService.addDepartament(this.departamento);
+      this.cerrarModal();
+      this.swal.exitoso("Agregado correctamente");
+      
+    }*/
+    
+
   }
-  obtenerDepartamentos(): void{
+  obtenerDepartamentos(){
       this.departamentoService.getAllDepartament().subscribe((response)=>{
 
       this.departamentos1=response;
@@ -52,10 +60,14 @@ export class DepartamentoComponent implements OnInit {
  
      })
   }
+  editarDepartamento(dep: Departamento){
+    this.departamento=dep;
+    this.botonAbrir.nativeElement.click();
+  }
+ 
 
   eliminarDepartamento(dep: Departamento){
-    console.log("Departamento-> ",dep);
-    ///this.departamentoService.deleteDepartament(dep);
+    
       Swal.fire({
         title: 'Estas seguro que desea eliminar el siguiente funcionario?',
         text: 'Funcionario',
@@ -66,6 +78,7 @@ export class DepartamentoComponent implements OnInit {
         confirmButtonText: 'Eliminar'
       }).then((result) => {
         if (result.isConfirmed) {
+        
           this.departamentoService.deleteDepartament(dep);
           this.obtenerDepartamentos();
           Swal.fire(
@@ -75,10 +88,14 @@ export class DepartamentoComponent implements OnInit {
           )
         }
       })
-    
+      
+     
       
   }
-
+  private cerrarModal(){
+    this.botonCerrar.nativeElement.click();
+    
+  }
   
 
 }

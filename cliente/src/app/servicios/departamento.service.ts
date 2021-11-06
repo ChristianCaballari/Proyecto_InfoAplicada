@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../environment';
@@ -18,7 +19,7 @@ export class DepartamentoService{
     private router: Router,
     private swal: Swal2) {}
 
-    getAllDepartament() :Observable<Departamento>{
+    /*getAllDepartament() :Observable<Departamento>{//listo
       return this.http.get<Departamento>(`${environment.API_URL}/departamento/consultar`)
       .pipe(
         map((response:Departamento) =>{
@@ -26,24 +27,29 @@ export class DepartamentoService{
         }),
         //catchError((error) =>this.hanlerError(error))
       );
+    }*/
+
+    getAllDepartament() :Observable<Departamento>{//listo
+      return this.http.get<Departamento>(`${environment.API_URL}/departamento/consultar`)
+    
     }
 
-    deleteDepartament(dep: Departamento){
+    deleteDepartament(dep: Departamento){ //casi listo
       return this.http.delete(`${environment.API_URL}/departamento/${dep.idDepartamento}`)
       .subscribe(() => this.status = 'Delete successful');
     }
 
-    addDepartament(descripcion: string): Observable<Departamento>{
-      return this.http.post(`${environment.API_URL}/departamento/`,descripcion)
+    addDepartament(dep: Departamento){//listo
+    
+      return this.http.post<Departamento>(`${environment.API_URL}/departamento/`,dep)
+      .subscribe();
     }
 
- /* async getDepartamentos(){
-    let rest = await clienteAxios.get('departamento/consultar');
-  
-   const datos = rest.data as Departamento;
-    
-    return datos;
-  }*/
+    editDepartament(dep: Departamento){
+      return this.http.put<Departamento>(`${environment.API_URL}/departamento/${dep.idDepartamento}`,dep);
+    }
+
+
 
 
 
