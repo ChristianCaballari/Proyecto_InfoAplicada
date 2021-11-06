@@ -17,11 +17,10 @@ exports.crear = (req, res) => {
 
 exports.eliminar  = (req, res) => {
       const idDepartamento = req.params.id;   
-
+      console.log(idDepartamento);
       let transaccion = `EXEC [dbo].[sp_deleteDepartment] @idDepartamento =N'${idDepartamento}'`;
       let data = new Data();
       data.transaccion2(transaccion,res);
-      console.log(res);
 }
 
 exports.obtener = (req, res) => {
@@ -34,13 +33,11 @@ exports.obtener = (req, res) => {
 exports.editar = (req, res) => {
     let departamento;
     
-    departamento = new Vuelo(req.body.descripcion);
-    let id = req.params.id;
-    const {descripcion} = departamento;
+    const {idDepartamento, descripcion }  = req.body;
   
     let data = new Data();
 
-    let transaccion = `EXEC [dbo].[sp_updateDepartment] @id =N'${id}',@descripcion =N'${descripcion}'`;
+    let transaccion = `EXEC [dbo].[sp_updateDepartment] @idDepartamento =N'${idDepartamento}',@descripcion =N'${descripcion}'`;
      data.transaccion2(transaccion,res);
 
 } 
