@@ -19,6 +19,7 @@ export class DepartamentoComponent implements OnInit {
 };
 
   @ViewChild("departamentoForm") funcionarioForm: NgForm;
+  @ViewChild("busquedaForm") busquedaForm: NgForm;
   @ViewChild("botonCerrar") botonCerrar: ElementRef;
   @ViewChild("botonAbrir") botonAbrir: ElementRef;
 
@@ -42,7 +43,7 @@ export class DepartamentoComponent implements OnInit {
 
   agregarDepartamento(departamentoForm: NgForm){
     console.log(this.departamento);
-
+   
     /*if(departamentoForm.valid){
       this.departamentoService.addDepartament(this.departamento);
       this.cerrarModal();
@@ -91,6 +92,13 @@ export class DepartamentoComponent implements OnInit {
       
      
       
+  }
+  buscarDepartamento(busquedaForm: NgForm){
+    if(busquedaForm.valid){
+    
+   
+       }
+  
   }
   private cerrarModal(){
     this.botonCerrar.nativeElement.click();

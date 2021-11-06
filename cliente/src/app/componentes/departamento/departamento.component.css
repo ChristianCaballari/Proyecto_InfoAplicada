@@ -9,13 +9,13 @@
 
 .card-header{
      
-     background-color: #4169E1;
+     background-color: #13547a;
      color:white;
      text-align: center;
      font-family: var(--bs-body-font-family);
 }
-.modal-header,.btn-modal{
-     background-color: #4169E1;
+.modal-header{
+     background-color: #80d0c7;
      color:white;
 }
 .btn-edit{
@@ -28,12 +28,27 @@
 }
 .btn-agregar{
      background: transparent;
-     border: 2px solid #4169E1;
+     border: 2px solid #80d0c7;
      border-radius: 6px;
      font-weight: bold;
 }
 .btn-agregar:hover {
-     background-color: #4169E1;
+     background-color: #80d0c7;
      color: white;
 }
-
+.bg-modal{
+     background-color: #80d0c7;
+ }
+ .btn-modal{
+     
+     background: transparent;
+     border: 2px solid #80d0c7;
+      border-radius: 6px;
+      font-weight: bold;
+      margin-left: 10%;
+ }
+ .btn-modal:hover {
+     background-color: #80d0c7;
+     color: white;
+     
+ }
