@@ -13,19 +13,21 @@
                ><i class="fas fa-plus"></i> Agregar
              </a>
            </div>
-
-           <div class="col-md-3">
-             <form>
+           <div class="col-md-6">
+            <form #busquedaForm="ngForm" (ngSubmit)="buscarDepartamento(busquedaForm)">
               <input
-              type="text" 
-              name="busqueda" 
-              class="form-control"
-              id="busqueda"
-             
-              class="rounded border border-white"  
-              />
-             </form>
-           </div>
+                          type="text" 
+                          name="busqueda" 
+                          class="form-control"
+                          id="busqueda"
+                         placeholder="B&uacute;squeda..."
+                          class="rounded border border-white input-bg "  
+                          /> 
+             <button type="submit" class="btn btn-modal" data-toggle="tooltip" data-placement="top" title="Buscar">Buscar</button>
+            </form>
+  
+          </div>
+           
          </div>
        </div>
      </section>

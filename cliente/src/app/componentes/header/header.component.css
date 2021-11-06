@@ -4,8 +4,22 @@
 .navbar{
      background-color: #4169E1;
 }
-.btn-modal{
-     background-color: #4169E1;
+.bg-custom-1 {
+     background-color: #85144b;
+   }
+   
+   .bg-custom-2 {
+   background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+   }
+  
+.btn-style{
+     background: transparent;
+     border: 2px solid white;
+     border-radius: 6px;
+     font-weight: bold;
      color:white;
 }
-
+.btn-style:hover {
+     background-color: white;
+     color: #80d0c7;
+}
