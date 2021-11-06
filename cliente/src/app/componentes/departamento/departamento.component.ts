@@ -6,6 +6,8 @@ import { Swal2 } from 'src/app/mensajes/mensajes';
 import  Swal  from 'sweetalert2';
 import { Observable, Subject, throwError, Subscription } from 'rxjs';
 
+
+
 @Component({
   selector: 'app-departamento',
   templateUrl: './departamento.component.html',
@@ -39,6 +41,9 @@ export class DepartamentoComponent implements OnInit {
   ngOnInit(): void {
   
     this.obtenerDepartamentos();
+    this.subscription = this.departamentoService.getRefres$().subscribe(() =>{
+      this.obtenerDepartamentos();
+    })
 
   }
   agregarDepartamento(departamentoForm: NgForm){
