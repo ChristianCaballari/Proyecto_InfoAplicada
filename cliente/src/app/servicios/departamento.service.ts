@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject, throwError } from 'rxjs';
+import { map,catchError } from 'rxjs/operators';
 import { environment } from '../environment';
 import { Swal2 } from '../mensajes/mensajes';
 ;
@@ -18,23 +18,18 @@ export class DepartamentoService{
   constructor(private http: HttpClient,
     private router: Router,
     private swal: Swal2) {}
+    private _refresh$ = new Subject<void>();
 
-    /*getAllDepartament() :Observable<Departamento>{//listo
-      return this.http.get<Departamento>(`${environment.API_URL}/departamento/consultar`)
-      .pipe(
-        map((response:Departamento) =>{
-         return response;
-        }),
-        //catchError((error) =>this.hanlerError(error))
-      );
-    }*/
-
-    getAllDepartament() :Observable<Departamento>{//listo
-      return this.http.get<Departamento>(`${environment.API_URL}/departamento/consultar`)
-    
+    getAllDepartament() :Observable<Departamento[]>{//listo
+      return this.http.get<Departamento[]>(`${environment.API_URL}/departamento/consultar`).pipe(map((res:Departamento[]) =>{
+            return res;
+      }),
+      catchError(this.handlerError)
+      )
     }
 
     deleteDepartament(dep: Departamento){ //casi listo
+      console.log(dep);
       return this.http.delete(`${environment.API_URL}/departamento/${dep.idDepartamento}`)
       .subscribe(() => this.status = 'Delete successful');
     }
@@ -46,11 +41,20 @@ export class DepartamentoService{
     }
 
     editDepartament(dep: Departamento){
-      return this.http.put<Departamento>(`${environment.API_URL}/departamento/${dep.idDepartamento}`,dep);
+      console.log(dep);
+      return this.http.put<Departamento>(`${environment.API_URL}/departamento/editar/${dep.idDepartamento}`,dep).
+      subscribe(()=> this.status = 'Actualizado');
     }
 
 
-
+    private handlerError(error:any): Observable<never>{
+      let errorMessage = 'An error ocurred retrienvin data';
+      if(error){
+        errorMessage = `Error: code ${error.message}`
+      }
+      window.alert(errorMessage);
+      return throwError(errorMessage);
+    }
 
 
      

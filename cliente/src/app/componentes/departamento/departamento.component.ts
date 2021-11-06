@@ -4,7 +4,7 @@ import { DepartamentoService } from './../../servicios/departamento.service';
 import { NgForm } from '@angular/forms';
 import { Swal2 } from 'src/app/mensajes/mensajes';
 import  Swal  from 'sweetalert2';
-
+import { Observable, Subject, throwError, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-departamento',
@@ -12,11 +12,14 @@ import  Swal  from 'sweetalert2';
   styleUrls: ['./departamento.component.css']
 })
 export class DepartamentoComponent implements OnInit {
-
+  indice : number;
+  subscription: Subscription;
+ 
   departamento: Departamento= {
     idDepartamento: '',
     descripcion: ''     
 };
+
 
   @ViewChild("departamentoForm") funcionarioForm: NgForm;
   @ViewChild("botonCerrar") botonCerrar: ElementRef;
@@ -31,43 +34,69 @@ export class DepartamentoComponent implements OnInit {
   departamentos1: any={};
 
   constructor(private departamentoService: DepartamentoService,private swal: Swal2) { 
-
+    
   }
-
   ngOnInit(): void {
   
     this.obtenerDepartamentos();
 
   }
-
   agregarDepartamento(departamentoForm: NgForm){
     console.log(this.departamento);
-
-    /*if(departamentoForm.valid){
-      this.departamentoService.addDepartament(this.departamento);
-      this.cerrarModal();
-      this.swal.exitoso("Agregado correctamente");
-      
-    }*/
+    let msg;
+    if(departamentoForm.valid){
     
-
+    if(departamentoForm.value.idDepartamento === ''){
+      this.departamentoService.addDepartament(this.departamento);
+      msg="Agregado correctamente";
+    }else{
+      console.log("En Editar");
+      this.departamentoService.editDepartament(this.departamento)
+      msg="Actualizado correctamente";
+    }
+    this.cerrarModal();
+    this.obtenerDepartamentos();
+    this.swal.exitoso(msg);
+  }
   }
   obtenerDepartamentos(){
       this.departamentoService.getAllDepartament().subscribe((response)=>{
-
-      this.departamentos1=response;
-      this.departamentos=this.departamentos1;
- 
+      this.departamentos=response;
      })
   }
   editarDepartamento(dep: Departamento){
-    this.departamento=dep;
+    //this.departamento=dep;
+    this.departamento.descripcion = dep.descripcion;
+    this.departamento.idDepartamento = dep.idDepartamento;
     this.botonAbrir.nativeElement.click();
   }
- 
 
-  eliminarDepartamento(dep: Departamento){
+  // Modifica el arreglo temporal
+  // private modificarDepTemp(departamento:Departamento){
+  //   this.departamentos.map(dep =>{
+  //     if(departamento.idDepartamento = dep.idDepartamento ){
+  //        const {descripcion} = departamento;
+  //        dep.descripcion = descripcion;
+  //     }
+  //   })
+  // }
+  private eliminarDepTemp(departamento:Departamento){
+    console.log(departamento);
+
+    this.indice = Number(departamento.idDepartamento);
+    console.log(this.indice);
+    this.departamentos.splice(this.indice,1);
     
+  }
+  private agregarDepTemp(departamento:Departamento){
+    if(this.departamentos == null){
+      this.departamentos = [];
+    }
+    this.departamentos.push(departamento);
+  }
+ 
+  eliminarDepartamento(dep: Departamento){
+   
       Swal.fire({
         title: 'Estas seguro que desea eliminar el siguiente funcionario?',
         text: 'Funcionario',
@@ -79,23 +108,25 @@ export class DepartamentoComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
         
-          this.departamentoService.deleteDepartament(dep);
-          this.obtenerDepartamentos();
+        this.departamentoService.deleteDepartament(dep);
+       this.eliminarDepTemp(dep);
+       // this.obtenerDepartamentos();
+          
           Swal.fire(
             'Eliminado',
             'Eliminado correctamente.',
             'success'   
           )
         }
-      })
-      
-     
-      
+      })   
   }
   private cerrarModal(){
     this.botonCerrar.nativeElement.click();
     
   }
-  
 
+  private setDepartamentos(departamentos: Departamento[]){
+    this.departamentos1 = departamentos;
+
+  }
 }
