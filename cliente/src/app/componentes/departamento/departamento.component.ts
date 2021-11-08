@@ -44,18 +44,9 @@ export class DepartamentoComponent implements OnInit {
   }
   agregarDepartamento(departamentoForm: NgForm){
     console.log(this.departamento);
-<<<<<<< HEAD
-   
-    /*if(departamentoForm.valid){
-      this.departamentoService.addDepartament(this.departamento);
-      this.cerrarModal();
-      this.swal.exitoso("Agregado correctamente");
-      
-    }*/
-=======
+
     let msg;
     if(departamentoForm.valid){
->>>>>>> 2fe7e5a15641632ded1b80086ca6e4c12301c3be
     
     if(departamentoForm.value.idDepartamento === ''){
       this.departamentoService.addDepartament(this.departamento);
