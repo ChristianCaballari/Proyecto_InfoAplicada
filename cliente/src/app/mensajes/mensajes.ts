@@ -30,6 +30,7 @@ export class Swal2 {
       timer: 2000,
     });
   }
+  
 //'Estas seguro que desea eliminar el siguiente funcionario?'
   delete(msg: string,text: string){
   Swal.fire({

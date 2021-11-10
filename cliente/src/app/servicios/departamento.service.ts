@@ -5,7 +5,6 @@ import { Observable, Subject, throwError } from 'rxjs';
 import { map,catchError, tap } from 'rxjs/operators';
 import { environment } from '../environment';
 import { Swal2 } from '../mensajes/mensajes';
-;
 import { Departamento} from '../modelo/Departamento.model';
 
 
@@ -14,37 +13,35 @@ import { Departamento} from '../modelo/Departamento.model';
 @Injectable()
 export class DepartamentoService{
   status: string;
-
+ private departamento: Departamento[];
   constructor(private http: HttpClient,
     private router: Router,
-    private swal: Swal2) {}
-    private _refresh$ = new Subject<void>();
 
-    getRefres$(){
-      return this._refresh$;
-    }
+    private swal: Swal2) {}
+    private _departamentos$ = new Subject<Departamento[]>();
+
 
     getAllDepartament() :Observable<Departamento[]>{//listo
       return this.http.get<Departamento[]>(`${environment.API_URL}/departamento/consultar`).pipe(map((res:Departamento[]) =>{
+        this.departamento = res;
             return res;
+            
+           
       }),
       catchError(this.handlerError)
       )
     }
 
+
+
     deleteDepartament(dep: Departamento){ //casi listo
       console.log(dep);
-      return this.http.delete(`${environment.API_URL}/departamento/${dep.idDepartamento}`)
+      return this.http.delete<Departamento>(`${environment.API_URL}/departamento/${dep.idDepartamento}`)
       .subscribe(() => this.status = 'Delete successful');
     }
 
     addDepartament(dep: Departamento):Observable<any>{//listo
-    
-      return this.http.post<Departamento>(`${environment.API_URL}/departamento/`,dep).pipe(
-        tap(()=>{
-          this._refresh$.next();
-        })
-      )
+          return this.http.post(`${environment.API_URL}/departamento/`,dep);
     }
 
     editDepartament(dep: Departamento){
@@ -52,6 +49,7 @@ export class DepartamentoService{
       return this.http.put<Departamento>(`${environment.API_URL}/departamento/editar/${dep.idDepartamento}`,dep).
       subscribe(()=> this.status = 'Actualizado');
     }
+  
 
 
     private handlerError(error:any): Observable<never>{
@@ -62,8 +60,4 @@ export class DepartamentoService{
       window.alert(errorMessage);
       return throwError(errorMessage);
     }
-
-
-     
-
 }    

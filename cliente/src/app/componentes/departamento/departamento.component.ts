@@ -7,7 +7,7 @@ import  Swal  from 'sweetalert2';
 import { Observable, Subject, throwError, Subscription } from 'rxjs';
 
 
-
+let DEPARTAMENTOS: Departamento[]=[]
 @Component({
   selector: 'app-departamento',
   templateUrl: './departamento.component.html',
@@ -42,25 +42,12 @@ export class DepartamentoComponent implements OnInit {
   ngOnInit(): void {
   
     this.obtenerDepartamentos();
-    this.subscription = this.departamentoService.getRefres$().subscribe(() =>{
-      this.obtenerDepartamentos();
-    })
 
   }
   agregarDepartamento(departamentoForm: NgForm){
-    console.log(this.departamento);
-<<<<<<< HEAD
-   
-    /*if(departamentoForm.valid){
-      this.departamentoService.addDepartament(this.departamento);
-      this.cerrarModal();
-      this.swal.exitoso("Agregado correctamente");
-      
-    }*/
-=======
     let msg;
     if(departamentoForm.valid){
->>>>>>> 2fe7e5a15641632ded1b80086ca6e4c12301c3be
+
     
     if(departamentoForm.value.idDepartamento === ''){
       this.departamentoService.addDepartament(this.departamento);
@@ -72,12 +59,16 @@ export class DepartamentoComponent implements OnInit {
     }
     this.cerrarModal();
     this.obtenerDepartamentos();
+    departamentoForm.resetForm();
     this.swal.exitoso(msg);
   }
   }
   obtenerDepartamentos(){
       this.departamentoService.getAllDepartament().subscribe((response)=>{
+      this.departamentos = [];
       this.departamentos=response;
+      console.log(this.departamentos);
+    //  DEPARTAMENTOS = this.departamentos;
      })
   }
   editarDepartamento(dep: Departamento){
@@ -86,30 +77,21 @@ export class DepartamentoComponent implements OnInit {
     this.departamento.idDepartamento = dep.idDepartamento;
     this.botonAbrir.nativeElement.click();
   }
-
-  // Modifica el arreglo temporal
-  // private modificarDepTemp(departamento:Departamento){
-  //   this.departamentos.map(dep =>{
-  //     if(departamento.idDepartamento = dep.idDepartamento ){
-  //        const {descripcion} = departamento;
-  //        dep.descripcion = descripcion;
-  //     }
-  //   })
-  // }
-  private eliminarDepTemp(departamento:Departamento){
-    console.log(departamento);
-
-    this.indice = Number(departamento.idDepartamento);
-    console.log(this.indice);
-    this.departamentos.splice(this.indice,1);
-    
+  private eliminarArr(departamento:Departamento){
+    let i = 0;
+    this.departamentos.map((dep)=>{
+          
+       if(dep.idDepartamento = departamento.idDepartamento){
+        console.log("Va a eliminar");
+         console.log(dep);
+         console.log("Indice "+i);
+        this.departamentos.slice(i,1);
+       }
+       i++;
+    }) 
+    console.log(this.departamentos);
   }
-  private agregarDepTemp(departamento:Departamento){
-    if(this.departamentos == null){
-      this.departamentos = [];
-    }
-    this.departamentos.push(departamento);
-  }
+
  
   eliminarDepartamento(dep: Departamento){
    
@@ -125,16 +107,13 @@ export class DepartamentoComponent implements OnInit {
         if (result.isConfirmed) {
         
         this.departamentoService.deleteDepartament(dep);
-       this.eliminarDepTemp(dep);
-       // this.obtenerDepartamentos();
-          
-          Swal.fire(
-            'Eliminado',
-            'Eliminado correctamente.',
-            'success'   
-          )
+       
+       this.obtenerDepartamentos(); 
+       this.swal.exitoso("Eliminado correctamente."); 
+       //this.eliminarArr(dep); 
+         
         }
-      })   
+      }) 
   }
   buscarDepartamento(busquedaForm: NgForm){
     if(busquedaForm.valid){
