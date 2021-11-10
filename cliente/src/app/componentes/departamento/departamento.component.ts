@@ -4,9 +4,8 @@ import { DepartamentoService } from './../../servicios/departamento.service';
 import { NgForm } from '@angular/forms';
 import { Swal2 } from 'src/app/mensajes/mensajes';
 import  Swal  from 'sweetalert2';
-import {Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
-
+import {Subject } from 'rxjs';
 
 @Component({
   selector: 'app-departamento',
@@ -36,7 +35,7 @@ tablaTrigger = new Subject<any>();
  
 ngOnInit(): void {
 
- this. obtenerDepartamentos();
+ this.obtenerDepartamentos();
 
 }
 
@@ -87,12 +86,14 @@ eliminarDepartamento(departamento: Departamento){
       }).then((result) => {
         if (result.isConfirmed) {
         
-        this.departamentoService.deleteDepartament(departamento).subscribe(result =>{console.log(result)});
-        this.reload();
-       this.swal.exitoso("Eliminado correctamente."); 
-         
-        }
-      }) 
+        this.departamentoService.deleteDepartament(departamento).subscribe(
+          (result)=>{
+            this.reload();
+          }
+        )
+        this.swal.exitoso("Eliminado correctamente."); 
+      }
+    })
 }
 agregarDepartamento(departamentoForm: NgForm){
 
@@ -107,8 +108,12 @@ agregarDepartamento(departamentoForm: NgForm){
       });
       msg="Agregado correctamente";
     }else{
-      this.reload();
-      this.departamentoService.editDepartament(this.departamento)
+      this.departamentoService.editDepartament(this.departamento).subscribe(
+        (result)=>{
+          console.log(result);
+          this.reload();
+        }
+      )
       msg="Actualizado correctamente";
 
     }

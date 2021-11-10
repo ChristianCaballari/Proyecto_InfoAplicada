@@ -34,8 +34,7 @@ export class DepartamentoService{
 
     editDepartament(dep: Departamento){
       console.log(dep);
-      return this.http.put<Departamento>(`${environment.API_URL}/departamento/editar/${dep.idDepartamento}`,dep).
-      subscribe(()=> this.status = 'Actualizado');
+      return this.http.put<Departamento>(`${environment.API_URL}/departamento/editar/${dep.idDepartamento}`,dep);
     }
   
 
