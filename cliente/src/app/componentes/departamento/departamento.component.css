@@ -28,12 +28,13 @@
 }
 .btn-agregar{
      background: transparent;
-     border: 2px solid #80d0c7;
+     background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
      border-radius: 6px;
      font-weight: bold;
+     color: white;
 }
 .btn-agregar:hover {
-     background-color: #80d0c7;
+     background-image: linear-gradient(15deg, #114969 0%, #6ec2b8 100%);
      color: white;
 }
 .bg-modal{
@@ -48,7 +49,31 @@
       margin-left: 10%;
  }
  .btn-modal:hover {
-     background-color: #80d0c7;
+     background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
      color: white;
      
  }
+ .bg-custom-2:hover{
+     background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+ }
+ .bg-custom-2 {
+     background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+}
+
+table{
+     margin-top: .5rem;
+}
+.border-b{
+     border: 1px solid #d0d0d0;
+}
+table td,th{
+     text-align: center;
+}
+.containerPer{
+     max-width: 1300px;
+     margin: 0 auto;
+}
+.spacing{
+  margin-right: .5rem;
+}
+
