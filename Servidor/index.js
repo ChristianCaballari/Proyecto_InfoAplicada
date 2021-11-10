@@ -21,6 +21,8 @@ const PORT = process.env.PORT || 4000;
 //app.use('/api/', require('./routes/avance')); 
 app.use('/api/funcionario', require('./routes/funcionario'));
 app.use('/api/departamento', require('./routes/departamento'));
+app.use('/api/avance', require('./routes/avance'));
+app.use('/api/solicitud', require('./routes/solicitud'));
 app.use('/api/auth', require('./routes/auth'));
 
 app.listen(PORT, () =>{

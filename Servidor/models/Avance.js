@@ -1,6 +1,6 @@
 class Avance{ //Clase avance
-    constructor(idAvance,idTrimestre,idUsuarioAplicativo,idSolicitud,documento,fechaHora){
-        this.idAvance=idAvance;
+    constructor(idTrimestre,idUsuarioAplicativo,idSolicitud,documento,fechaHora){
+        
         this.idTrimestre=idTrimestre;
         this.idUsuarioAplicativo= idUsuarioAplicativo;
         this.idSolicitud=idSolicitud;

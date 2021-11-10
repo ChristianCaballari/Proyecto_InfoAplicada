@@ -1,28 +1,28 @@
 const express = require('express'); 
 const router = express.Router(); // Usar route de express y express para el servidor
 
-const solicitudController = require('../controller/AvanceController');
+const avanceController = require('../controller/AvanceController');
 
 
 //Crear un avance (api/avance)
 router.post('/',
 
-solicitudController.crear
+    avanceController.crear
    
 );
 // Eliminar un vuelo (api/id)
 router.delete('/:id',
-    solicitudController.eliminar
+    avanceController.eliminar
 );
 
 // Consultar vuelo
 router.get('/obtener/:id',
-    solicitudController.obtener
+    avanceController.obtener
 );
 
 // Actualizar vuelo
 router.put('/editar/:id',
-    solicitudController.editar
+    avanceController.editar
 );
 
 

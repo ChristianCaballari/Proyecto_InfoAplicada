@@ -45,9 +45,15 @@ export class DepartamentoComponent implements OnInit {
 
   }
   agregarDepartamento(departamentoForm: NgForm){
+
     let msg;
     if(departamentoForm.valid){
 
+
+    console.log(this.departamento);
+
+    let msg;
+    if(departamentoForm.valid){
     
     if(departamentoForm.value.idDepartamento === ''){
       this.departamentoService.addDepartament(this.departamento);
@@ -71,28 +77,14 @@ export class DepartamentoComponent implements OnInit {
     //  DEPARTAMENTOS = this.departamentos;
      })
   }
+  
   editarDepartamento(dep: Departamento){
     //this.departamento=dep;
     this.departamento.descripcion = dep.descripcion;
     this.departamento.idDepartamento = dep.idDepartamento;
     this.botonAbrir.nativeElement.click();
   }
-  private eliminarArr(departamento:Departamento){
-    let i = 0;
-    this.departamentos.map((dep)=>{
-          
-       if(dep.idDepartamento = departamento.idDepartamento){
-        console.log("Va a eliminar");
-         console.log(dep);
-         console.log("Indice "+i);
-        this.departamentos.slice(i,1);
-       }
-       i++;
-    }) 
-    console.log(this.departamentos);
-  }
 
- 
   eliminarDepartamento(dep: Departamento){
    
       Swal.fire({
@@ -108,25 +100,18 @@ export class DepartamentoComponent implements OnInit {
         
         this.departamentoService.deleteDepartament(dep);
        
-       this.obtenerDepartamentos(); 
+      
        this.swal.exitoso("Eliminado correctamente."); 
        //this.eliminarArr(dep); 
          
         }
       }) 
   }
-  buscarDepartamento(busquedaForm: NgForm){
-    if(busquedaForm.valid){
-    
-   
-       }
-  
-  }
+
   private cerrarModal(){
     this.botonCerrar.nativeElement.click();
     
   }
-
   private setDepartamentos(departamentos: Departamento[]){
     this.departamentos1 = departamentos;
 
