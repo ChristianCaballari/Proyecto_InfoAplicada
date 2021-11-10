@@ -18,7 +18,7 @@ import { FuncionarioService } from './servicios/funcionario.service';
 import { LoginService } from './servicios/login.service';
 import { DepartamentoComponent } from './componentes/departamento/departamento.component';
 import { DepartamentoService } from './servicios/departamento.service';
-
+import { DataTablesModule } from "angular-datatables";
 
 @NgModule({
   declarations: [
@@ -35,10 +35,11 @@ import { DepartamentoService } from './servicios/departamento.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    DataTablesModule,
       FormsModule,
       NgbModule
   ],
-  providers: [LoginService,FuncionarioService,DepartamentoService,GuardianGuard,Swal2],
+  providers: [LoginService,FuncionarioService,DepartamentoService,/*GuardianGuard,*/Swal2],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

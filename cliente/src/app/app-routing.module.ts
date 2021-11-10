@@ -7,9 +7,9 @@ import { GuardianGuard } from './guards/guardian.guard';
 
 const routes: Routes = [
   {path: '',redirectTo:'/login', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent,canActivate:[GuardianGuard] },
+  {path: 'home', component: HomeComponent,/*canActivate:[GuardianGuard] */},
   {path: 'login', component: LoginComponent },
- {path: 'departamento', component: DepartamentoComponent, canActivate:[GuardianGuard]},
+ {path: 'departamento', component: DepartamentoComponent,/* canActivate:[GuardianGuard]*/},
  // {path: 'departamento', component: DepartamentoComponent},
   {path: 'departamento/editar/:id', component: DepartamentoComponent},
   //{path: '**', component: PageNotFoundComponent}

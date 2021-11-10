@@ -41,7 +41,7 @@ export class DepartamentoComponent implements OnInit {
   }
   ngOnInit(): void {
   
-    this.obtenerDepartamentos();
+   this.obtenerDepartamentos();
 
   }
   agregarDepartamento(departamentoForm: NgForm){
@@ -68,13 +68,13 @@ export class DepartamentoComponent implements OnInit {
     departamentoForm.resetForm();
     this.swal.exitoso(msg);
   }
-  }
+}}
   obtenerDepartamentos(){
       this.departamentoService.getAllDepartament().subscribe((response)=>{
       this.departamentos = [];
       this.departamentos=response;
       console.log(this.departamentos);
-    //  DEPARTAMENTOS = this.departamentos;
+     DEPARTAMENTOS = this.departamentos;
      })
   }
   
@@ -102,7 +102,7 @@ export class DepartamentoComponent implements OnInit {
        
       
        this.swal.exitoso("Eliminado correctamente."); 
-       //this.eliminarArr(dep); 
+       
          
         }
       }) 
