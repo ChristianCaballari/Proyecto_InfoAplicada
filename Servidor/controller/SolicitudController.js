@@ -2,24 +2,29 @@ const Solicitud = require("../models/Solicitud");
 const Data = require("../dataModel/Data");
 
 exports.crear = (req, res) => {
-
-    solicitud= new Solicitud(req.body.fechaHora,re.body.idUsuarioAplicativo,req.body.idResponsableTI,req.body.fechaInicio,
+    let solicitud;
+    s= new Solicitud(req.body.idUsuarioAplicativo,req.body.idResponsableTI,req.body.fechaInicio,
         req.body.fechaFin,req.body.idResponsableUsuarioFinal,req.body.documentoActaConstitutiva);
     
-    let transaccion = `EXEC [dbo].[sp_insertDepartment] @fechaHora =N'${fechaHora}',@idUsuarioAplicativo =N'${idUsuarioAplicativo}',
-    @idResponsableTI =N'${idResponsableTI}',@fechaInicio =N'${fechaInicio}',@fechaFin =N'${fechaFin}',@idResponsableUsuarioFinal =N'${idResponsableUsuarioFinal}',
-    @documentoActaConstitutiva =N'${documentoActaConstitutiva}'`;
+        console.log(solicitud);
+
+    let transaccion = `EXEC [dbo].[sp_insertarSolicitud] @idUsuarioAplicativo=N'${s.idUsuarioAplicativo}',
+    @idResponsableTI =N'${s.idResponsableTI}',@fechaInicio =N'${s.fechaInicio}',@fechaFin =N'${s.fechaFin}'
+    ,@idResponsableUsuarioFinal =N'${s.idResponsableUsuarioFinal}',
+    @documentoActaConstitutiva =N'${s.documentoActaConstitutiva}'`;
 
     let data = new Data();
-    data.transaccion2(transaccion,res);   
+   data.transaccion2(transaccion,res);  
+    
 
   
 } 
 
 exports.eliminar  = (req, res) => {
       const idSolicitud = req.params.id;   
+      console.log(idSolicitud);
       
-      let transaccion = `EXEC [dbo].[sp_deleteDepartment] @idSolicitud =N'${idSolicitud}'`;
+      let transaccion = `EXEC [dbo].[sp_deleteSolicitud] @idSolicitud =N'${idSolicitud}'`;
       let data = new Data();
       data.transaccion2(transaccion,res);
 }
@@ -32,14 +37,20 @@ exports.obtener = (req, res) => {
 } 
 
 exports.editar = (req, res) => {
-    let solicitud;
-    
-    const {idDepartamento, descripcion }  = req.body;
-  
+
+    const s= {idUsuarioAplicativo,idResponsableTI,fechaInicio,fechaFin,
+        idResponsableUsuarioFinal,documentoActaConstitutiva}  = req.body;
+    let idSolicitud = req.params.id;
+    console.log(s);
     let data = new Data();
 
-    let transaccion = `EXEC [dbo].[sp_updateDepartment] @idDepartamento =N'${idDepartamento}',@descripcion =N'${descripcion}'`;
+    let transaccion = `EXEC [dbo].[sp_updateSolicitud] @idSolicitud=N'${idSolicitud}',@idUsuarioAplicativo=N'${s.idUsuarioAplicativo}',
+    @idResponsableTI =N'${s.idResponsableTI}',@fechaInicio =N'${s.fechaInicio}',@fechaFin =N'${s.fechaFin}'
+    ,@idResponsableUsuarioFinal =N'${s.idResponsableUsuarioFinal}',
+    @documentoActaConstitutiva =N'${s.documentoActaConstitutiva}'`;
      data.transaccion2(transaccion,res);
+     
+     
 
 } 
 
