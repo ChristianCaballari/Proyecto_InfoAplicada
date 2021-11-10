@@ -1,93 +1,82 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Departamento } from 'src/app/modelo/Departamento.model';
 import { DepartamentoService } from './../../servicios/departamento.service';
 import { NgForm } from '@angular/forms';
 import { Swal2 } from 'src/app/mensajes/mensajes';
 import  Swal  from 'sweetalert2';
-import { Observable, Subject, throwError, Subscription } from 'rxjs';
+import {Subject } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
 
 
-let DEPARTAMENTOS: Departamento[]=[]
 @Component({
   selector: 'app-departamento',
   templateUrl: './departamento.component.html',
   styleUrls: ['./departamento.component.css']
 })
-export class DepartamentoComponent implements OnInit {
-  indice : number;
-  subscription: Subscription;
- 
-  departamento: Departamento= {
+export class DepartamentoComponent implements OnInit, OnDestroy{
+@ViewChild(DataTableDirective, {static: false})
+dtElement: DataTableDirective;
+departamento: Departamento = {
     idDepartamento: '',
     descripcion: ''     
 };
+@ViewChild("departamentoForm") funcionarioForm: NgForm;
+@ViewChild("busquedaForm") busquedaForm: NgForm;
+@ViewChild("botonCerrar") botonCerrar: ElementRef;
+@ViewChild("botonAbrir") botonAbrir: ElementRef;
 
+dtOptions: DataTables.Settings = {};
+departamentos!: any[];
+tablaTrigger = new Subject<any>();
 
-  @ViewChild("departamentoForm") funcionarioForm: NgForm;
-  @ViewChild("busquedaForm") busquedaForm: NgForm;
-  @ViewChild("botonCerrar") botonCerrar: ElementRef;
-  @ViewChild("botonAbrir") botonAbrir: ElementRef;
-
-  page = 1;
-  pageSize = 4;
-  collectionSize: number;
-   
-  
-  departamentos: Departamento[];
-  departamentos1: any={};
 
   constructor(private departamentoService: DepartamentoService,private swal: Swal2) { 
     
   }
-  ngOnInit(): void {
-  
-   this.obtenerDepartamentos();
+ 
+ngOnInit(): void {
 
-  }
-  agregarDepartamento(departamentoForm: NgForm){
+ this. obtenerDepartamentos();
 
-    let msg;
-    if(departamentoForm.valid){
+}
 
-
-    console.log(this.departamento);
-
-    let msg;
-    if(departamentoForm.valid){
-    
-    if(departamentoForm.value.idDepartamento === ''){
-      this.departamentoService.addDepartament(this.departamento);
-      msg="Agregado correctamente";
-    }else{
-      console.log("En Editar");
-      this.departamentoService.editDepartament(this.departamento)
-      msg="Actualizado correctamente";
-    }
-    this.cerrarModal();
-    this.obtenerDepartamentos();
-    departamentoForm.resetForm();
-    this.swal.exitoso(msg);
-  }
-}}
+reload(){
+  this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    // Destroy the table first
+    dtInstance.destroy();
+    this.departamentoService.getAllDepartament()
+    .subscribe((departamentos: any[]) => {
+    this.departamentos = departamentos;
+    this.tablaTrigger.next();
+    });
+  });
+}
+ngOnDestroy(): void{
+  this.tablaTrigger.unsubscribe();
+}
   obtenerDepartamentos(){
-      this.departamentoService.getAllDepartament().subscribe((response)=>{
-      this.departamentos = [];
-      this.departamentos=response;
-      console.log(this.departamentos);
-     DEPARTAMENTOS = this.departamentos;
-     })
-  }
-  
-  editarDepartamento(dep: Departamento){
-    //this.departamento=dep;
-    this.departamento.descripcion = dep.descripcion;
-    this.departamento.idDepartamento = dep.idDepartamento;
-    this.botonAbrir.nativeElement.click();
+    
+    this.dtOptions = {
+    pagingType: 'full_numbers',
+    pageLength: 6,
+    language:{
+      url: '//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json'
+    }
+  };
+      this.departamentoService.getAllDepartament().subscribe((departamentos)=>{
+      this.departamentos=departamentos;
+      this.tablaTrigger.next();
+     });
   }
 
-  eliminarDepartamento(dep: Departamento){
-   
-      Swal.fire({
+editarDepartamento(departamento: Departamento){
+  //   //this.departamento=dep;
+    this.departamento.descripcion = departamento.descripcion;
+    this.departamento.idDepartamento = departamento.idDepartamento;
+    this.botonAbrir.nativeElement.click();
+}
+eliminarDepartamento(departamento: Departamento){
+        Swal.fire({
         title: 'Estas seguro que desea eliminar el siguiente funcionario?',
         text: 'Funcionario',
         icon: 'warning',
@@ -98,22 +87,40 @@ export class DepartamentoComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
         
-        this.departamentoService.deleteDepartament(dep);
-       
-      
+        this.departamentoService.deleteDepartament(departamento).subscribe(result =>{console.log(result)});
+        this.reload();
        this.swal.exitoso("Eliminado correctamente."); 
-       
          
         }
       }) 
-  }
+}
+agregarDepartamento(departamentoForm: NgForm){
 
-  private cerrarModal(){
-    this.botonCerrar.nativeElement.click();
+    let msg;
+    if(departamentoForm.valid){
+
     
-  }
-  private setDepartamentos(departamentos: Departamento[]){
-    this.departamentos1 = departamentos;
+    if(departamentoForm.value.idDepartamento == '' || departamentoForm.value.idDepartamento == undefined){
+      this.departamentoService.addDepartament(this.departamento).subscribe((result:any) =>{
+        this.reload();
+        console.log("En Insertar");
+      });
+      msg="Agregado correctamente";
+    }else{
+      this.reload();
+      this.departamentoService.editDepartament(this.departamento)
+      msg="Actualizado correctamente";
 
+    }
+    this.cerrarModal();
+    departamentoForm.resetForm();
+    this.swal.exitoso(msg);
+  
+  }
+  }
+  public cerrarModal(){
+    this.botonCerrar.nativeElement.click();
+    this.funcionarioForm.resetForm();
+    
   }
 }

@@ -22,22 +22,10 @@ export class DepartamentoService{
 
 
     getAllDepartament() :Observable<Departamento[]>{//listo
-      return this.http.get<Departamento[]>(`${environment.API_URL}/departamento/consultar`).pipe(map((res:Departamento[]) =>{
-        this.departamento = res;
-            return res;
-            
-           
-      }),
-      catchError(this.handlerError)
-      )
+      return this.http.get<Departamento[]>(`${environment.API_URL}/departamento/consultar`)
     }
-
-
-
-    deleteDepartament(dep: Departamento){ //casi listo
-      console.log(dep);
-      return this.http.delete<Departamento>(`${environment.API_URL}/departamento/${dep.idDepartamento}`)
-      .subscribe(() => this.status = 'Delete successful');
+    deleteDepartament(dep: Departamento):Observable<any>{ //casi listo
+      return this.http.delete<Departamento>(`${environment.API_URL}/departamento/${dep.idDepartamento}`);
     }
 
     addDepartament(dep: Departamento):Observable<any>{//listo
@@ -50,7 +38,6 @@ export class DepartamentoService{
       subscribe(()=> this.status = 'Actualizado');
     }
   
-
 
     private handlerError(error:any): Observable<never>{
       let errorMessage = 'An error ocurred retrienvin data';
