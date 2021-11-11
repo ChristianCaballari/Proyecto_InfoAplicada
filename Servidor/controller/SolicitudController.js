@@ -31,7 +31,7 @@ exports.eliminar  = (req, res) => {
 
 exports.obtener = (req, res) => {
 
-    let trasaccion = `EXEC [dbo].[sp_selectDepartaments]`;
+    let trasaccion = `EXEC [dbo].[sp_selectAllSolicitud]`;
     let data = new Data();
     data.transaccion2(trasaccion,res);
 } 
@@ -41,7 +41,6 @@ exports.editar = (req, res) => {
     const s= {idUsuarioAplicativo,idResponsableTI,fechaInicio,fechaFin,
         idResponsableUsuarioFinal,documentoActaConstitutiva}  = req.body;
     let idSolicitud = req.params.id;
-    console.log(s);
     let data = new Data();
 
     let transaccion = `EXEC [dbo].[sp_updateSolicitud] @idSolicitud=N'${idSolicitud}',@idUsuarioAplicativo=N'${s.idUsuarioAplicativo}',

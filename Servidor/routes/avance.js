@@ -5,25 +5,15 @@ const avanceController = require('../controller/AvanceController');
 
 
 //Crear un avance (api/avance)
-router.post('/',
-
-    avanceController.crear
-   
-);
+router.post('/', avanceController.crear);
 // Eliminar un vuelo (api/id)
-router.delete('/:id',
-    avanceController.eliminar
-);
+router.delete('/:id',avanceController.eliminar);
 
-// Consultar vuelo
-router.get('/obtener/:id',
-    avanceController.obtener
-);
+// Consultar avance
+router.get('/consultar',avanceController.obtener);
 
-// Actualizar vuelo
-router.put('/editar/:id',
-    avanceController.editar
-);
+// Actualizar avance
+router.put('/editar/:id',avanceController.editar);
 
 
 module.exports = router; //exportar porque se usa en index

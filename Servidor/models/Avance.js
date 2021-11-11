@@ -1,11 +1,11 @@
 class Avance{ //Clase avance
-    constructor(idTrimestre,idUsuarioAplicativo,idSolicitud,documento,fechaHora){
+    constructor(idTrimestre,idUsuarioAplicativo,idSolicitud,documento){
         
         this.idTrimestre=idTrimestre;
         this.idUsuarioAplicativo= idUsuarioAplicativo;
         this.idSolicitud=idSolicitud;
         this.documento=documento;
-        this.fechaHora=fechaHora;
+       // this.fechaHora=fechaHora; ,fechaHora
     }
 
 }
