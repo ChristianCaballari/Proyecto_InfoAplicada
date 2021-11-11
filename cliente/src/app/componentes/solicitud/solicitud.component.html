@@ -1,0 +1,37 @@
+<div class="border-b p-2">
+    <table
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="tablaTrigger"
+      class="table table-striped table-bordered row-border hover pt-2"
+    >
+      <thead class="bg-custom-2 text-light">
+        <tr>
+          <th>ID</th>
+          <th>Fecha y Hora</th>
+          <th>Fecha Incio</th>
+          <th>Fecha Fin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sol of solicitudes">
+          <td>{{ sol.idSolicitud }}</td>
+          <td>{{sol.fechaHora}}</td>
+          <td>{{sol.fechaInicio}}</td>
+          <td>{{sol.fechaFin}}</td>
+          <td>
+            <a (click)="editarSolicitud(sol)" class="btn btn-edit spacing">
+              <i class="fas fa-edit"></i>
+            </a>
+            <a
+              (click)="eliminarSolicitud(sol)"
+              class="btn btn-danger"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+

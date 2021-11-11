@@ -1,6 +1,7 @@
 const Solicitud = require("../models/Solicitud"); 
 const Data = require("../dataModel/Data");
 
+
 exports.crear = (req, res) => {
     let solicitud;
     s= new Solicitud(req.body.idUsuarioAplicativo,req.body.idResponsableTI,req.body.fechaInicio,
