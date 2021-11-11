@@ -8,6 +8,13 @@ export interface Funcionario{
      loginName?:string;
      password?:string;      
 }
+
+export interface Funcionario2{
+     idFuncionario?:string;
+     nombre?:string;
+     apellidos?:string;
+   
+}
 export interface FuncionarioE{
      id?:string;
      idDepartamento?:string;

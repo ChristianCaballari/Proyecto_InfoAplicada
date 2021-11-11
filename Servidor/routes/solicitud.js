@@ -11,9 +11,11 @@ router.delete('/:id',solicitudController.eliminar);
 
 // Consultar solicitud
 router.get('/consultar',solicitudController.obtener);
+router.get('/consultar/TI',solicitudController.funcionarioTI);
 
 // Actualizar solicitud
 router.put('/editar/:id',solicitudController.editar);
+
 
 
 module.exports = router; //exportar porque se usa en index

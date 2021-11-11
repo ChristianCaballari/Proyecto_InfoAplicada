@@ -2,6 +2,7 @@ import { catchError, map } from 'rxjs/operators';
 import { Observable,throwError } from 'rxjs';
 import { Injectable } from '@angular/core';;
 import { Funcionario1 } from '../modelo/Funcionario.model';
+import { Funcionario2 } from '../modelo/Funcionario.model';
 import { HttpClient } from '@angular/common/http';
 import clienteAxios from '../componentes/ClienteAxios/Axios';
 import { environment } from '../environment';
@@ -56,6 +57,9 @@ export class FuncionarioService{
       return this.http.delete<Funcionario1>(`${environment.API_URL}/funcionario/${funcionarioId}`).pipe(catchError(this.handlerError));
     }
 
+    getFuncionarioTI() :Observable<Funcionario2[]>{
+      return this.http.get<Funcionario2[]>(`${environment.API_URL}/solicitud/consultar/TI`)
+    }
 
 
      private handlerError(error:any): Observable<never>{

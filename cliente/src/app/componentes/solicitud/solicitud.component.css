@@ -1,0 +1,80 @@
+.center{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.h4{
+    text-align: center;
+}
+
+.card-header{
+    
+    background-color: #13547a;
+    color:white;
+    text-align: center;
+    font-family: var(--bs-body-font-family);
+}
+.modal-header{
+    background-color: #80d0c7;
+    color:white;
+}
+.btn-edit{
+    background-color: #1E90FF;
+    color:white;
+}
+.btn-edit:hover {
+    background-color: #4169E1; /* Green */
+    color: white;
+}
+.btn-agregar{
+    background: transparent;
+   /* background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);*/
+   border: 3px solid #80d0c7;
+    border-radius: 6px;
+    font-weight: bold;
+    
+}
+.btn-agregar:hover {
+    background-color: #80d0c7;
+    color: white;
+}
+.bg-modal{
+    background-color: #80d0c7;
+}
+.btn-modal{
+    
+    background: transparent;
+    border: 2px solid #80d0c7;
+     border-radius: 6px;
+     font-weight: bold;
+     margin-left: 10%;
+}
+.btn-modal:hover {
+    background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+    color: white;
+    
+}
+.bg-custom-2:hover{
+    background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+}
+.bg-custom-2 {
+    background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+}
+
+table{
+    margin-top: .5rem;
+}
+.border-b{
+    border: 1px solid #d0d0d0;
+}
+table td,th{
+    text-align: center;
+}
+.containerPer{
+    max-width: 1300px;
+    margin: 0 auto;
+}
+.spacing{
+ margin-right: .5rem;
+}
+

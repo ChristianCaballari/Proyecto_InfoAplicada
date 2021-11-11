@@ -30,5 +30,7 @@ export class SolicitudService{
       
             return this.http.put<Solicitud>(`${environment.API_URL}/solicitud/editar/${sol.idSolicitud}`,sol);
           }
+
+          
         
 }

@@ -50,9 +50,14 @@ exports.editar = (req, res) => {
     @documentoActaConstitutiva =N'${s.documentoActaConstitutiva}'`;
      data.transaccion2(transaccion,res);
      
-     
 
 } 
+
+exports.funcionarioTI=(req,res) =>{
+    let trasaccion = `EXEC [dbo].[sp_selectFuncionariosTI]`;
+    let data = new Data();
+    data.transaccion2(trasaccion,res);
+}
 
 exports.buscar=(req,res) => {
 

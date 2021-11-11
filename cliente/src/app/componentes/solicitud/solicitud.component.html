@@ -1,3 +1,16 @@
+<div class="containerPer mt-5">
+  <div class="mb-2">
+  <a
+  href="#"
+  class="btn btn-agregar btn-block"
+  data-toggle="tooltip" data-placement="top" title="Agregar departamento"
+  data-bs-toggle="modal"
+  data-bs-target="#agregarModal"
+  #botonAbrir
+  ><i class="fas fa-plus"></i> Agregar
+</a>
+</div>
+
 <div class="border-b p-2">
     <table
       datatable
@@ -11,20 +24,21 @@
           <th>Fecha y Hora</th>
           <th>Fecha Incio</th>
           <th>Fecha Fin</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let sol of solicitudes">
-          <td>{{ sol.idSolicitud }}</td>
-          <td>{{sol.fechaHora}}</td>
-          <td>{{sol.fechaInicio}}</td>
-          <td>{{sol.fechaFin}}</td>
+        <tr *ngFor="let solicitud of solicitudes">
+          <td>{{ solicitud.idSolicitud }}</td>
+          <td>{{solicitud.fechaHora}}</td>
+          <td>{{solicitud.fechaInicio}}</td>
+          <td>{{solicitud.fechaFin}}</td>
           <td>
-            <a (click)="editarSolicitud(sol)" class="btn btn-edit spacing">
+            <a (click)="editarSolicitud(solicitud)" class="btn btn-edit spacing">
               <i class="fas fa-edit"></i>
             </a>
             <a
-              (click)="eliminarSolicitud(sol)"
+              (click)="eliminarSolicitud(solicitud)"
               class="btn btn-danger"
             >
               <i class="fas fa-trash-alt"></i>
@@ -34,4 +48,85 @@
       </tbody>
     </table>
   </div>
+</div>
 
+<div class="modal fade" id="agregarModal">
+  <div class="modal-dialog modal-lg">
+   <div class="modal-content">
+     <div class="modal-header text-white bg-custom-2">
+       <h5 class="modal-title">Agregar</h5>
+       <button
+         class="btn-close btn-close-white"
+         data-bs-dismiss="modal"
+         data-toggle="tooltip" data-placement="top" title="Cerrar"
+         #botonCerrar
+         (click)="cerrarModal()"
+       ></button>
+     </div> 
+
+     <form #solicitudForm="ngForm" (ngSubmit)="agregarSolicitud(solicitudForm)">
+      <input type="hidden" name="idSolicitud"
+      #idSolicitud="ngModel"
+      [(ngModel)]="solicitud.idSolicitud"/>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="usuarioA">Usuario Responsable TI</label>
+                      <select class="form-select" aria-label="Default select example" name="idResponsableTI" [(ngModel)]="solicitud.idResponsableTI" >
+                        
+                        <option [value]="item.idResponsableTI"  *ngFor="let item of funcionariosTI ">{{item.nombre+"  "+item.apellidos}}  </option>
+                        </select>
+                     
+                    </div>
+
+                    <div class="form-group">
+                      <label for="fechaInicio">Fecha inicio del proyecto</label>
+                    <input type="date" name="fechaInicio" placeholder="dd-mm-yyyy"
+                    class="form-control"
+                    #fechaIncio="ngModel"
+                    [(ngModel)]="solicitud.fechaInicio"
+                   
+                    required>
+                  </div>
+
+                  
+                  <div class="form-group">
+                    <label for="fechaFin">Fecha fin del proyecto</label>
+                  <input type="date" name="fechaFin" placeholder="dd-mm-yyyy"
+                  class="form-control"
+                  #fechaFin="ngModel"
+                  [(ngModel)]="solicitud.fechaFin"
+                 
+                  required>
+                </div>
+                <div class="form-group">
+                  <label for="usuarioResponsable">Responsable usuario final</label>
+                  <select class="form-select" aria-label="Default select example" name="idResponsableUsuarioFinal" [(ngModel)]="solicitud.idResponsableUsuarioFinal" >
+                    
+                    <option [value]="item.idResponsableUsuarioFinal"  *ngFor="let item of funcionarios ">{{item.nombre+"  "+item.apellidos}}  </option>
+                    </select>
+                 
+                </div>
+
+                <div class="form-group">
+                  <label for="usuarioResponsable">Documento Acta constitutiva</label>
+                  <input type="file" #documentoActaConstitutiva="ngModel" name="documentoActaConstitutiva"
+                  [(ngModel)]="solicitud.documentoActaConstitutiva" required>
+                </div>
+
+
+
+                  </div>
+
+                  
+              </div>
+              </div>
+      
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-agregar" data-toggle="tooltip" data-placement="top" title="Guardar">Guardar</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div> 
