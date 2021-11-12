@@ -18,11 +18,10 @@ export class SolicitudComponent implements OnInit,OnDestroy {
   @ViewChild(DataTableDirective, {static: false})
   dtElement: DataTableDirective;
 
-  lista:string[]=["hola","que","tal", "estas"];
-
   solicitud: Solicitud = {
     idSolicitud:'',
     idUsuarioAplicativo:'',
+    nombreAplicativo:'',
     idResponsableTI:'',
     fechaInicio:'',
     fechaFin:'',
@@ -38,7 +37,7 @@ export class SolicitudComponent implements OnInit,OnDestroy {
   };
 
 
-  @ViewChild("solicitudForm") funcionarioForm: NgForm;
+  @ViewChild("solicitudForm") solicitudForm: NgForm;
   @ViewChild("botonCerrar") botonCerrar: ElementRef;
   @ViewChild("botonAbrir") botonAbrir: ElementRef;
   
@@ -51,11 +50,13 @@ export class SolicitudComponent implements OnInit,OnDestroy {
   
   constructor(private solicitudService: SolicitudService,private funcionarioService: FuncionarioService,
     private swal: Swal2) { }
+
   ngOnDestroy(): void{
     this.tablaTrigger.unsubscribe();
   }
 
   ngOnInit(): void {
+
     this.obtenerSolicitudes();
     this.obtenerFuncionariosTI();
     this.obtenerAllFuncionrios();
@@ -77,7 +78,35 @@ export class SolicitudComponent implements OnInit,OnDestroy {
 
   agregarSolicitud(solicitudForm: NgForm){
     console.log(solicitudForm.value);
+   
+  
+    let msg;
+    if(solicitudForm.valid){
+
+    
+    if(solicitudForm.value.idSolicitud == '' || solicitudForm.value.idSolicitud == undefined){
+      this.solicitud.idUsuarioAplicativo="1";
+      this.solicitudService.addSolicitud(this.solicitud).subscribe((result:any) =>{
+        this.reload();
+        
+      });
+      msg="Agregado correctamente";
+    }else{
+      this.solicitudService.editSolicitud(this.solicitud).subscribe(
+        (result)=>{
+          console.log(result);
+          this.reload();
+        }
+      )
+      msg="Actualizado correctamente";
+
+    }
+    this.cerrarModal();
+    solicitudForm.resetForm();
+    this.swal.exitoso(msg);
   }
+  
+}
 
   obtenerSolicitudes(){
     
@@ -98,19 +127,52 @@ export class SolicitudComponent implements OnInit,OnDestroy {
 
 
   editarSolicitud(sol: Solicitud){
+
+
+    this.solicitud.idSolicitud= sol.idSolicitud;
+    this.solicitud.idUsuarioAplicativo= sol.idUsuarioAplicativo;
+    this.solicitud.idResponsableTI= sol.idResponsableTI;
+    this.solicitud.fechaInicio= sol.fechaInicio;
+    this.solicitud.fechaFin= sol.fechaFin;
+    this.solicitud.idResponsableUsuarioFinal= sol.idResponsableUsuarioFinal;
+    this.solicitud.documentoActaConstitutiva= sol.documentoActaConstitutiva;
+   
+    this.botonAbrir.nativeElement.click();
    
   }
-  eliminarSolicitud(sol: Solicitud){}
+  eliminarSolicitud(sol: Solicitud){
+    Swal.fire({
+      title: 'Estas seguro que desea eliminar?',
+      text: 'Solicitud',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+      
+      this.solicitudService.deleteSolicitud(sol).subscribe(
+        (result)=>{
+          this.reload();
+        }
+      )
+      this.swal.exitoso("Eliminado correctamente."); 
+    }
+  })
+  }
 
   public cerrarModal(){
     this.botonCerrar.nativeElement.click();
-    this.funcionarioForm.resetForm();
+    this.solicitudForm.resetForm();
     
   }
 
   obtenerFuncionariosTI(){
     this.funcionarioService.getFuncionarioTI().subscribe((funcionario)=>{
       this.funcionariosTI=funcionario;
+      console.log(this.funcionariosTI);
+      
     });
 
   }

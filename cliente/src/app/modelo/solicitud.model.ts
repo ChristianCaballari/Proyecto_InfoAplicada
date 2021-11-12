@@ -2,6 +2,7 @@ export interface Solicitud{
     idSolicitud?:string;
     fechaHora ?:string;
     idUsuarioAplicativo ?:string;
+    nombreAplicativo?:string;
     idResponsableTI ?:string;
     fechaInicio ?:string;
     fechaFin ?:string;
