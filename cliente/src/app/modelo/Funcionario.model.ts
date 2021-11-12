@@ -1,4 +1,5 @@
 export interface Funcionario{
+     idFuncionario?:string;
      idDepartamento?:string;
      idSexo?:string;
      nombre?:string;
@@ -9,6 +10,15 @@ export interface Funcionario{
      password?:string;      
 }
 
+export interface FuncionarioD{
+     departamento?:string;
+     sexo?:string;
+     nombre?:string;
+     apellidos?:string;
+     fachaNacimiento?:string;
+     foto?:string;
+     loginName?:string;    
+}
 export interface Funcionario2{
      idFuncionario?:string;
      nombre?:string;

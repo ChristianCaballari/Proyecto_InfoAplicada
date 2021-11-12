@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/servicios/login.service';
 @Component({
@@ -7,7 +7,7 @@ import { LoginService } from 'src/app/servicios/login.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-
+  @ViewChild('botonCerrarHeader') botonCerrarHeader: ElementRef;
   constructor(public loginService:LoginService,
     private router: Router) { }
   
@@ -17,4 +17,7 @@ export class SidebarComponent implements OnInit {
       this.loginService.logout();
       this.router.navigate(['/login']);  
     }
+    cerrarSidebar(){
+      this.botonCerrarHeader.nativeElement.click();
+     }
 }

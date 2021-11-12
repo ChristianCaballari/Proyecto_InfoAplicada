@@ -18,6 +18,10 @@ export class SolicitudService{
         getAllSolicitud() :Observable<Solicitud[]>{//listo
             return this.http.get<Solicitud[]>(`${environment.API_URL}/solicitud/consultar`)
           }
+          
+          getAllSolicitudTI() :Observable<any>{//listo
+            return this.http.get(`${environment.API_URL}/solicitud/obtenerSolicitudesTI`);
+          }
           deleteSolicitud(sol: Solicitud):Observable<any>{ //casi listo
             return this.http.delete<Solicitud>(`${environment.API_URL}/solicitud/${sol.idSolicitud}`);
           }
