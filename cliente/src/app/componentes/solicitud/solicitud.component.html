@@ -81,24 +81,35 @@
                     <div class="form-group">
                       <label for="usuarioA">Usuario Responsable TI</label>
                       <select class="form-select" aria-label="Default select example" name="idResponsableTI"
-                       #idResponsableTI="ngModel" [(ngModel)]="solicitud.idResponsableTI" >
+                       #idResponsableTI="ngModel" 
+                       [(ngModel)]="solicitud.idResponsableTI" 
+                       [ngClass]="{'is-invalid': idResponsableTI.errors && idResponsableTI.touched}">
                         
                 
                        <option [value]="item.idFuncionario"  *ngFor="let item of funcionariosTI ">{{item.nombre+"  "+item.apellidos}}  </option>
                         </select>
+
+                        <div [hidden]="!idResponsableTI.errors?.required" class="invalid-feedback">
+                          *Requerido
+                        </div>
                      
                     </div>
                    </div>
 
-                    <div class="form-group">
+                <div class="form-group">
                       <label for="fechaInicio">Fecha inicio del proyecto</label>
                     <input type="date" name="fechaInicio" placeholder="dd-mm-yyyy"
                     class="form-control"
                     #fechaIncio="ngModel"
                     [(ngModel)]="solicitud.fechaInicio"
-                   
+                    [ngClass]="{'is-invalid': fechaIncio.errors && fechaIncio.touched}"
                     required>
-                  </div>
+
+                    <div [hidden]="!fechaIncio.errors?.required" class="invalid-feedback">
+                      *Requerido
+                    </div>
+                   
+                 </div>
 
                   
                   <div class="form-group">
@@ -107,15 +118,26 @@
                   class="form-control"
                   #fechaFin="ngModel"
                   [(ngModel)]="solicitud.fechaFin"
-                 
+                  [ngClass]="{'is-invalid': fechaFin.errors && fechaFin.touched}"
                   required>
+
+                  <div [hidden]="!fechaFin.errors?.required" class="invalid-feedback">
+                    *Requerido
+                  </div>
                 </div>
                 <div class="form-group">
                   <label for="usuarioResponsable">Responsable usuario final</label>
-                  <select class="form-select"  name="idResponsableUsuarioFinal" #idResponsableUsuarioFinal="ngModel" [(ngModel)]="solicitud.idResponsableUsuarioFinal" >
+                  <select class="form-select"  name="idResponsableUsuarioFinal" 
+                  #idResponsableUsuarioFinal="ngModel" 
+                  [(ngModel)]="solicitud.idResponsableUsuarioFinal" 
+                  [ngClass]="{'is-invalid': idResponsableUsuarioFinal.errors && idResponsableUsuarioFinal.touched}">
                     
                     <option [value]="item.idFuncionario"   *ngFor="let item of funcionarios ">{{item.nombre+"  "+item.apellidos}}  </option>
                     </select>
+
+                    <div [hidden]="!idResponsableUsuarioFinal.errors?.required" class="invalid-feedback">
+                      *Requerido
+                    </div>
                  
                 </div>
 
