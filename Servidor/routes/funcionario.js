@@ -11,22 +11,23 @@ funcionarioController.crear
    
 );
 // Eliminar (api/id)
-router.delete('/:id',
-funcionarioController.eliminar
+router.delete('/:idFuncionario',
+funcionarioController.eliminarFuncionario
 );
-
-// Consultar 
-router.get('/consultar/:correo/:password',
-funcionarioController.obtener
-);
-
 // Actualizar
-router.put('/editar/:id',
+router.patch('/editar',
 funcionarioController.editar
 );
 
 router.get('/obtenerFuncionarios',
      funcionarioController.obtenerFuncionarios
+);
+
+router.get('/obtenerFuncionario/:idFuncionario',
+     funcionarioController.obtenerFuncionario
+);
+router.get('/obtenerFuncionarioDetalles/:idFuncionario',
+     funcionarioController.obtenerFuncionarioDetalles
 );
 
 

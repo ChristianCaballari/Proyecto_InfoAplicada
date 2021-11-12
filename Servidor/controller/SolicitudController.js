@@ -65,3 +65,8 @@ exports.buscar=(req,res) => {
     let data = new Data();
     data.transaccion2(trasaccion,res);
 }
+exports.selectProyectosSolicitud=(req,res) =>{
+    let trasaccion = `EXEC [dbo].[sp_selectProyectosSolicitud]`;
+    let data = new Data();
+    data.transaccion2(trasaccion,res);
+}

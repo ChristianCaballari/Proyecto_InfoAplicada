@@ -12,6 +12,9 @@ router.delete('/:id',avanceController.eliminar);
 // Consultar avance
 router.get('/consultar',avanceController.obtener);
 
+//Obtener Documento 
+router.get('/obtenerDocumento/:id',avanceController.obtenerDocumento);
+
 // Actualizar avance
 router.put('/editar/:id',avanceController.editar);
 
