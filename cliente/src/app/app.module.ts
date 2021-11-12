@@ -24,6 +24,7 @@ import { SolicitudService } from './servicios/solicitud.service';
 import { SexoService } from './servicios/sexoService';
 import { AvanceService } from './servicios/avance.service';
 import { AvanceComponent } from './componentes/avance/avance.component';
+import { TrimestreService } from './servicios/trimestre.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { AvanceComponent } from './componentes/avance/avance.component';
       FormsModule,
       NgbModule
   ],
-  providers: [LoginService,FuncionarioService,DepartamentoService,/*GuardianGuard,*/Swal2,SolicitudService,SexoService,AvanceService],
+  providers: [LoginService,FuncionarioService,DepartamentoService,/*GuardianGuard,*/Swal2,SolicitudService,SexoService,AvanceService,TrimestreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
