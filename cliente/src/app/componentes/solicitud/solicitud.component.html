@@ -36,9 +36,39 @@
           <td>{{solicitud.fechaHora}}</td>
           <td>{{solicitud.fechaInicio}}</td>
           <td>{{solicitud.fechaFin}}</td>
-          <td>{{solicitud.idUsuarioAplicativo}}</td>
-          <td>{{solicitud.idResponsableTI}}</td>
-          <td>{{solicitud.idResponsableUsuarioFinal}}</td>
+          <td>
+            <a
+            (click)="verDetalles(solicitud,1)"
+            class="btn btn-agregar spacing"
+            data-bs-toggle="modal"
+            data-bs-target="#verDetalles"
+            #botonDetalles
+          >
+          <i class="fas fa-address-card"></i>
+          </a>
+          </td>
+          <td>
+            <a
+            (click)="verDetalles(solicitud,2)"
+            class="btn btn-agregar spacing"
+            data-bs-toggle="modal"
+            data-bs-target="#verDetalles"
+            #botonDetalles
+          >
+          <i class="fas fa-address-card"></i>
+          </a>
+          </td>
+          <td>
+            <a
+            (click)="verDetalles(solicitud,3)"
+            class="btn btn-agregar spacing"
+            data-bs-toggle="modal"
+            data-bs-target="#verDetalles"
+            #botonDetalles
+          >
+          <i class="fas fa-address-card"></i>
+          </a>
+          </td>
           
           <td>
             <a (click)="editarSolicitud(solicitud)" class="btn btn-edit spacing">
@@ -46,10 +76,11 @@
             </a>
             <a
               (click)="eliminarSolicitud(solicitud)"
-              class="btn btn-danger spacing"
+              class="btn btn-danger"
             >
               <i class="fas fa-trash-alt"></i>
             </a>
+
             <a (click)="verdocumentoActaconstituvia(solicitud)" class="btn btn-edit spacing">
               <i class="fas fa-clipboard-list"></i>
             </a>
@@ -146,13 +177,8 @@
 
                 <div class="form-group">
                   <label for="usuarioResponsable">Documento Acta constitutiva</label>
-
-                  <input type="file"
-                  alife-file-to-base64
-                  class="form-control"  
-                  name="documentoActaConstitutiva"
-                  (onFileChanged)="onFileChangedSolicitud($event)"
-                  required />
+                  <input type="file" #documentoActaConstitutiva="ngModel" class="form-control" name="documentoActaConstitutiva"
+                  [(ngModel)]="solicitud.documentoActaConstitutiva" required>
                 </div>
 
 
@@ -170,3 +196,38 @@
             </div>
           </div>
         </div> 
+
+
+        <div class="modal fade" id="verDetalles">
+          <div class="modal-dialog modal-static">
+            <div class="modal-content">
+              <div class="modal-header bg-custom-2 text-white">
+                <h5 class="modal-title">Detalles Funcionario</h5>
+                <button
+                  class="btn-close btn-close-white"
+                  data-bs-dismiss="modal"
+                  #botonDetalles
+                  (click)="cerrarDetalles()"
+                ></button>
+              </div>
+              <div class="card" style="max-width: 540px;">
+                <div class="row g-0">
+                 
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <div class="card" style="width: 19rem;">
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item"><i class="fas fa-check-square bg-custom-2"></i> Nombre: {{funcionario1.nombre}} {{funcionario.apellidos}}</li>
+                          <li class="list-group-item"><i class="fas fa-check-square bg-custom-2"></i> Apellido: {{funcionario1.apellidos}}</li>
+                          <li class="list-group-item"><i class="fas fa-check-square bg-custom-2"></i> Departamento: {{funcionario1.departamento}}</li>
+                          <li class="list-group-item"><i class="fas fa-check-square bg-custom-2"></i> Sexo: {{funcionario1.sexo}}</li>
+            
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

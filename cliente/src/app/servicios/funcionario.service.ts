@@ -41,6 +41,10 @@ export class FuncionarioService{
       return this.http.get<Funcionario2[]>(`${environment.API_URL}/solicitud/consultar/TI`)
     }
 
+    getFuncionarioSolicitud(funcionario1: Funcionario1) :Observable<Funcionario1[]>{
+      return this.http.get<Funcionario1[]>(`${environment.API_URL}/solicitud/consultar/funcionario/${funcionario1.idFuncionario}`)
+    }
+
      private handlerError(error:any): Observable<never>{
       let errorMessage = 'An error ocurred retrienvin data';
       if(error){

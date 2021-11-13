@@ -83,3 +83,11 @@ exports.documentoActaConstitutiva=(req,res) =>{
     let data = new Data();
     data.transaccion2(trasaccion,res);
 }
+
+exports.funcionarioSolicitud=(req,res) =>{
+    let idFuncionario = req.params.id; 
+    let trasaccion = `EXEC [dbo].[sp_selectFuncionarioSolicitud] @idFuncionario=N'${idFuncionario}'`;
+    let data = new Data();
+    data.transaccion2(trasaccion,res);
+    
+}

@@ -12,6 +12,7 @@ router.delete('/:id',solicitudController.eliminar);
 // Consultar solicitud
 router.get('/consultar',solicitudController.obtener);
 router.get('/consultar/TI',solicitudController.funcionarioTI);
+router.get('/consultar/funcionario/:id',solicitudController.funcionarioSolicitud);
 router.get('/consultar',solicitudController.obtener);
 
 

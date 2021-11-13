@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Solicitud } from 'src/app/modelo/solicitud.model';
-import { Funcionario2 } from 'src/app/modelo/Funcionario.model';
+import { Funcionario2,Funcionario1 } from 'src/app/modelo/Funcionario.model';
 import { SolicitudService } from './../../servicios/solicitud.service';
 import { FuncionarioService } from './../../servicios/funcionario.service';
 import { NgForm } from '@angular/forms';
@@ -17,7 +17,7 @@ import {Subject } from 'rxjs';
 export class SolicitudComponent implements OnInit,OnDestroy {
   @ViewChild(DataTableDirective, {static: false})
   dtElement: DataTableDirective;
-
+  habilidado:boolean = false;
   solicitud: Solicitud = {
     idSolicitud:'',
     idUsuarioAplicativo:'',
@@ -35,10 +35,21 @@ export class SolicitudComponent implements OnInit,OnDestroy {
      apellidos:''
    
   };
+  funcionario1:Funcionario1={
+    idFuncionario:'',
+     departamento:'',
+     sexo:'',
+     nombre:'',
+     apellidos:'',
+     fechaNacimiento:''
+   
+  };
+
   pdf64:string;
   @ViewChild("solicitudForm") solicitudForm: NgForm;
   @ViewChild("botonCerrar") botonCerrar: ElementRef;
   @ViewChild("botonAbrir") botonAbrir: ElementRef;
+  @ViewChild('botonDetalles') botonDetalles: ElementRef;
   
   dtOptions: DataTables.Settings = {};
   solicitudes!: any[];
@@ -192,7 +203,7 @@ showPdf(pdf:any) {
   public cerrarModal(){
     this.botonCerrar.nativeElement.click();
     this.solicitudForm.resetForm();
-    
+    this.habilidado = false;
   }
 
   obtenerFuncionariosTI(){
@@ -208,6 +219,46 @@ showPdf(pdf:any) {
     this.funcionarioService.getAllFuncionarios().subscribe((funcionario)=>{
       this.funcionarios=funcionario;
     });
+  }
+
+  verDetalles(solicitud:Solicitud,num : Number){
+    let id:any;
+    
+    if(num==1){
+      id= solicitud.idUsuarioAplicativo;
+    }
+    if(num==2){
+      id= solicitud.idResponsableTI;
+    }
+    if(num==3){
+      id= solicitud.idResponsableUsuarioFinal;
+    }
+    
+    this.funcionario1.idFuncionario=id;
+    this.funcionarioService.getFuncionarioSolicitud(this.funcionario1).subscribe(
+      (result)=>{
+        this.funcionario1.idFuncionario= result[0].idFuncionario;
+        this.funcionario1.departamento = result[0].departamento;
+        this.funcionario1.sexo = result[0].sexo;
+        this.funcionario1.nombre = result[0].nombre;
+        this.funcionario1.apellidos = result[0].apellidos;
+        this.funcionario1.fechaNacimiento = result[0].fechaNacimiento;
+        
+      }
+    
+      )
+      
+   this.botonDetalles.nativeElement.click();
+  }
+
+  cerrarDetalles(){
+    this.funcionario.idFuncionario = "";
+        this.funcionario1.sexo = "";
+        this.funcionario1.nombre = "";
+        this.funcionario1.apellidos = "";
+        this.funcionario1.departamento = "";
+        this.funcionario1.fechaNacimiento = "";
+        this.habilidado = false;
   }
 
 
