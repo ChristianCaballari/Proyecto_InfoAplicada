@@ -1,5 +1,6 @@
 const Solicitud = require("../models/Solicitud"); 
 const Data = require("../dataModel/Data");
+const DataFuncionario = require("../dataModel/DataFuncionario");
 
 
 exports.crear = (req, res) => {
@@ -26,8 +27,24 @@ exports.eliminar  = (req, res) => {
       console.log(idSolicitud);
       
       let transaccion = `EXEC [dbo].[sp_deleteSolicitud] @idSolicitud =N'${idSolicitud}'`;
-      let data = new Data();
-      data.transaccion2(transaccion,res);
+      let promise = DataFuncionario.trasaccion(transaccion);    
+      try {
+        promise.then((resultado) => {
+          let da = resultado[0].resultado;
+          console.log(da);
+    
+            if(da ===true){
+              return res.status(200)
+            .json({ msg: "Solicitud eliminada", valido: "Si" });
+            }else{
+            return res
+            .status(200)
+            .json({ msg: "No se puede eliminar", valido: "No" });  
+            }
+        });
+      } catch (error) {
+          console.log(error);
+   };
 }
 
 exports.obtener = (req, res) => {

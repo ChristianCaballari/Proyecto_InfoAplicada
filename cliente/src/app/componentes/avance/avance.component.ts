@@ -68,8 +68,10 @@ pdf:any;
   agregarAvance(avanceForm:NgForm){
     this.avance.documento =this.pdf;
     this.avance.idUsuarioAplicativo = localStorage.getItem("idFuncionario")?.toString();
-    this.avance.idUsuarioAplicativo  ='148';
     console.log(this.avance);
+
+    
+    if(this.avance.idAvance == ''){
 
       this.avanceService.addAvance(this.avance).subscribe(
         (result) =>{
@@ -77,6 +79,15 @@ pdf:any;
          this.swal.exitoso("Agregado Exitosamente");
         }
       )
+    }else{
+      this.avanceService.updateAvance(this.avance).subscribe(
+        (result) =>{
+          this.reload();
+          this.swal.exitoso("Actualizado Exitosamente");
+        }
+      )
+    }
+    this.cerrarModal();
   }
 
   onFileChanged(e: any) {
@@ -172,6 +183,13 @@ pdf:any;
   }
 
   editarAvance(avance:AvanceDetetalle){
+   this.avanceService.getAvanceUpdate(avance).subscribe(
+     (result) =>{
+      this.avance.idAvance = result[0].idAvance;
+      this.avance.idTrimestre = result[0].idTrimestre,
+      this.avance.idSolicitud = result[0].idSolicitud;  
+     }
+   )
  this.botonAbrir.nativeElement.click();
   }
   eliminarAvance(avance:AvanceDetetalle){
@@ -196,5 +214,14 @@ pdf:any;
         }
       });
       return;
+    }
+    private cerrarModal(){
+      this.avance.documento='';
+      this.avance.fechaHora='';
+      this.avance.idAvance='';
+      this.avance.idSolicitud='';
+      this.avance.idTrimestre='';
+      this.avance.idUsuarioAplicativo='';
+      this.botonCerrar.nativeElement.click();
     }
 }

@@ -15,8 +15,12 @@ router.get('/consultar',avanceController.obtener);
 //Obtener Documento 
 router.get('/obtenerDocumento/:id',avanceController.obtenerDocumento);
 
+
+//Obtener avance
+router.get('/obtenerAvanceUpdate/:id',avanceController.obtenerAvanceUpdate);
+
 // Actualizar avance
-router.put('/editar/:id',avanceController.editar);
+router.patch('/editar',avanceController.editar);
 
 
 module.exports = router; //exportar porque se usa en index

@@ -24,6 +24,14 @@ export class AvanceService {
     return this.http.get<any>(`${environment.API_URL}/avance/obtenerDocumento/${avance.idAvance}`);
   }
 
+  getAvanceUpdate(avance:AvanceDetetalle): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL}/avance/obtenerAvanceUpdate/${avance.idAvance}`);
+  }
+
+  updateAvance(avance:Avance):Observable<any>{
+    return this.http.patch(`${environment.API_URL}/avance/editar`,avance);
+  }
+
   deleteAvance(avance: AvanceDetetalle):Observable<any>{ //casi listo
     return this.http.delete<AvanceDetetalle>(`${environment.API_URL}/avance/${avance.idAvance}`);
   }

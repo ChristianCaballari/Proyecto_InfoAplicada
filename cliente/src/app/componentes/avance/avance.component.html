@@ -42,7 +42,7 @@
                <a (click)="eliminarAvance(avance)" class="btn btn-danger">
                  <i class="fas fa-trash-alt"></i>
                </a>
-               <a (click)="VerDocumento(avance)" class="btn btn-edit spacing">
+               <a (click)="VerDocumento(avance)" class="btn btn-agregar2 spacing">
                   <i class="fas fa-clipboard-list"></i>
                 </a>   
              </td>
@@ -68,7 +68,11 @@
          </div>
    
          <form #departamentoForm="ngForm" (ngSubmit)="agregarAvance(avanceForm)">
-           <input type="hidden" name="idDepartamento" />
+           <input type="hidden" name="idAvance"
+           #idAvance="ngModel"
+           [(ngModel)]="avance.idAvance"
+
+            />
            <div class="modal-body">
              <div class="col-12">
                <div class="col">
@@ -84,10 +88,17 @@
                      required
                    >
                      <option
+                     
                        [value]="item.idSolicitud"
                        *ngFor="let item of solicitudes"
+                       
                      >
-                     {{ item.nombre }} {{ item.apellidos }}  
+                     <div *ngIf="item.idSolicitud!='0'">
+                      Proyecto # {{ item.idSolicitud }}, Encargado TI {{ item.nombre }} {{ item.apellidos }} 
+                    </div> 
+                    <div *ngIf="item.idSolicitud=='0'">
+                        {{ item.nombre }} {{ item.apellidos }} 
+                    </div>
                      </option>
                    </select>
                    <div

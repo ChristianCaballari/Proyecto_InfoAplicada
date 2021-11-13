@@ -12,13 +12,17 @@ export class HeaderComponent implements OnInit {
 
   isLoggin: boolean = false;
   loggerUser: string = '';
+  nombreUser: any
+
+
+
 
 
   constructor(private loginService:LoginService,
-           private  Routerer: Router) {}
+  private  Routerer: Router) {}
 
   ngOnInit(): void {
-   
+   this.nombreUser = localStorage.getItem("nombreUsuario")?.toString();
   }
   logout(){
     this.loginService.logout();

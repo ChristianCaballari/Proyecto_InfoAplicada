@@ -9,7 +9,7 @@ export class Swal2 {
       position: 'top-end',
       icon: 'success',
       showConfirmButton: false,
-      timer: 2000,
+      timer: 2500,
     });
   }
   warning(msg: string) {
@@ -18,7 +18,7 @@ export class Swal2 {
       position: 'top-end',
       icon: 'warning',
       showConfirmButton: false,
-      timer: 2000,
+      timer: 2500,
     });
   }
   error(msg: string) {

@@ -3,9 +3,10 @@ export interface IResponse{
      msg:string;
      noValido:string;
      idFuncionario:string;
+     loginName:string;
 }
 
 export interface IRespuesta{
     msg:string;
-    valido:string;
+    valido:string;  
 }

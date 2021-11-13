@@ -1,3 +1,4 @@
+import { IRespuesta } from 'src/app/modelo/Respuesta.models';
 import { Funcionario2 } from 'src/app/modelo/Funcionario.model';
 import { catchError, map } from 'rxjs/operators';
 import { Observable,throwError } from 'rxjs';
@@ -33,8 +34,8 @@ export class FuncionarioService{
     updateFuncionario(funcionario:Funcionario):Observable<any>{
       return this.http.patch(`${environment.API_URL}/funcionario/editar`,funcionario);
     }
-    delete(funcionario:Funcionario1):Observable<any>{
-      return this.http.delete(`${environment.API_URL}/funcionario/${funcionario.idFuncionario}`);
+    delete(funcionario:Funcionario1):Observable<IRespuesta>{
+      return this.http.delete<IRespuesta>(`${environment.API_URL}/funcionario/${funcionario.idFuncionario}`);
     }
 
     getFuncionarioTI() :Observable<Funcionario2[]>{

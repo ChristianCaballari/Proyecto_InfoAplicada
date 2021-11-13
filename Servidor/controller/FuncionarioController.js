@@ -105,14 +105,15 @@ exports.eliminarFuncionario = (req, res) =>{
         try {
           promise.then((resultado) => {
             let da = resultado[0].resultado;
+            console.log(da);
       
-              if(da){
-                 res.status(200)
-              .json({ msg: "Funcionario eliminado", noValido: "Si" });
+              if(da ===true){
+                return res.status(200)
+              .json({ msg: "Funcionario eliminado", valido: "Si" });
               }else{
               return res
               .status(200)
-              .json({ msg: "No se pudo relizar la transaccion", noValido: "No" });  
+              .json({ msg: "Funcionario asociado a una Solicitud", valido: "No" });  
               }
           });
         } catch (error) {

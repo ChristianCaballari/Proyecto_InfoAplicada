@@ -1,4 +1,4 @@
-import { Swal2 } from './../../mensajes/mensajes';
+import { IRespuesta } from 'src/app/modelo/Respuesta.models';
 import { SexoService } from 'src/app/servicios/sexoService';
 import { DepartamentoService } from './../../servicios/departamento.service';
 import {Component,OnInit,ViewChild,ElementRef, OnDestroy} from '@angular/core';
@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
+import { Swal2 } from './../../mensajes/mensajes';
 @Component({
   selector: 'app-funcionarios',
   templateUrl: './funcionarios.component.html',
@@ -190,6 +191,7 @@ export class FuncionariosComponent implements OnInit,OnDestroy {
   }
 
   eliminarFuncionario(funcionario1: Funcionario1) {
+
     const { nombre, apellidos, departamento } = funcionario1;
     Swal.fire({
       title: 'Estas Seguro de Eliminar el Siguiente Funcionario?',
@@ -204,14 +206,19 @@ export class FuncionariosComponent implements OnInit,OnDestroy {
 
         this.funcionarioService.delete(funcionario1).subscribe(
           (result)=>{
-            this.reload();
+            let data = result as IRespuesta
+            console.log(data);
+           if(data.valido='Si'){
+             this.swal.exitoso(data.msg);
+             this.reload();
+           
+           }else{
+             this.swal.error(data.msg);
+           }
+            
           }
         )
-        Swal.fire(
-          'Eliminado!',
-          'Funcionario eliminado Correctamente.',
-          'success'
-        );
+       
       }
     });
     return;

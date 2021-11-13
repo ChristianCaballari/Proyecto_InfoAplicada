@@ -37,30 +37,33 @@
           <td>{{solicitud.fechaInicio}}</td>
           <td>{{solicitud.fechaFin}}</td>
           <td>
+           
             <a
-            (click)="verDetalles(solicitud,1)"
+            (click)="verDetalles(solicitud,'1',solicitud.idUsuarioAplicativo)"
             class="btn btn-agregar2 spacing"
             data-bs-toggle="modal"
             data-bs-target="#verDetalles"
-            #botonDetalles
+            
           >
           <i class="fas fa-address-card"></i>
           </a>
           </td>
           <td>
+           
             <a
-            (click)="verDetalles(solicitud,2)"
+            (click)="verDetalles(solicitud,'2',solicitud.idResponsableTI)"
             class="btn btn-agregar2 spacing"
             data-bs-toggle="modal"
             data-bs-target="#verDetalles"
-            #botonDetalles
+            
           >
           <i class="fas fa-address-card"></i>
           </a>
           </td>
           <td>
+        
             <a
-            (click)="verDetalles(solicitud,3)"
+            (click)="verDetalles(solicitud,'3',solicitud.idResponsableUsuarioFinal)"
             class="btn btn-agregar2 spacing"
             data-bs-toggle="modal"
             data-bs-target="#verDetalles"
@@ -76,7 +79,7 @@
             </a>
             <a
               (click)="eliminarSolicitud(solicitud)"
-              class="btn btn-danger"
+              class="btn btn-danger spacing"
             >
               <i class="fas fa-trash-alt"></i>
             </a>

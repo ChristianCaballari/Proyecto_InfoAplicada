@@ -8,6 +8,7 @@ import { Swal2 } from 'src/app/mensajes/mensajes';
 import  Swal  from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
 import {Subject } from 'rxjs';
+import { IRespuesta } from 'src/app/modelo/Respuesta.models';
 
 @Component({
   selector: 'app-solicitud',
@@ -97,10 +98,10 @@ export class SolicitudComponent implements OnInit,OnDestroy {
     if(solicitudForm.value.idSolicitud == '' || solicitudForm.value.idSolicitud == undefined){
       this.solicitud.idUsuarioAplicativo = localStorage.getItem("idFuncionario")?.toString();
       console.log(this.solicitud);
-      // this.solicitudService.addSolicitud(this.solicitud).subscribe((result:any) =>{
-      //   this.reload();
+      this.solicitudService.addSolicitud(this.solicitud).subscribe((result:any) =>{
+        this.reload();
         
-      // });
+      });
       msg="Agregado correctamente";
     }else{
       this.solicitudService.editSolicitud(this.solicitud).subscribe(
@@ -192,10 +193,17 @@ showPdf(pdf:any) {
       
       this.solicitudService.deleteSolicitud(sol).subscribe(
         (result)=>{
-          this.reload();
+          let data = result as IRespuesta
+          console.log(data);
+         if(data.valido='Si'){
+           this.swal.exitoso(data.msg);
+           this.reload();
+         
+         }else{
+           this.swal.error(data.msg);
+         }
         }
       )
-      this.swal.exitoso("Eliminado correctamente."); 
     }
   })
   }
@@ -221,18 +229,25 @@ showPdf(pdf:any) {
     });
   }
 
-  verDetalles(solicitud:Solicitud,num : Number){
+  verDetalles(solicitud:Solicitud,num : string,idFun:number){
     let id:any;
+
+    console.log("Ver");
+    console.log(num);
+    console.log(idFun);
+    console.log("Ver");
     
-    if(num==1){
-      id= solicitud.idUsuarioAplicativo;
+    if(num==='1'){
+      id= idFun;
+      //alert(`Num ${num}, IdFuncionario: ${idFun} `);
+    }else if(num==='2'){
+      id= idFun;
+     // alert(`Num ${num}, IdFuncionario: ${idFun} `);
+    }else if(num==='3'){
+      id= idFun;
+    //  alert(`Num ${num}, IdFuncionario: ${idFun} `);
     }
-    if(num==2){
-      id= solicitud.idResponsableTI;
-    }
-    if(num==3){
-      id= solicitud.idResponsableUsuarioFinal;
-    }
+
     
     this.funcionario1.idFuncionario=id;
     this.funcionarioService.getFuncionarioSolicitud(this.funcionario1).subscribe(

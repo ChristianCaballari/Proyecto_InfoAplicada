@@ -1,3 +1,4 @@
+import { IRespuesta } from 'src/app/modelo/Respuesta.models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -22,8 +23,8 @@ export class SolicitudService{
           getAllSolicitudTI() :Observable<any>{//listo
             return this.http.get(`${environment.API_URL}/solicitud/obtenerSolicitudesTI`);
           }
-          deleteSolicitud(sol: Solicitud):Observable<any>{ //casi listo
-            return this.http.delete<Solicitud>(`${environment.API_URL}/solicitud/${sol.idSolicitud}`);
+          deleteSolicitud(sol: Solicitud):Observable<IRespuesta>{ //casi listo
+            return this.http.delete<IRespuesta>(`${environment.API_URL}/solicitud/${sol.idSolicitud}`);
           }
       
           addSolicitud(sol: Solicitud):Observable<any>{//listo

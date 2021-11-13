@@ -29,6 +29,7 @@ export class LoginService {
     .post<IResponse>(`${environment.API_URL}/auth`,ilogin)
     .pipe(
       map((res:IResponse) =>{
+        console.log(res);
        //saveToke()
       // console.log(res);
        if(res.noValido){
@@ -36,6 +37,7 @@ export class LoginService {
        }else{
        this.saveToken(res.token);
        this.saveIdUsuario(res.idFuncionario);
+       this.saveNombreUsuario(res.loginName);
        this.loggedIn.next(true);
        }
        
@@ -46,6 +48,9 @@ export class LoginService {
   }
   logout():void {
     localStorage.removeItem('token');
+    localStorage.removeItem('loginName');
+    localStorage.removeItem('idFuncionario');
+
     this.loggedIn.next(false);
   }
   
@@ -68,6 +73,9 @@ export class LoginService {
   private saveToken(token:string): void{
    localStorage.setItem('token', token);
   }
+  private saveNombreUsuario(nombre:string): void{
+    localStorage.setItem('loginName', nombre);
+   }
   private saveIdUsuario(idFuncionario:string){
     localStorage.setItem('idFuncionario',idFuncionario);
   }
