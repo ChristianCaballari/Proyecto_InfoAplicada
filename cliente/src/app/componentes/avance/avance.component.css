@@ -40,23 +40,23 @@ ngb-pagination .page-item.active .page-link{
  }
 
  .btn-agregar{
-     background: transparent;
-     background-color: #2b8caa;
-     color:white;
-      border-radius: 6px;
-      font-weight: bold;
-      
-  }
-  .btn-agregar:hover {
-      background-color: #55bfdf;
-      color: white;
-  }
+   
+     background-color: #019ce4;
+     border-radius: 6px;
+     font-weight: bold;
+     color: white;
+}
+.btn-agregar:hover {
+     background-color: #53c3f0; 
+     color: white;
+}
 .btn-edit{
-     background-color: #1E90FF;
+     background-color:  gold;
      color:white;
 }
 .btn-edit:hover {
-     background-color: #4169E1; /* Green */
+   /* Green */
+     background-color: rgb(243, 220, 87);
      color: white;
 }
 
@@ -94,4 +94,33 @@ table td,th{
 }
 img {
      border-radius: 1px solid !important;
+}
+thead, tr {
+     
+     border-style: none;
+   
+}
+
+table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
+    border-top: none;
+    border-left: none; 
+    border: none;
+    border-bottom:none;
+    
+}
+
+.table-bordered>:not(caption)>*>*{
+     border-width: 1px;
+}
+
+.btn-agregar2{
+  
+    background-color: #1E90FF;
+    border-radius: 6px;
+    font-weight: bold;
+    color: white;
+}
+.btn-agregar2:hover {
+    background-color: #4169E1; 
+    color: white;
 }
