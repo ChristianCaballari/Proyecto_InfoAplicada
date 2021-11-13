@@ -27,7 +27,10 @@ exports.autenticarUsuario = async (req, res) => {
           .status(200)
           .json({ msg: "El Usuario no existe", noValido: "No" });
       }
-
+      console.log("ID FUNCIONARIO");
+      const idFun = resultado[0].idFuncionario;
+      console.log(resultado[0].idFuncionario);
+      console.log("FUNCIONARIO");
       // Pasa la validacion
       //Crea y firmar el JWT
       const payload = {
@@ -47,7 +50,9 @@ exports.autenticarUsuario = async (req, res) => {
           //Mensaje de confirmacion
           console.log("Mensaje de Token");
           console.log(token);
-          res.json({ token });
+          console.log(resultado.idFuncionario);
+          console.log("Mensaje de Token");
+          res.json({ "token":token,"idFuncionario":idFun });
         }
       );
     });

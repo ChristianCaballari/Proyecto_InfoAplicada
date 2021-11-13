@@ -6,6 +6,7 @@ import { map,catchError, tap } from 'rxjs/operators';
 import { environment } from '../environment';
 import { Swal2 } from '../mensajes/mensajes';
 import { Departamento} from '../modelo/Departamento.model';
+import { IRespuesta } from '../modelo/Respuesta.models';
 
 
 
@@ -24,8 +25,8 @@ export class DepartamentoService{
     getAllDepartament() :Observable<Departamento[]>{//listo
       return this.http.get<Departamento[]>(`${environment.API_URL}/departamento/consultar`)
     }
-    deleteDepartament(dep: Departamento):Observable<any>{ //casi listo
-      return this.http.delete<Departamento>(`${environment.API_URL}/departamento/${dep.idDepartamento}`);
+    deleteDepartament(dep: Departamento):Observable<IRespuesta>{ //casi listo
+      return this.http.delete<IRespuesta>(`${environment.API_URL}/departamento/${dep.idDepartamento}`);
     }
 
     addDepartament(dep: Departamento):Observable<any>{//listo

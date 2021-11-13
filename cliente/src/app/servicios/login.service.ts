@@ -35,6 +35,7 @@ export class LoginService {
         console.log(res);
        }else{
        this.saveToken(res.token);
+       this.saveIdUsuario(res.idFuncionario);
        this.loggedIn.next(true);
        }
        
@@ -66,6 +67,9 @@ export class LoginService {
 
   private saveToken(token:string): void{
    localStorage.setItem('token', token);
+  }
+  private saveIdUsuario(idFuncionario:string){
+    localStorage.setItem('idFuncionario',idFuncionario);
   }
   private hanlerError(error:any): Observable<never>{
     let errorMessage = 'An error ocurred retrienvin data';

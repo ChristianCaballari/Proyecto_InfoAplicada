@@ -25,6 +25,7 @@ import { SexoService } from './servicios/sexoService';
 import { AvanceService } from './servicios/avance.service';
 import { AvanceComponent } from './componentes/avance/avance.component';
 import { TrimestreService } from './servicios/trimestre.service';
+import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { TrimestreService } from './servicios/trimestre.service';
     AppRoutingModule,
     HttpClientModule,
     DataTablesModule,
+    AlifeFileToBase64Module,
       FormsModule,
       NgbModule
   ],

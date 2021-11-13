@@ -1,6 +1,5 @@
-const Departamento = require("../models/Departamento"); 
 const Data = require("../dataModel/Data");
-
+const Data2 = require("../dataModel/Data2");
 exports.crear = (req, res) => {
 
     const descripcion = req.body.descripcion; 
@@ -16,11 +15,25 @@ exports.crear = (req, res) => {
 } 
 
 exports.eliminar  = (req, res) => {
-      const idDepartamento = req.params.id;   
+      const idDepartamento = req.params.id;
+
       console.log(idDepartamento);
       let transaccion = `EXEC [dbo].[sp_deleteDepartment] @idDepartamento =N'${idDepartamento}'`;
-      let data = new Data();
-      data.transaccion2(transaccion,res);
+      
+      let promise = Data2.transaccion(transaccion);
+
+      promise.then((resultado)=>{
+          if(resultado[0].resultado){
+            console.log(resultado[0].resultado);
+            return res
+            .status(200)
+            .json({ msg: "Departamento eliminado", valido: "Si" });
+          }else{
+            return res
+            .status(200)
+            .json({ msg: "El departamento contiene Funcionarios Asociados", valido: "No" });
+          }
+      })    
 }
 
 exports.obtener = (req, res) => {

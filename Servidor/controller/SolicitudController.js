@@ -70,3 +70,16 @@ exports.selectProyectosSolicitud=(req,res) =>{
     let data = new Data();
     data.transaccion2(trasaccion,res);
 }
+
+exports.documentoActaConstitutiva=(req,res) =>{
+    const idSolicitud = req.params.id; 
+
+    console.log("IDSOLICITUD");
+
+    console.log(idSolicitud);
+
+    console.log("IDSOLICITUD");
+    let trasaccion = `EXEC [dbo].[sp_selectDocumentoActaConstitutiva] @idSolicitud =N'${idSolicitud}'`;
+    let data = new Data();
+    data.transaccion2(trasaccion,res);
+}

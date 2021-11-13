@@ -35,8 +35,7 @@ export class SolicitudComponent implements OnInit,OnDestroy {
      apellidos:''
    
   };
-
-
+  pdf64:string;
   @ViewChild("solicitudForm") solicitudForm: NgForm;
   @ViewChild("botonCerrar") botonCerrar: ElementRef;
   @ViewChild("botonAbrir") botonAbrir: ElementRef;
@@ -85,11 +84,12 @@ export class SolicitudComponent implements OnInit,OnDestroy {
 
     
     if(solicitudForm.value.idSolicitud == '' || solicitudForm.value.idSolicitud == undefined){
-      this.solicitud.idUsuarioAplicativo="1";
-      this.solicitudService.addSolicitud(this.solicitud).subscribe((result:any) =>{
-        this.reload();
+      this.solicitud.idUsuarioAplicativo = localStorage.getItem("idFuncionario")?.toString();
+      console.log(this.solicitud);
+      // this.solicitudService.addSolicitud(this.solicitud).subscribe((result:any) =>{
+      //   this.reload();
         
-      });
+      // });
       msg="Agregado correctamente";
     }else{
       this.solicitudService.editSolicitud(this.solicitud).subscribe(
@@ -108,6 +108,21 @@ export class SolicitudComponent implements OnInit,OnDestroy {
   
 }
 
+showPdf(pdf:any) {
+   
+  const linkSource = pdf;
+  const downloadLink = document.createElement("a");
+  
+  const fileName = "DocumentoAvance.pdf";
+     
+      downloadLink.href = linkSource;
+       //downloadLink = fileName;
+
+      window.open(downloadLink.href)
+    //  downloadLink.click();
+
+//  console.log(this.pdf);
+}
   obtenerSolicitudes(){
     
     this.dtOptions = {
@@ -123,9 +138,21 @@ export class SolicitudComponent implements OnInit,OnDestroy {
      });
   }
 
- 
+  onFileChangedSolicitud(e:any){
 
+    console.log(e[0].base64);
+    this.solicitud.documentoActaConstitutiva = e[0].base64;
+  }
 
+  verdocumentoActaconstituvia(sol: Solicitud){
+    this.solicitudService.getDocumento(sol).subscribe(
+      (result) =>{
+        this.pdf64 = result[0].documentoActaConstitutiva;
+        console.log(this.pdf64);
+        this.showPdf(this.pdf64);
+      }
+    )
+  }
   editarSolicitud(sol: Solicitud){
 
 

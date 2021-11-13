@@ -17,6 +17,9 @@ router.get('/consultar',solicitudController.obtener);
 
 router.get('/obtenerSolicitudesTI',solicitudController.selectProyectosSolicitud);
 
+router.get('/documentoActa/:id',solicitudController.documentoActaConstitutiva);
+
+
 // Actualizar solicitud
 router.put('/editar/:id',solicitudController.editar);
 

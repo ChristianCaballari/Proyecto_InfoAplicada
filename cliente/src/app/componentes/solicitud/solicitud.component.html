@@ -46,9 +46,12 @@
             </a>
             <a
               (click)="eliminarSolicitud(solicitud)"
-              class="btn btn-danger"
+              class="btn btn-danger spacing"
             >
               <i class="fas fa-trash-alt"></i>
+            </a>
+            <a (click)="verdocumentoActaconstituvia(solicitud)" class="btn btn-edit spacing">
+              <i class="fas fa-clipboard-list"></i>
             </a>
           </td>
         </tr>
@@ -143,8 +146,13 @@
 
                 <div class="form-group">
                   <label for="usuarioResponsable">Documento Acta constitutiva</label>
-                  <input type="file" #documentoActaConstitutiva="ngModel" name="documentoActaConstitutiva"
-                  [(ngModel)]="solicitud.documentoActaConstitutiva" required>
+
+                  <input type="file"
+                  alife-file-to-base64
+                  class="form-control"  
+                  name="documentoActaConstitutiva"
+                  (onFileChanged)="onFileChangedSolicitud($event)"
+                  required />
                 </div>
 
 

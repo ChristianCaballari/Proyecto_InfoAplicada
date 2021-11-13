@@ -2,10 +2,11 @@ import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/co
 import { Departamento } from 'src/app/modelo/Departamento.model';
 import { DepartamentoService } from './../../servicios/departamento.service';
 import { NgForm } from '@angular/forms';
-import { Swal2 } from 'src/app/mensajes/mensajes';
 import  Swal  from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
 import {Subject } from 'rxjs';
+import { IRespuesta } from 'src/app/modelo/Respuesta.models';
+import { Swal2 } from 'src/app/mensajes/mensajes';
 
 @Component({
   selector: 'app-departamento',
@@ -75,6 +76,7 @@ editarDepartamento(departamento: Departamento){
     this.botonAbrir.nativeElement.click();
 }
 eliminarDepartamento(departamento: Departamento){
+  let notificacion;
         Swal.fire({
         title: 'Estas seguro que desea eliminar el siguiente funcionario?',
         text: 'Funcionario',
@@ -88,10 +90,17 @@ eliminarDepartamento(departamento: Departamento){
         
         this.departamentoService.deleteDepartament(departamento).subscribe(
           (result)=>{
-            this.reload();
+            let data = result as IRespuesta
+            if(data.valido='Si'){
+             notificacion = data.msg;
+             this.swal.exitoso(notificacion); 
+             this.reload();  
+            }else{
+              notificacion = data.msg;
+              this.swal.error(notificacion); 
+            }
           }
         )
-        this.swal.exitoso("Eliminado correctamente."); 
       }
     })
 }

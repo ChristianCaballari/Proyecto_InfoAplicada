@@ -27,7 +27,7 @@ export class Swal2 {
       position: 'top-end',
       icon: 'error',
       showConfirmButton: false,
-      timer: 2000,
+      timer: 2500,
     });
   }
   

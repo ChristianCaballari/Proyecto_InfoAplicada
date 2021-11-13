@@ -67,6 +67,7 @@ pdf:any;
 
   agregarAvance(avanceForm:NgForm){
     this.avance.documento =this.pdf;
+    this.avance.idUsuarioAplicativo = localStorage.getItem("idFuncionario")?.toString();
     this.avance.idUsuarioAplicativo  ='148';
     console.log(this.avance);
 
@@ -100,7 +101,7 @@ pdf:any;
     
     const fileName = "DocumentoAvance.pdf";
         downloadLink.href = linkSource;
-       // downloadLink = fileName;
+         //downloadLink = fileName;
         window.open(downloadLink.href)
       //  downloadLink.click();
 

@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       console.log("Hola");
     //  this.subscripcion.add(
         this.loginService.login2(this.funcionario).subscribe((res) => {
-        
+            
          if (Object(res)['noValido'] == 'No') {
             this.swal.error(Object(res)['msg']);
          }else{

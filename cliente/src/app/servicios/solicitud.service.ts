@@ -35,6 +35,8 @@ export class SolicitudService{
             return this.http.put<Solicitud>(`${environment.API_URL}/solicitud/editar/${sol.idSolicitud}`,sol);
           }
 
-          
-        
+          getDocumento(sol:Solicitud): Observable<any> {
+            return this.http.get(`${environment.API_URL}/solicitud/documentoActa/${sol.idSolicitud}`);
+          }
+      
 }
