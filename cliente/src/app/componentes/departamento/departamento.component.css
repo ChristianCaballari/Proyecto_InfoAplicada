@@ -28,15 +28,16 @@
 }
 .btn-agregar{
      background: transparent;
-     background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
-     border-radius: 6px;
-     font-weight: bold;
-     color: white;
-}
-.btn-agregar:hover {
-     background-image: linear-gradient(15deg, #114969 0%, #6ec2b8 100%);
-     color: white;
-}
+     background-color: #2b8caa;
+     color:white;
+      border-radius: 6px;
+      font-weight: bold;
+      
+  }
+  .btn-agregar:hover {
+      background-color: #55bfdf;
+      color: white;
+  }
 .bg-modal{
      background-color: #80d0c7;
  }

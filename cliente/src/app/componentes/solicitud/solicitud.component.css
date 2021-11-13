@@ -27,15 +27,15 @@
     color: white;
 }
 .btn-agregar{
-    background: transparent;
-   /* background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);*/
-   border: 3px solid #80d0c7;
+   background: transparent;
+   background-color: #2b8caa;
+   color:white;
     border-radius: 6px;
     font-weight: bold;
     
 }
 .btn-agregar:hover {
-    background-color: #80d0c7;
+    background-color: #55bfdf;
     color: white;
 }
 .bg-modal{
@@ -58,7 +58,8 @@
     background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
 }
 .bg-custom-2 {
-    background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+ background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+  
 }
 
 table{
@@ -77,4 +78,11 @@ table td,th{
 .spacing{
  margin-right: .5rem;
 }
-
+.btn-detalles{
+    background-color: #048888;
+    color:white;
+}
+.btn-pdf{
+    background-color: rgba(50, 225, 231, 0.932);
+    color:white;
+}
