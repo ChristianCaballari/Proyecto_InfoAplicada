@@ -90,7 +90,7 @@ export class SolicitudComponent implements OnInit,OnDestroy {
   agregarSolicitud(solicitudForm: NgForm){
     console.log(solicitudForm.value);
    
-  
+   console.log( this.solicitud.documentoActaConstitutiva) 
     let msg;
     if(solicitudForm.valid){
 
@@ -152,7 +152,6 @@ showPdf(pdf:any) {
 
   onFileChangedSolicitud(e:any){
 
-    console.log(e[0].base64);
     this.solicitud.documentoActaConstitutiva = e[0].base64;
   }
 

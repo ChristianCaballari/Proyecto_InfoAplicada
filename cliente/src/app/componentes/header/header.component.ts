@@ -22,7 +22,8 @@ export class HeaderComponent implements OnInit {
   private  Routerer: Router) {}
 
   ngOnInit(): void {
-   this.nombreUser = localStorage.getItem("nombreUsuario")?.toString();
+   this.nombreUser = localStorage.getItem("loginName")?.toString();
+   console.log(this.nombreUser);
   }
   logout(){
     this.loginService.logout();

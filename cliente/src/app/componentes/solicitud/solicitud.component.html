@@ -181,7 +181,10 @@
                 <div class="form-group">
                   <label for="usuarioResponsable">Documento Acta constitutiva</label>
                   <input type="file" #documentoActaConstitutiva="ngModel" class="form-control" name="documentoActaConstitutiva"
-                  [(ngModel)]="solicitud.documentoActaConstitutiva" required>
+                  [(ngModel)]="solicitud.documentoActaConstitutiva"
+                  alife-file-to-base64
+                  (onFileChanged)="onFileChangedSolicitud($event)"
+                 required>
                 </div>
 
 

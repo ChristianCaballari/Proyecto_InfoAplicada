@@ -17,17 +17,8 @@
     
     <ul class="navbar-nav ml-auto">
       <li  class="nav-item dropdown mr-3">
-          <a class="btn  btn-style dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-               <i class="fas fa-user"></i>Bienvenido {{nombreUser}}
-          </a>
+         <p class="text-light">  <i class="fas fa-user"></i>Bienvenido {{nombreUser}}</p>
       </li>
-    </ul>
-    <ul class="navbar-nav p-1">
-    <li *ngIf="isLoggin" class="nav-item">
-      <a style="cursor: pointer;"  (click)="logout()" class="btn btn-secondary"><span>Salir</span>
-       
-      </a>
-    </li>
     </ul>
   </div>
 </nav>
