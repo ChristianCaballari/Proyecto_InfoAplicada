@@ -13,7 +13,7 @@
     </a>
   </div>
   <div class="border-b p-2">
-    <table
+    <table id="example"
       datatable
       [dtOptions]="dtOptions"
       [dtTrigger]="tablaTrigger"
@@ -198,9 +198,19 @@
                   accept="image/*"
                   name="foto"
                   alife-file-to-base64
-                  class="form-control"
+                  class="form-control" 
+                  (pointerdown)="onFileData($event)"
                   (onFileChanged)="onFileChanged($event)"
+                  [ngClass]="{
+                    'is-invalid': !fotoValida
+                  }"
                 />
+                <div
+                [hidden]="fotoValida"
+                class="invalid-feedback"
+              >
+                Requerido *
+              </div>
               </div>
             </div>
             <div class="col-8">
@@ -318,7 +328,7 @@
         <div class="modal-footer">
           <button
             type="submit"
-            [disabled]="!funcionarioForm.valid"
+            [disabled]="!funcionarioForm.valid && !fotoValida"
             class="btn btn-agregar"
           >
             Guardar

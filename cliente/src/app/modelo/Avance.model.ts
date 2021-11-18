@@ -14,5 +14,6 @@ export interface Avance{
     descripcion?:string;
     nombre?:string;
     apellidos?:string;
+    nombreSolicitud?:string;
 
  }

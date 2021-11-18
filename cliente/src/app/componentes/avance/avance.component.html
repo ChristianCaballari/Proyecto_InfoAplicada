@@ -31,7 +31,7 @@
          </thead>
          <tbody>
            <tr *ngFor="let avance of avances">
-             <td>{{ avance.idSolicitud }}</td>
+              <td>{{ avance.nombreSolicitud }}</td>
              <td>{{ avance.nombre }} {{ avance.apellidos }}</td>
              <td>{{ avance.descripcion }}</td>
              <td>{{ avance.fechaHora }}</td>
@@ -94,7 +94,7 @@
                        
                      >
                      <div *ngIf="item.idSolicitud!='0'">
-                      Proyecto # {{ item.idSolicitud }}, Encargado TI {{ item.nombre }} {{ item.apellidos }} 
+                      Proyecto {{ item.nombreSolicitud }}, Encargado TI {{ item.nombre }} {{ item.apellidos }} 
                     </div> 
                     <div *ngIf="item.idSolicitud=='0'">
                         {{ item.nombre }} {{ item.apellidos }} 
