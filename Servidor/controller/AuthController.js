@@ -30,7 +30,8 @@ exports.autenticarUsuario = async (req, res) => {
      
       const idFun = resultado[0].idFuncionario;
       const nombreusuario = resultado[0].loginName;
-      console.log(nombreusuario);
+      const foto = resultado[0].foto;
+     
       // Pasa la validacion
       //Crea y firmar el JWT
       const payload = {
@@ -48,7 +49,7 @@ exports.autenticarUsuario = async (req, res) => {
         (error, token) => {
           if (error) throw error;
           //Mensaje de confirmacion
-          res.json({ "token":token,"idFuncionario":idFun,"loginName":nombreusuario});
+          res.json({ "token":token,"idFuncionario":idFun,"loginName":nombreusuario, "foto":foto});
         }
       );
     });
