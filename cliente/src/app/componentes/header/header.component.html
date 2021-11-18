@@ -17,7 +17,10 @@
     
     <ul class="navbar-nav ml-auto">
       <li  class="nav-item dropdown mr-3">
-         <p class="text-light">  <i class="fas fa-user"></i>Bienvenido {{nombreUser}}</p>
+        <div class="contenedorImg">
+          <img [src]="imgUser" class="imgUser" />
+         <p class="text-light">Bienvenido {{nombreUser}}</p>
+        </div>
       </li>
     </ul>
   </div>

@@ -38,6 +38,7 @@ export class LoginService {
        this.saveToken(res.token);
        this.saveIdUsuario(res.idFuncionario);
        this.saveNombreUsuario(res.loginName);
+       this.saveFotoUsuario(res.foto);
        this.loggedIn.next(true);
        }
        
@@ -50,7 +51,7 @@ export class LoginService {
     localStorage.removeItem('token');
     localStorage.removeItem('loginName');
     localStorage.removeItem('idFuncionario');
-
+    localStorage.removeItem('foto');
     this.loggedIn.next(false);
   }
   
@@ -78,6 +79,9 @@ export class LoginService {
    }
   private saveIdUsuario(idFuncionario:string){
     localStorage.setItem('idFuncionario',idFuncionario);
+  }
+  private saveFotoUsuario(foto:string){
+    localStorage.setItem('foto',foto);
   }
   private hanlerError(error:any): Observable<never>{
     let errorMessage = 'An error ocurred retrienvin data';

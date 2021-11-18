@@ -12,7 +12,8 @@ export class HeaderComponent implements OnInit {
 
   isLoggin: boolean = false;
   loggerUser: string = '';
-  nombreUser: any
+  nombreUser: any;
+  imgUser:any;
 
 
 
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
    this.nombreUser = localStorage.getItem("loginName")?.toString();
+   this.imgUser = localStorage.getItem("foto")?.toString();
    console.log(this.nombreUser);
   }
   logout(){

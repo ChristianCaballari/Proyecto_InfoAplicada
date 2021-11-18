@@ -23,3 +23,17 @@
      background-color: white;
      color: #80d0c7;
 }
+.contenedorImg{
+     display: flex;
+     flex-direction: row;
+
+}
+.contenedorImg >*{
+     padding: 5px;
+}
+.imgUser{
+     width:60px;
+     height:60px;
+     border-radius:150px;
+/* border:7px solid #666; */
+}

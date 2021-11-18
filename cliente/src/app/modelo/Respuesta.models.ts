@@ -4,6 +4,7 @@ export interface IResponse{
      noValido:string;
      idFuncionario:string;
      loginName:string;
+     foto:string;
 }
 
 export interface IRespuesta{

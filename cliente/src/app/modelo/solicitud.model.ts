@@ -8,6 +8,7 @@ export interface Solicitud{
     fechaFin ?:string;
     idResponsableUsuarioFinal ?:string;
     documentoActaConstitutiva ?:string;
+    nombre?:string
 
 }
 
@@ -16,5 +17,5 @@ export interface Solicitud2{
     fechaHora ?:string;
     fechaInicio ?:string;
     fechaFin ?:string;
-
+    nombreSolicitud?:string;
 }
