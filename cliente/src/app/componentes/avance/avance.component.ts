@@ -162,7 +162,9 @@ pdf:any;
       console.log(this.avances[0].fechaHora);
       console.log(this.avances[0].idAvance);
       console.log(this.avances[0].idSolicitud);
+      console.log("Holaaaaa");
       console.log(this.avances);
+      console.log("Holaaaaa");
       this.tablaTrigger.next();
     }
    )
