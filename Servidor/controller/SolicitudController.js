@@ -6,25 +6,23 @@ const DataFuncionario = require("../dataModel/DataFuncionario");
 exports.crear = (req, res) => {
     let solicitud;
     s= new Solicitud(req.body.idUsuarioAplicativo,req.body.idResponsableTI,req.body.fechaInicio,
-        req.body.fechaFin,req.body.idResponsableUsuarioFinal,req.body.documentoActaConstitutiva);
+        req.body.fechaFin,req.body.idResponsableUsuarioFinal,req.body.documentoActaConstitutiva,req.body.nombre);
     
-        console.log(solicitud);
 
     let transaccion = `EXEC [dbo].[sp_insertarSolicitud] @idUsuarioAplicativo=N'${s.idUsuarioAplicativo}',
     @idResponsableTI =N'${s.idResponsableTI}',@fechaInicio =N'${s.fechaInicio}',@fechaFin =N'${s.fechaFin}'
     ,@idResponsableUsuarioFinal =N'${s.idResponsableUsuarioFinal}',
-    @documentoActaConstitutiva =N'${s.documentoActaConstitutiva}'`;
+    @documentoActaConstitutiva =N'${s.documentoActaConstitutiva}',
+    @nombre =N'${s.nombre}'`;
 
     let data = new Data();
    data.transaccion2(transaccion,res);  
-    
-
   
 } 
 
 exports.eliminar  = (req, res) => {
       const idSolicitud = req.params.id;   
-      console.log(idSolicitud);
+    
       
       let transaccion = `EXEC [dbo].[sp_deleteSolicitud] @idSolicitud =N'${idSolicitud}'`;
       let promise = DataFuncionario.trasaccion(transaccion);    
@@ -57,14 +55,15 @@ exports.obtener = (req, res) => {
 exports.editar = (req, res) => {
 
     const s= {idUsuarioAplicativo,idResponsableTI,fechaInicio,fechaFin,
-        idResponsableUsuarioFinal,documentoActaConstitutiva}  = req.body;
+        idResponsableUsuarioFinal,documentoActaConstitutiva,nombre}  = req.body;
     let idSolicitud = req.params.id;
     let data = new Data();
 
     let transaccion = `EXEC [dbo].[sp_updateSolicitud] @idSolicitud=N'${idSolicitud}',@idUsuarioAplicativo=N'${s.idUsuarioAplicativo}',
     @idResponsableTI =N'${s.idResponsableTI}',@fechaInicio =N'${s.fechaInicio}',@fechaFin =N'${s.fechaFin}'
     ,@idResponsableUsuarioFinal =N'${s.idResponsableUsuarioFinal}',
-    @documentoActaConstitutiva =N'${s.documentoActaConstitutiva}'`;
+    @documentoActaConstitutiva =N'${s.documentoActaConstitutiva}',
+    @nombre =N'${s.nombre}'`;
      data.transaccion2(transaccion,res);
      
 
@@ -76,12 +75,7 @@ exports.funcionarioTI=(req,res) =>{
     data.transaccion2(trasaccion,res);
 }
 
-exports.buscar=(req,res) => {
 
-    let trasaccion = `EXEC [dbo].[sp_searchDepartment]`;
-    let data = new Data();
-    data.transaccion2(trasaccion,res);
-}
 exports.selectProyectosSolicitud=(req,res) =>{
     let trasaccion = `EXEC [dbo].[sp_selectProyectosSolicitud]`;
     let data = new Data();
@@ -91,11 +85,11 @@ exports.selectProyectosSolicitud=(req,res) =>{
 exports.documentoActaConstitutiva=(req,res) =>{
     const idSolicitud = req.params.id; 
 
-    console.log("IDSOLICITUD");
+  /*  console.log("IDSOLICITUD");
 
     console.log(idSolicitud);
 
-    console.log("IDSOLICITUD");
+    console.log("IDSOLICITUD");*/
     let trasaccion = `EXEC [dbo].[sp_selectDocumentoActaConstitutiva] @idSolicitud =N'${idSolicitud}'`;
     let data = new Data();
     data.transaccion2(trasaccion,res);

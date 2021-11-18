@@ -21,6 +21,7 @@ export class SolicitudComponent implements OnInit,OnDestroy {
   habilidado:boolean = false;
   solicitud: Solicitud = {
     idSolicitud:'',
+    nombre:'',
     idUsuarioAplicativo:'',
     nombreAplicativo:'',
     idResponsableTI:'',
@@ -97,13 +98,14 @@ export class SolicitudComponent implements OnInit,OnDestroy {
     
     if(solicitudForm.value.idSolicitud == '' || solicitudForm.value.idSolicitud == undefined){
       this.solicitud.idUsuarioAplicativo = localStorage.getItem("idFuncionario")?.toString();
-      console.log(this.solicitud);
+     console.log(this.solicitud.idUsuarioAplicativo);
       this.solicitudService.addSolicitud(this.solicitud).subscribe((result:any) =>{
         this.reload();
         
       });
       msg="Agregado correctamente";
     }else{
+      console.log("Editar solicitud---->",this.solicitud);
       this.solicitudService.editSolicitud(this.solicitud).subscribe(
         (result)=>{
           console.log(result);
@@ -115,7 +117,7 @@ export class SolicitudComponent implements OnInit,OnDestroy {
     }
     this.cerrarModal();
     solicitudForm.resetForm();
-    this.swal.exitoso(msg);
+   // this.swal.exitoso(msg);
   }
   
 }
@@ -166,7 +168,7 @@ showPdf(pdf:any) {
   }
   editarSolicitud(sol: Solicitud){
 
-
+    this.solicitud.nombre=sol.nombre;
     this.solicitud.idSolicitud= sol.idSolicitud;
     this.solicitud.idUsuarioAplicativo= sol.idUsuarioAplicativo;
     this.solicitud.idResponsableTI= sol.idResponsableTI;
@@ -230,11 +232,6 @@ showPdf(pdf:any) {
 
   verDetalles(solicitud:Solicitud,num : string,idFun:number){
     let id:any;
-
-    console.log("Ver");
-    console.log(num);
-    console.log(idFun);
-    console.log("Ver");
     
     if(num==='1'){
       id= idFun;

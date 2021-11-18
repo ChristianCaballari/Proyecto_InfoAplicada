@@ -20,15 +20,6 @@ exports.editar = (req, res) => {
 
   const {idFuncionario,idDepartamento, idSexo, nombre, apellidos, fachaNacimiento, foto, loginName} = req.body;
 
-  console.log("HOALSLFSLDFJLKSJDFLKJSLKFJSLKFJLDSJFJDSLFJLKDSFJLKDSJF");
-  console.log(idDepartamento);
-  console.log(idSexo);
-  console.log(nombre);
-  console.log(apellidos);
-  console.log(loginName);
-  console.log(foto);
-  console.log("HOALSLFSLDFJLKSJDFLKJSLKFJSLKFJLDSJFJDSLFJLKDSFJLKDSJF");
-
   let transaccion = `EXEC [dbo].[sp_updateFuncionario] @idFuncionario =N'${idFuncionario}', @idDepartamento =N'${idDepartamento}',@idSexo =N'${idSexo}',@nombre =N'${nombre}',
   @apellidos =N'${apellidos}',@fechaNacimiento =N'${fachaNacimiento}',@foto =N'${foto}',
   @loginName =N'${loginName}'`;

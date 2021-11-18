@@ -68,7 +68,7 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
   ) {}
 
   onFileChanged(e: any) {
-    console.log(e[0].base64);
+    
     let extencionPermitida = /(.png|.jpg)$/i;
     let extencionvalida = e[0].name;
     if (!extencionPermitida.exec(extencionvalida)) {
@@ -144,7 +144,6 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
 
     this.funcionarioService.getAllFuncionarios().subscribe((funcionarios) => {
       this.funcionarios = funcionarios;
-      console.log(funcionarios);
       this.tablaTrigger.next();
     });
   }
@@ -188,11 +187,9 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
     this.habilidado = false;
   }
   editarFuncionario(funcionario: Funcionario) {
-    console.log(funcionario);
+    
     this.funcionarioService.getById(funcionario).subscribe((result) => {
-      console.log('Editar');
-      console.log(result[0].nombre);
-      console.log('Editar');
+    
       this.funcionario.idFuncionario = result[0].idFuncionario;
       this.funcionario.idSexo = result[0].idSexo;
       this.funcionario.nombre = result[0].nombre;
@@ -208,10 +205,8 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
   }
 
   agregar(funcionarioForm: NgForm) {
-    console.log(this.funcionarioForm.value);
+   
     let msg;
-    console.log('ID FUNCIONARIO ' + this.funcionario.idFuncionario);
-    console.log(this.funcionario);
     if (funcionarioForm.valid) {
       if (
         this.funcionario.idFuncionario == '' ||

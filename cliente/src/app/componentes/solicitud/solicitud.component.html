@@ -20,7 +20,7 @@
     >
       <thead class="bg-custom-2 text-light">
         <tr>
-          <th>ID</th>
+          <th>Nombre proyecto</th>
           <th>Fecha y Hora</th>
           <th>Fecha Incio</th>
           <th>Fecha Fin</th>
@@ -32,7 +32,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let solicitud of solicitudes">
-          <td>{{ solicitud.nombre}}</td>
+          <td>{{solicitud.nombre}}</td>
           <td>{{solicitud.fechaHora}}</td>
           <td>{{solicitud.fechaInicio}}</td>
           <td>{{solicitud.fechaFin}}</td>
@@ -115,6 +115,22 @@
               <div class="modal-body">
                 <div class="row">
                   <div class="col">
+
+                    <div class="form-group">
+                      <label for="nombre">Nombre del proyecto</label>
+                    <input type="text" name="nombre"
+                    class="form-control"
+                    #nombre="ngModel"
+                    [(ngModel)]="solicitud.nombre"
+                    [ngClass]="{'is-invalid': nombre.errors && nombre.touched}"
+                    required>
+
+                    <div [hidden]="!nombre.errors?.required" class="invalid-feedback">
+                      *Requerido
+                    </div>
+                   
+                 </div>
+
                     <div class="form-group">
                       <label for="usuarioA">Usuario Responsable TI</label>
                       <select class="form-select" aria-label="Default select example" name="idResponsableTI"

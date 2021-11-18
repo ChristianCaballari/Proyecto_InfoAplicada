@@ -1,6 +1,6 @@
 class Solicitud{ 
     constructor(idUsuarioAplicativo,idResponsableTI,fechaInicio,fechaFin,
-        idResponsableUsuarioFinal,documentoActaConstitutiva){
+        idResponsableUsuarioFinal,documentoActaConstitutiva,nombre){
        
         this.idUsuarioAplicativo= idUsuarioAplicativo;
         this.idResponsableTI= idResponsableTI;
@@ -8,6 +8,7 @@ class Solicitud{
         this.fechaFin= fechaFin;
         this.idResponsableUsuarioFinal= idResponsableUsuarioFinal;
         this.documentoActaConstitutiva= documentoActaConstitutiva
+        this.nombre=nombre;
     }
 
 }
