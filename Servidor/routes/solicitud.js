@@ -14,6 +14,7 @@ router.get('/consultar',solicitudController.obtener);
 router.get('/consultar/TI',solicitudController.funcionarioTI);
 router.get('/consultar/funcionario/:id',solicitudController.funcionarioSolicitud);
 router.get('/consultar',solicitudController.obtener);
+router.post('/filtro',solicitudController.solicitudFiltro);
 
 
 router.get('/obtenerSolicitudesTI',solicitudController.selectProyectosSolicitud);

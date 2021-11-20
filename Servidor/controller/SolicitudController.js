@@ -1,6 +1,7 @@
 const Solicitud = require("../models/Solicitud"); 
 const Data = require("../dataModel/Data");
 const DataFuncionario = require("../dataModel/DataFuncionario");
+const Filtro = require("../models/Filtro");
 
 
 exports.crear = (req, res) => {
@@ -101,4 +102,13 @@ exports.funcionarioSolicitud=(req,res) =>{
     let data = new Data();
     data.transaccion2(trasaccion,res);
     
+}
+
+exports.solicitudFiltro=(req,res)=>{
+    f = new Filtro (req.body.fechaInicio,req.body.fechaFin) ;
+    
+     let trasaccion = `EXEC [dbo].[searchFiltroSolicitud] @fechaInicio=N'${f.fechaInicio}',@fechaFin=N'${f.fechaFin}'`;
+     let data = new Data();
+     data.transaccion2(trasaccion,res);
+
 }

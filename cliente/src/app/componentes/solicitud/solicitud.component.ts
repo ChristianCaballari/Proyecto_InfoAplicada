@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Solicitud } from 'src/app/modelo/solicitud.model';
+import {filtro} from 'src/app/modelo/Filtro.model';
 import { Funcionario2,Funcionario1 } from 'src/app/modelo/Funcionario.model';
 import { SolicitudService } from './../../servicios/solicitud.service';
 import { FuncionarioService } from './../../servicios/funcionario.service';
@@ -46,14 +47,19 @@ export class SolicitudComponent implements OnInit,OnDestroy {
      fechaNacimiento:''
    
   };
+  filtro1: filtro={
+    fechaInicio: '',
+    fechaFin:'',
+  }
 
   pdf64:string;
   @ViewChild("solicitudForm") solicitudForm: NgForm;
+  @ViewChild("filtroForm") filtroForm: NgForm;
   @ViewChild("botonCerrar") botonCerrar: ElementRef;
   @ViewChild("botonAbrir") botonAbrir: ElementRef;
   @ViewChild('botonDetalles') botonDetalles: ElementRef;
   
-  dtOptions: DataTables.Settings = {};
+  dtOptions:any = {};
   solicitudes!: any[];
   funcionariosTI!: any[];
   funcionarios!:any[];
@@ -72,6 +78,8 @@ export class SolicitudComponent implements OnInit,OnDestroy {
     this.obtenerSolicitudes();
     this.obtenerFuncionariosTI();
     this.obtenerAllFuncionrios();
+
+   
   }
 
   reload(){
@@ -137,15 +145,47 @@ showPdf(pdf:any) {
 
 //  console.log(this.pdf);
 }
+ 
+
   obtenerSolicitudes(){
     
-    this.dtOptions = {
-    pagingType: 'full_numbers',
-    pageLength: 6,
-    language:{
-      url: '//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json'
-    }
-  };
+    this.dtOptions = { 
+      pagingType: 'full_numbers',
+      pageLength: 6,
+      responsive: true,
+     // dom: '<lf<Bt>ip>',
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json',
+      },
+      processing: true,
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'excelHtml5', 
+          titleAttr: 'Exportar a Excel',
+          title:"Reporte Funcionarios",
+          text:'<i class="fas fa-file-excel fs-4"></i>',
+          className: 'bg-success text-light rounded-3',
+          filename: 'Reporte de Funcionarios',
+          exportOptions: {
+            columns: [0, 1, 2, 3, 4],
+          },
+        },
+        {
+          extend: 'pdfHtml5',
+          titleAttr: 'Exportar a PDF',
+          title:"Reporte Funcionarios",
+          text:'<i class="fas fa-file-pdf fs-4"></i>',
+          className: 'bg-danger text-light rounded-3',
+          filename: 'Reporte de Funcionarios',
+          exportOptions: {
+            columns: [0, 1, 2, 3, 4],
+          },
+          
+        },
+      ],
+    };
+  
       this.solicitudService.getAllSolicitud().subscribe((solicitudes)=>{
       this.solicitudes=solicitudes;
       this.tablaTrigger.next();
@@ -271,6 +311,27 @@ showPdf(pdf:any) {
         this.funcionario1.fechaNacimiento = "";
         this.habilidado = false;
   }
+
+  filtro(filtroForm: NgForm){
+
+  
+    if(filtroForm.valid){
+      this.filtro1= filtroForm.value;
+     
+
+      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        // Destroy the table first
+        dtInstance.destroy();
+     this.solicitudService.getAllSolicitudFiltro(this.filtro1).subscribe(
+       (result)=>{
+         this.solicitudes=result; 
+         this.tablaTrigger.next();
+       }
+     
+       )
+     }
+      )};
+   }
 
 
 }

@@ -12,6 +12,21 @@
 </div>
 
 <div class="border-b p-2">
+    
+<form #filtroForm="ngForm" (ngSubmit)="filtro(filtroForm)">
+  <label for="min">Fecha m&iacute;nima:</label>
+  <input type="date" id="fechaInicio" name="fechaInicio"
+  #fechaInicio="ngModel"
+  [(ngModel)]="filtro1.fechaInicio"> 
+
+<label for="max">Fecha m&aacute;xima:</label>
+  <input type="date" id="fechaFin" name="fechaFin"
+  #fechaFin="ngModel"
+  [(ngModel)]="filtro1.fechaFin">
+
+  <button type="submit" class="btn btn-agregar" >Filtrar</button>
+</form>
+
     <table
       datatable
       [dtOptions]="dtOptions"

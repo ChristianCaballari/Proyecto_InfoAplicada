@@ -7,6 +7,7 @@ import { map,catchError, tap } from 'rxjs/operators';
 import { environment } from '../environment';
 import { Swal2 } from '../mensajes/mensajes';
 import { Solicitud} from '../modelo/solicitud.model';
+import {filtro} from '../modelo/Filtro.model'
 
 @Injectable()
 export class SolicitudService{
@@ -18,6 +19,10 @@ export class SolicitudService{
 
         getAllSolicitud() :Observable<Solicitud[]>{//listo
             return this.http.get<Solicitud[]>(`${environment.API_URL}/solicitud/consultar`)
+          }
+          getAllSolicitudFiltro(filtro: filtro) :Observable<any>{
+            
+            return this.http.post<Solicitud[]>(`${environment.API_URL}/solicitud/filtro`,filtro);
           }
           
           getAllSolicitudTI() :Observable<any>{//listo

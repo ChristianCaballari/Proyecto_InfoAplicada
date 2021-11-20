@@ -1,18 +1,8 @@
 import { IRespuesta } from 'src/app/modelo/Respuesta.models';
 import { SexoService } from 'src/app/servicios/sexoService';
 import { DepartamentoService } from './../../servicios/departamento.service';
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  OnDestroy,
-} from '@angular/core';
-import {
-  Funcionario1,
-  Funcionario,
-  FuncionarioD,
-} from 'src/app/modelo/Funcionario.model';
+import {Component,OnInit,ViewChild,ElementRef,OnDestroy,} from '@angular/core';
+import {Funcionario1,Funcionario,FuncionarioD,} from 'src/app/modelo/Funcionario.model';
 import { FuncionarioService } from './../../servicios/funcionario.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
