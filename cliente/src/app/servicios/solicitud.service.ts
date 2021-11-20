@@ -20,6 +20,9 @@ export class SolicitudService{
         getAllSolicitud() :Observable<Solicitud[]>{//listo
             return this.http.get<Solicitud[]>(`${environment.API_URL}/solicitud/consultar`)
           }
+          getAllPendienteCancelados() :Observable<any[]>{//listo
+            return this.http.get<any>(`${environment.API_URL}/solicitud/obtenerProyectoTerminadoCancelado`)
+          }
           getAllSolicitudFiltro(filtro: filtro) :Observable<any>{
             
             return this.http.post<Solicitud[]>(`${environment.API_URL}/solicitud/filtro`,filtro);

@@ -76,7 +76,8 @@
                 [(ngModel)]="departamento.descripcion"
                 [ngClass]="{'is-invalid': descripcion.errors && descripcion.touched}"
                 required
-                minlength="2"  
+                minlength="2" 
+                placeholder="Ingrese el nombre del departamento" 
                 />
                 <div [hidden]="!descripcion.errors?.required" class="invalid-feedback">
                   *Campo requerido
@@ -91,7 +92,8 @@
         </div>
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-agregar" data-toggle="tooltip" data-placement="top" title="Guardar">Guardar</button>
+          <button type="submit" class="btn btn-agregar" data-toggle="tooltip" data-placement="top" title="Guardar"
+          [disabled]="!departamentoForm.valid">Guardar</button>
         </div>
         </form>
       </div>

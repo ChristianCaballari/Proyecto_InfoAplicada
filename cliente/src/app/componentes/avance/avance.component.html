@@ -1,171 +1,170 @@
 <div class="containerPer mt-5">
-     <div class="mb-2">
-       <a
-         href="#"
-         class="btn btn-agregar btn-block"
-         data-toggle="tooltip"
-         data-placement="top"
-         title="Agregar Funcionario"
-         data-bs-toggle="modal"
-         data-bs-target="#agregarClienteModal"
-         #botonAbrir
-         ><i class="fas fa-plus"></i> Agregar
-       </a>
-     </div>
-     <!-- [dtTrigger]="dtTrigger" -->
-     <div class="border-b p-2">
-       <table
-         datatable
-         [dtOptions]="dtOptions"
-         [dtTrigger]="tablaTrigger"
-         class="table table-striped  row-border hover pt-2"
-       >
-         <thead class="bg-custom-2 text-light">
-           <tr>
-             <th>Proyecto</th>
-             <th>Usuario Aplicativo</th>
-             <th>Trimestre</th>
-             <th>Fecha</th>
-             <th>Acciones</th>
-           </tr>
-         </thead>
-         <tbody>
-           <tr *ngFor="let avance of avances">
-              <td>{{ avance.nombreSolicitud }}</td>
-             <td>{{ avance.nombre }} {{ avance.apellidos }}</td>
-             <td>{{ avance.descripcion }}</td>
-             <td>{{ avance.fechaHora }}</td>
-             <td>
-               <a (click)="editarAvance(avance)" class="btn btn-edit spacing">
-                 <i class="fas fa-edit"></i>
-               </a>
-               <a (click)="eliminarAvance(avance)" class="btn btn-danger">
-                 <i class="fas fa-trash-alt"></i>
-               </a>
-               <a (click)="VerDocumento(avance)" class="btn btn-agregar2 spacing">
-                  <i class="fas fa-clipboard-list"></i>
-                </a>   
-             </td>
-           </tr>
-         </tbody>
-       </table>
-     </div>
-   </div>
-   
-   <div class="modal fade" id="agregarClienteModal">
-     <div class="modal-dialog modal-lg">
-       <div class="modal-content">
-         <div class="modal-header text-white bg-custom-2">
-           <h5 class="modal-title">Agregar Avance</h5>
-           <button
-             class="btn-close btn-close-white"
-             data-bs-dismiss="modal"
-             data-toggle="tooltip"
-             data-placement="top"
-             title="Cerrar"
-             #botonCerrar
-           ></button>
-         </div>
-   
-         <form #departamentoForm="ngForm" (ngSubmit)="agregarAvance(avanceForm)">
-           <input type="hidden" name="idAvance"
-           #idAvance="ngModel"
-           [(ngModel)]="avance.idAvance"
+  <div class="mb-2">
+    <a
+      href="#"
+      class="btn btn-agregar btn-block"
+      data-toggle="tooltip"
+      data-placement="top"
+      title="Agregar Funcionario"
+      data-bs-toggle="modal"
+      data-bs-target="#agregarClienteModal"
+      #botonAbrir
+      ><i class="fas fa-plus"></i> Agregar
+    </a>
+  </div>
+  <!-- [dtTrigger]="dtTrigger" -->
+  <div class="border-b p-2">
+    <table
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="tablaTrigger"
+      class="table table-striped row-border hover pt-2"
+    >
+      <thead class="bg-custom-2 text-light">
+        <tr>
+          <th>Proyecto</th>
+          <th>Usuario Aplicativo</th>
+          <th>Trimestre</th>
+          <th>Fecha</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let avance of avances">
+          <td>{{ avance.nombreSolicitud }}</td>
+          <td>{{ avance.nombre }} {{ avance.apellidos }}</td>
+          <td>{{ avance.descripcion }}</td>
+          <td>{{ avance.fechaHora }}</td>
+          <td>
+            <a (click)="editarAvance(avance)" class="btn btn-edit spacing">
+              <i class="fas fa-edit"></i>
+            </a>
+            <a (click)="eliminarAvance(avance)" class="btn btn-danger">
+              <i class="fas fa-trash-alt"></i>
+            </a>
+            <a (click)="VerDocumento(avance)" class="btn btn-agregar2 spacing">
+              <i class="fas fa-clipboard-list"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-            />
-           <div class="modal-body">
-             <div class="col-12">
-               <div class="col">
-                 <div class="form-group">
-                   <label for="descripcion">Solicitud (Encargado de TI)</label>
-                   <select
-                   [(ngModel)]="solicitudSelected"
-                     class="form-select"
-                     aria-label="Solicitud"
-                     name="idSolicitud"
-                     #idSolicitud="ngModel"
-                     [(ngModel)]="avance.idSolicitud"
-                     required
-                   >
-                     <option
-                     
-                       [value]="item.idSolicitud"
-                       *ngFor="let item of solicitudes"
-                       
-                     >
-                     <div *ngIf="item.idSolicitud!='0'">
-                      Proyecto {{ item.nombreSolicitud }}, Encargado TI {{ item.nombre }} {{ item.apellidos }} 
-                    </div> 
-                    <div *ngIf="item.idSolicitud=='0'">
-                        {{ item.nombre }} {{ item.apellidos }} 
+<div class="modal fade" id="agregarClienteModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white bg-custom-2">
+        <h5 class="modal-title">Agregar Avance</h5>
+        <button
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Cerrar"
+          #botonCerrar
+        ></button>
+      </div>
+
+      <form #departamentoForm="ngForm" (ngSubmit)="agregarAvance(avanceForm)">
+        <input
+          type="hidden"
+          name="idAvance"
+          #idAvance="ngModel"
+          [(ngModel)]="avance.idAvance"
+        />
+        <div class="modal-body">
+          <div class="col-12">
+            <div class="col">
+              <div class="form-group">
+                <label for="descripcion">Solicitud (Encargado de TI)</label>
+                <select
+                  [(ngModel)]="solicitudSelected"
+                  class="form-select"
+                  aria-label="Solicitud"
+                  name="idSolicitud"
+                  #idSolicitud="ngModel"
+                  [(ngModel)]="avance.idSolicitud"
+                  required
+                  (click)="validarSelect($event)"
+                  [ngClass]="{
+                    'is-invalid': !selectSolicitud
+                  }"
+                >
+                  <option
+                    [value]="item.idSolicitud"
+                    *ngFor="let item of solicitudes"
+                  >
+                    <div *ngIf="item.idSolicitud != '0'">
+                      Proyecto {{ item.nombreSolicitud }}, Encargado TI
+                      {{ item.nombre }} {{ item.apellidos }}
                     </div>
-                     </option>
-                   </select>
-                   <div
-                   *ngIf="this.permitido ==false"
-                   class="invalid-feedback">
-                   Requerido *
-                 </div>
-                 </div>
-               </div>
-               <div class="col">
-                 <div class="form-group">
-                   <label for="descripcion">Documento</label>
-                   <input
-                     type="file"
-                     name="documento"
-                     alife-file-to-base64
-                     class="form-control"
-                     (onFileChanged)="onFileChanged($event)"
-                   />
-                 </div>
-               </div>
-               <div class="col">
-                 <div class="form-group">
-                   <label for="descripcion">Trimestre</label>
-                   <select
-                   [(ngModel)]="trimestresSelected"
-                     class="form-select"
-                     aria-label="Trimestre"
-                     name="idTrimestre"
-                     #idTrimestre="ngModel"
-                     [(ngModel)]="avance.idTrimestre"
-                     [ngClass]="{
-                       'is-invalid': idTrimestre.errors && idTrimestre.touched
-                     }"
-                     required
-                   >
-                     <option
-                       [value]="item.idTrimestre"
-                       *ngFor="let item of trimestres"
-                     >
-                       {{ item.descripcion }}
-                     </option>
-                   </select>
-                   <div
-                     [hidden]="!idTrimestre.errors?.required"
-                     class="invalid-feedback"
-                   >
-                     Requerido *
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-   
-           <div class="modal-footer">
-             <button
-               type="submit"
-               class="btn btn-agregar"
-               data-toggle="tooltip"
-               data-placement="top"
-               title="Guardar"
-             >
-               Guardar
-             </button>
-           </div>
-         </form>
-       </div>
-     </div>
-   </div>
-   
+                    <div *ngIf="item.idSolicitud == '0'">
+                      {{ item.nombre }} {{ item.apellidos }}
+                    </div>
+                  </option>
+                </select>
+                <div [hidden]="selectSolicitud" class="invalid-feedback">
+                  Selecione una Solicitud *
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="descripcion">Documento</label>
+                <input
+                  type="file"
+                  name="documento"
+                  alife-file-to-base64
+                  class="form-control"
+                  (onFileChanged)="onFileChanged($event)"
+                />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="descripcion">Trimestre</label>
+                <select
+                  [(ngModel)]="trimestresSelected"
+                  class="form-select"
+                  aria-label="Trimestre"
+                  name="idTrimestre"
+                  #idTrimestre="ngModel"
+                  [(ngModel)]="avance.idTrimestre"
+                  required
+                  (click)="validarSelectTrimestre()"
+                  [ngClass]="{ 'is-invalid': !selectTrimestre }"
+                >
+                  <option
+                    [value]="item.idTrimestre"
+                    *ngFor="let item of trimestres"
+                  >
+                    {{ item.descripcion }}
+                  </option>
+                </select>
+
+                <div [hidden]="selectTrimestre" class="invalid-feedback">
+                  Requerido *
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="submit"
+            class="btn btn-agregar"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Guardar"
+            [disabled]="!selectTrimestre || !selectSolicitud"
+          >
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

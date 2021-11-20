@@ -37,6 +37,19 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
     foto: '',
     loginName: '',
   };
+  sexoData:any={
+    idSexo:'-1',
+    descripcion :"Seleccione el Sexo"
+  }
+  deparData:any={
+    idDepartamento:'-1',
+    descripcion :"Seleccione el departamento"
+  }
+  sexoSeleted:number;
+  departamentSelected:number;
+
+  isSexoSelected:boolean = false;
+  isDepartSelected:boolean = false;
 
   @ViewChild('funcionarioForm') funcionarioForm: NgForm;
   @ViewChild('botonCerrar') botonCerrar: ElementRef;
@@ -73,6 +86,24 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
     console.log(this.fotoValida);
     this.fotoValida = false;
     console.log(this.fotoValida);
+  }
+  validarSelectSexo(){
+    if(this.funcionario.idSexo == '-1' || this.funcionario.idSexo == ''){
+       this.isSexoSelected = false;
+    }else{
+       this.isSexoSelected = true;
+    }
+    console.log(this.isSexoSelected);
+    console.log(this.funcionario.idSexo);
+  }
+  validarSelectDepartamento(){
+    if(this.funcionario.idDepartamento == '-1' || this.funcionario.idDepartamento == ''){
+      this.isDepartSelected = false;
+   }else{
+      this.isDepartSelected = true;
+   }
+   console.log(this.isDepartSelected);
+   console.log(this.funcionario.idDepartamento);
   }
 
   ngOnInit(): void {

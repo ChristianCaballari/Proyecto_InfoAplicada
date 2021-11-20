@@ -1,0 +1,24 @@
+<div class="container2">
+     <ul class="nav nav-tabs">
+       <li class="nav-item">
+         <a class="nav-link active" aria-current="page" routerLink="/estadistica">Avances de Proyectos</a>
+       </li>
+       <li><a class="dropdown-item" routerLink="/pastel">Estadisticas de los Proyectos</a></li>
+     </ul>
+     <ngx-charts-bar-vertical
+       [view]="view"
+       [scheme]="colorScheme"
+       [results]="single"
+       [gradient]="gradient"
+       [xAxis]="showXAxis"
+       [yAxis]="showYAxis"
+       [legend]="showLegend"
+       [showXAxisLabel]="showXAxisLabel"
+       [showYAxisLabel]="showYAxisLabel"
+       [xAxisLabel]="xAxisLabel"
+       [yAxisLabel]="yAxisLabel"
+       (select)="onSelect($event)"
+     >
+     </ngx-charts-bar-vertical>
+   </div>
+   

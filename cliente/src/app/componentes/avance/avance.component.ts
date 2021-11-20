@@ -26,6 +26,8 @@ dtableElement: DataTableDirective;
     idSolicitud: '',
     documento: '',
 };
+selectSolicitud:boolean = false;
+selectTrimestre:boolean = false;
 
 @ViewChild('avanceForm') avanceForm: NgForm;
 @ViewChild('botonAbrir') botonAbrir: ElementRef;
@@ -48,7 +50,7 @@ data:any={
   descripcion :"Seleccione el Trimestre"
 }
 dataSolicitud:any={
-  idSolicitud:'0',
+  idSolicitud: '0',
   nombre :"Seleccione la Solicitud"
 }
 number:number = 5;
@@ -93,6 +95,23 @@ pdf:any;
   onFileChanged(e: any) {
     this.pdf = e[0].base64 
   }
+  validarSelect(e: any){
+
+    if(this.avance.idSolicitud == '0' || this.avance.idSolicitud == ''){
+      this.selectSolicitud = false;
+    }else{
+      this.selectSolicitud = true;
+    }
+  }
+  validarSelectTrimestre(){
+    if(this.avance.idTrimestre == '5' || this.avance.idTrimestre == ''){
+        this.selectTrimestre = false;
+    }else{
+      this.selectTrimestre = true;
+    }
+    console.log(this.selectTrimestre);
+  }
+  
   getAllSolicitudTI(){
     this.solicitudService.getAllSolicitudTI().subscribe(
       (result) =>{
@@ -162,9 +181,7 @@ pdf:any;
       console.log(this.avances[0].fechaHora);
       console.log(this.avances[0].idAvance);
       console.log(this.avances[0].idSolicitud);
-      console.log("Holaaaaa");
-      console.log(this.avances);
-      console.log("Holaaaaa");
+      console.log(this.avances[0].nombreSolicitud);
       this.tablaTrigger.next();
     }
    )

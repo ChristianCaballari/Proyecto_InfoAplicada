@@ -16,6 +16,10 @@ export class AvanceService {
     return this.http.get<AvanceDetetalle[]>(`${environment.API_URL}/avance/consultar`);
   }
 
+  getAllAvanceProyectos(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.API_URL}/avance/obtenerAvanceProyecto`);
+  }
+
   addAvance(avance: Avance): Observable<any> {
     //listo
     return this.http.post(`${environment.API_URL}/avance`, avance);

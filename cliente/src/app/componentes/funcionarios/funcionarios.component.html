@@ -13,11 +13,12 @@
     </a>
   </div>
   <div class="border-b p-2">
-    <table id="example"
+    <table
+      id="example"
       datatable
       [dtOptions]="dtOptions"
       [dtTrigger]="tablaTrigger"
-      class="table table-striped  row-border hover pt-2"
+      class="table table-striped row-border hover pt-2"
     >
       <thead class="bg-custom-2 text-light">
         <tr>
@@ -50,14 +51,14 @@
               <i class="fas fa-trash-alt"></i>
             </a>
             <a
-            (click)="verDetalles(funcionario)"
-            class="btn btn-agregar2 spacing"
-            data-bs-toggle="modal"
-            data-bs-target="#verDetalles"
-            #botonDetalles
-          >
-          <i class="fas fa-address-card"></i>
-          </a>
+              (click)="verDetalles(funcionario)"
+              class="btn btn-agregar2 spacing"
+              data-bs-toggle="modal"
+              data-bs-target="#verDetalles"
+              #botonDetalles
+            >
+              <i class="fas fa-address-card"></i>
+            </a>
           </td>
         </tr>
       </tbody>
@@ -74,8 +75,7 @@
           class="btn-close btn-close-white"
           data-bs-dismiss="modal"
           #botonCerrar
-  (click)="cerrarModal()"
-  
+          (click)="cerrarModal()"
         ></button>
       </div>
 
@@ -100,6 +100,7 @@
                   [ngClass]="{ 'is-invalid': nombre.errors && nombre.touched }"
                   required
                   minlength="2"
+                  placeholder="Nombre del Funcionario"
                 />
                 <div
                   [hidden]="!nombre.errors?.required"
@@ -127,6 +128,7 @@
                   }"
                   required
                   minlength="2"
+                  placeholder="Apellidos del Funcionario"
                 />
                 <div
                   [hidden]="!apellido.errors?.required"
@@ -174,6 +176,7 @@
                     }"
                     required
                     minlength="5"
+                    placeholder="Nombre de Usuario"
                   />
                   <div
                     [hidden]="!loginName.errors?.required"
@@ -198,19 +201,17 @@
                   accept="image/*"
                   name="foto"
                   alife-file-to-base64
-                  class="form-control" 
+                  class="form-control"
                   (pointerdown)="onFileData($event)"
                   (onFileChanged)="onFileChanged($event)"
                   [ngClass]="{
                     'is-invalid': !fotoValida
                   }"
+                  placeholder="Foto del Funcionario"
                 />
-                <div
-                [hidden]="fotoValida"
-                class="invalid-feedback"
-              >
-                Requerido *
-              </div>
+                <div [hidden]="fotoValida" class="invalid-feedback">
+                  Requerido *
+                </div>
               </div>
             </div>
             <div class="col-8">
@@ -228,6 +229,7 @@
                   }"
                   required
                   minlength="5"
+                  placeholder="Password"
                 />
                 <div
                   [hidden]="!password.errors?.required"
@@ -273,16 +275,16 @@
                 <select
                   class="form-select"
                   aria-label="Departamentos"
+                  [(ngModel)]="departamentSelected"
                   name="idDepartamento"
                   #idDepartamento="ngModel"
                   [(ngModel)]="funcionario.idDepartamento"
                   [ngClass]="{
-                    'is-invalid':
-                      idDepartamento.errors && idDepartamento.touched
+                    'is-invalid': !isDepartSelected
                   }"
+                  (click)="validarSelectDepartamento()"
                   required
                 >
-                  <option selected>Seleccion el Departamento</option>
                   <option
                     [value]="item.idDepartamento"
                     *ngFor="let item of departamentos"
@@ -290,10 +292,7 @@
                     {{ item.descripcion }}
                   </option>
                 </select>
-                <div
-                  [hidden]="!idDepartamento.errors?.required"
-                  class="invalid-feedback"
-                >
+                <div [hidden]="isDepartSelected" class="invalid-feedback">
                   Requerido *
                 </div>
               </div>
@@ -304,21 +303,20 @@
                 <select
                   class="form-select"
                   aria-label="Sexo"
+                  [(ngModel)]="sexoSeleted"
                   name="idSexo"
                   #idSexo="ngModel"
                   [(ngModel)]="funcionario.idSexo"
-                  [ngClass]="{ 'is-invalid': idSexo.errors && idSexo.touched }"
+                  (click)="validarSelectSexo()"
                   required
+                  [ngClass]="{ 'is-invalid': !isSexoSelected }"
                 >
-                  <option selected>Seleccion el Sexo</option>
+                  >
                   <option [value]="item.idSexo" *ngFor="let item of sexo">
                     {{ item.descripcion }}
                   </option>
                 </select>
-                <div
-                  [hidden]="!idSexo.errors?.required"
-                  class="invalid-feedback"
-                >
+                <div [hidden]="isSexoSelected" class="invalid-feedback">
                   Requerido *
                 </div>
               </div>
@@ -328,7 +326,9 @@
         <div class="modal-footer">
           <button
             type="submit"
-            [disabled]="!funcionarioForm.valid && !fotoValida"
+            [disabled]="
+              !funcionarioForm.valid || !isSexoSelected || !isDepartSelected
+            "
             class="btn btn-agregar"
           >
             Guardar
@@ -338,8 +338,6 @@
     </div>
   </div>
 </div>
-
-
 
 <div class="modal fade" id="verDetalles">
   <div class="modal-dialog modal-static">
@@ -353,25 +351,40 @@
           (click)="cerrarDetalles()"
         ></button>
       </div>
-      <div class="card" style="max-width: 540px;">
+      <div class="card" style="max-width: 540px">
         <div class="row g-0">
           <div class="col-md-4 p-2 pt-3">
             <img
-                    *ngIf="funcionarioD.foto != ''"
-                    [src]="funcionarioD.foto"
-                    class="img-fluid rounded-start"
-                    alt="..."
-                  />
+              *ngIf="funcionarioD.foto != ''"
+              [src]="funcionarioD.foto"
+              class="img-fluid rounded-start"
+              alt="..."
+            />
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <div class="card" style="width: 19rem;">
+              <div class="card" style="width: 19rem">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><i class="fas fa-check-square bg-custom-2"></i> Nombre: {{funcionarioD.nombre}} {{funcionario.apellidos}}</li>
-                  <li class="list-group-item"><i class="fas fa-check-square bg-custom-2"></i> Nombre Usuario: {{funcionarioD.loginName}}</li>
-                  <li class="list-group-item"><i class="fas fa-check-square bg-custom-2"></i> Departamento: {{funcionarioD.departamento}}</li>
-                  <li class="list-group-item"><i class="fas fa-check-square bg-custom-2"></i> Sexo: {{funcionarioD.sexo}}</li>
-                  <li class="list-group-item"><i class="fas fa-check-square bg-custom-2"></i> Fecha Nacimiento: {{funcionarioD.fachaNacimiento}}</li>
+                  <li class="list-group-item">
+                    <i class="fas fa-check-square bg-custom-2"></i> Nombre:
+                    {{ funcionarioD.nombre }} {{ funcionario.apellidos }}
+                  </li>
+                  <li class="list-group-item">
+                    <i class="fas fa-check-square bg-custom-2"></i> Nombre
+                    Usuario: {{ funcionarioD.loginName }}
+                  </li>
+                  <li class="list-group-item">
+                    <i class="fas fa-check-square bg-custom-2"></i>
+                    Departamento: {{ funcionarioD.departamento }}
+                  </li>
+                  <li class="list-group-item">
+                    <i class="fas fa-check-square bg-custom-2"></i> Sexo:
+                    {{ funcionarioD.sexo }}
+                  </li>
+                  <li class="list-group-item">
+                    <i class="fas fa-check-square bg-custom-2"></i> Fecha
+                    Nacimiento: {{ funcionarioD.fachaNacimiento }}
+                  </li>
                 </ul>
               </div>
             </div>

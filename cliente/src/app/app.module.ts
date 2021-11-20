@@ -2,6 +2,7 @@ import { Swal2 } from './mensajes/mensajes';
 import { GuardianGuard } from './guards/guardian.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './componentes/login/login.component';
@@ -29,6 +30,8 @@ import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import {BitacoraService} from './servicios/bitacora.service'
 import { BitacoraComponent } from './componentes/bitacora/bitacora.component';
 import { ProyectosPastelComponent } from './componentes/proyectos-pastel/proyectos-pastel.component';
+import { EstadisticaComponent } from './componentes/estadistica/estadistica.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -44,6 +47,7 @@ import { ProyectosPastelComponent } from './componentes/proyectos-pastel/proyect
     AvanceComponent,
     BitacoraComponent,
     ProyectosPastelComponent,
+    EstadisticaComponent,
     
   ],
   imports: [
@@ -52,6 +56,8 @@ import { ProyectosPastelComponent } from './componentes/proyectos-pastel/proyect
     HttpClientModule,
     DataTablesModule,
     AlifeFileToBase64Module,
+    NgxChartsModule,
+    BrowserAnimationsModule,
       FormsModule,
       NgbModule
   ],

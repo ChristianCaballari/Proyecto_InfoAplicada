@@ -1,3 +1,5 @@
+import { ProyectosPastelComponent } from './componentes/proyectos-pastel/proyectos-pastel.component';
+import { EstadisticaComponent } from './componentes/estadistica/estadistica.component';
 import { DepartamentoComponent } from './componentes/departamento/departamento.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { LoginComponent } from './componentes/login/login.component';
@@ -18,6 +20,8 @@ const routes: Routes = [
   {path: 'solicitud', component: SolicitudComponent,canActivate:[GuardianGuard]},
   {path: 'avance', component: AvanceComponent,canActivate:[GuardianGuard]},
   {path: 'bitacora', component: BitacoraComponent},
+  {path: 'estadistica', component: EstadisticaComponent,/*canActivate:[GuardianGuard]*/},
+  {path: 'pastel', component: ProyectosPastelComponent,/*canActivate:[GuardianGuard]*/},
   //{path: '**', component: PageNotFoundComponent}
 ]
 
