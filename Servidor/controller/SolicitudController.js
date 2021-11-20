@@ -112,3 +112,10 @@ exports.solicitudFiltro=(req,res)=>{
      data.transaccion2(trasaccion,res);
 
 }
+exports.proyectoTerminadoCancelado = (req, res) =>{
+    let data = new Data();
+
+    let transaccion = `EXEC [dbo].[sp_selectProyectosPendienteCancelados]`;
+
+    data.transaccion2(transaccion,res);
+}

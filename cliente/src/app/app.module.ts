@@ -28,6 +28,7 @@ import { TrimestreService } from './servicios/trimestre.service';
 import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import {BitacoraService} from './servicios/bitacora.service'
 import { BitacoraComponent } from './componentes/bitacora/bitacora.component';
+import { ProyectosPastelComponent } from './componentes/proyectos-pastel/proyectos-pastel.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { BitacoraComponent } from './componentes/bitacora/bitacora.component';
     SolicitudComponent,
     AvanceComponent,
     BitacoraComponent,
+    ProyectosPastelComponent,
     
   ],
   imports: [

@@ -55,3 +55,11 @@ exports.obtenerAvanceUpdate = (req, res) =>{
     data.transaccion2(transaccion,res);
 
 }
+
+exports.avanceProyecto = (req, res) =>{
+    let data = new Data();
+
+    let transaccion = `EXEC [dbo].[sp_selectAvancesProyecto]`;
+
+    data.transaccion2(transaccion,res);
+}

@@ -25,6 +25,7 @@ router.get('/documentoActa/:id',solicitudController.documentoActaConstitutiva);
 // Actualizar solicitud
 router.put('/editar/:id',solicitudController.editar);
 
+router.get('/obtenerProyectoTerminadoCancelado',solicitudController.proyectoTerminadoCancelado);
 
 
 module.exports = router; //exportar porque se usa en index

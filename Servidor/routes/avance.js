@@ -22,5 +22,7 @@ router.get('/obtenerAvanceUpdate/:id',avanceController.obtenerAvanceUpdate);
 // Actualizar avance
 router.patch('/editar',avanceController.editar);
 
+router.get('/obtenerAvanceProyecto',avanceController.avanceProyecto);
+
 
 module.exports = router; //exportar porque se usa en index
