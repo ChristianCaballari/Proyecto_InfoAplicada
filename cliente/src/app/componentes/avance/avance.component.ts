@@ -172,6 +172,7 @@ pdf:any;
   obtenerAvances(){
     this.dtOptions = {
       pagingType: 'full_numbers',
+      sort:false,
       pageLength: 6,
       language: {
         url: '//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json',
@@ -219,10 +220,10 @@ pdf:any;
     this.avanceService.getAvancesTrimestrales().subscribe(
       (result) =>{
         this.avances =  result;
-        
+        this.tablaTrigger.next();  
       }
       )
-      this.tablaTrigger.next();   
+       
     }); 
   }
 

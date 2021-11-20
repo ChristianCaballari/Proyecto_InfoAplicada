@@ -152,6 +152,7 @@ export class SolicitudComponent implements OnInit, OnDestroy {
   obtenerSolicitudes() {
     this.dtOptions = {
       pagingType: 'full_numbers',
+      sort:false,
       pageLength: 6,
       responsive: true,
       // dom: '<lf<Bt>ip>',
