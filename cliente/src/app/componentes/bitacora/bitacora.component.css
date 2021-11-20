@@ -108,3 +108,6 @@ table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dat
    background-color: #4169E1; 
    color: white;
 }
+.p-l{
+    padding-left: 5px;
+}

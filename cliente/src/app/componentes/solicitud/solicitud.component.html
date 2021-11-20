@@ -1,37 +1,60 @@
 <div class="containerPer mt-5">
   <div class="mb-2">
-  <a
-  href="#"
-  class="btn btn-agregar btn-block"
-  data-toggle="tooltip" data-placement="top" title="Agregar departamento"
-  data-bs-toggle="modal"
-  data-bs-target="#agregarModal"
-  #botonAbrir
-  ><i class="fas fa-plus"></i> Agregar
-</a>
-</div>
-
-<div class="border-b p-2">
-    
-<form #filtroForm="ngForm" (ngSubmit)="filtro(filtroForm)">
-  <label for="min">Fecha m&iacute;nima:</label>
-  <input type="date" id="fechaInicio" name="fechaInicio"
-  #fechaInicio="ngModel"
-  [(ngModel)]="filtro1.fechaInicio"> 
-
-<label for="max">Fecha m&aacute;xima:</label>
-  <input type="date" id="fechaFin" name="fechaFin"
-  #fechaFin="ngModel"
-  [(ngModel)]="filtro1.fechaFin">
-
-  <button type="submit" class="btn btn-agregar" >Filtrar</button>
-</form>
-
+    <div class="d-flex">
+      <div class="col-1">
+        <a
+          href="#"
+          class="btn btn-agregar btn-block"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Agregar departamento"
+          data-bs-toggle="modal"
+          data-bs-target="#agregarModal"
+          #botonAbrir
+          ><i class="fas fa-plus"></i> Agregar
+        </a>
+      </div>
+      <div class="col-12">
+        <form #filtroForm="ngForm" (ngSubmit)="filtro(filtroForm)">
+          <div class="d-flex">
+            <div class="col-3">
+            <div class="d-flex">
+              <label for="min">Fecha m&iacute;nima:</label>
+              <input
+                type="date"
+                id="fechaInicio"
+                name="fechaInicio"
+                #fechaInicio="ngModel"
+                [(ngModel)]="filtro1.fechaInicio"
+                class="form-control m-md-1"
+              />
+            </div>
+            </div>
+            <div class="col-3">
+              <div class="d-flex">
+              <label for="max">Fecha m&aacute;xima:</label>
+              <input
+                type="date"
+                id="fechaFin"
+                name="fechaFin"
+                #fechaFin="ngModel"
+                [(ngModel)]="filtro1.fechaFin"
+                class="form-control m-md-1"
+              />
+            </div>
+            </div>
+            <button type="submit" class="btn btn-agregar m-md-1">Filtrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="border-b p-2">
     <table
       datatable
       [dtOptions]="dtOptions"
       [dtTrigger]="tablaTrigger"
-      class="table table-striped  row-border hover pt-2"
+      class="table table-striped row-border hover pt-2"
     >
       <thead class="bg-custom-2 text-light">
         <tr>
@@ -39,19 +62,19 @@
           <th>Fecha y Hora</th>
           <th>Fecha Incio</th>
           <th>Fecha Fin</th>
-          <th>Aplicativo</th>
+          <!-- <th>Aplicativo</th>
           <th>Responsable TI</th>
-          <th>Responsable usuario final</th>
+          <th>Responsable usuario final</th> -->
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let solicitud of solicitudes">
-          <td>{{solicitud.nombre}}</td>
-          <td>{{solicitud.fechaHora}}</td>
-          <td>{{solicitud.fechaInicio}}</td>
-          <td>{{solicitud.fechaFin}}</td>
-          <td>
+          <td>{{ solicitud.nombre }}</td>
+          <td>{{ solicitud.fechaHora }}</td>
+          <td>{{ solicitud.fechaInicio }}</td>
+          <td>{{ solicitud.fechaFin }}</td>
+          <!-- <td>
            
             <a
             (click)="verDetalles(solicitud,'1',solicitud.idUsuarioAplicativo)"
@@ -86,10 +109,13 @@
           >
           <i class="fas fa-address-card"></i>
           </a>
-          </td>
-          
+          </td> -->
+
           <td>
-            <a (click)="editarSolicitud(solicitud)" class="btn btn-edit spacing">
+            <a
+              (click)="editarSolicitud(solicitud)"
+              class="btn btn-edit spacing"
+            >
               <i class="fas fa-edit"></i>
             </a>
             <a
@@ -99,8 +125,18 @@
               <i class="fas fa-trash-alt"></i>
             </a>
 
-            <a (click)="verdocumentoActaconstituvia(solicitud)" class="btn btn-agregar2 spacing">
+            <a
+              (click)="verdocumentoActaconstituvia(solicitud)"
+              class="btn btn-agregar2 spacing"
+            >
               <i class="fas fa-clipboard-list"></i>
+            </a>
+
+            <a
+              (click)="finalizarProyecto(solicitud)"
+              class="btn bg-success spacing text-light"
+            >
+              <i class="fas fa-hourglass-end"></i> Finalizar
             </a>
           </td>
         </tr>
@@ -111,159 +147,229 @@
 
 <div class="modal fade" id="agregarModal">
   <div class="modal-dialog modal-lg">
-   <div class="modal-content">
-     <div class="modal-header text-white bg-custom-2">
-       <h5 class="modal-title">Agregar</h5>
-       <button
-         class="btn-close btn-close-white"
-         data-bs-dismiss="modal"
-         data-toggle="tooltip" data-placement="top" title="Cerrar"
-         #botonCerrar
-         (click)="cerrarModal()"
-       ></button>
-     </div> 
+    <div class="modal-content">
+      <div class="modal-header text-white bg-custom-2">
+        <h5 class="modal-title">Agregar</h5>
+        <button
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="Cerrar"
+          #botonCerrar
+          (click)="cerrarModal()"
+        ></button>
+      </div>
 
-     <form #solicitudForm="ngForm" (ngSubmit)="agregarSolicitud(solicitudForm)">
-      <input type="hidden" name="idSolicitud"
-      #idSolicitud="ngModel"
-      [(ngModel)]="solicitud.idSolicitud"/>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col">
-
-                    <div class="form-group">
-                      <label for="nombre">Nombre del proyecto</label>
-                    <input type="text" name="nombre"
-                    class="form-control"
-                    #nombre="ngModel"
-                    [(ngModel)]="solicitud.nombre"
-                    [ngClass]="{'is-invalid': nombre.errors && nombre.touched}"
-                    required>
-
-                    <div [hidden]="!nombre.errors?.required" class="invalid-feedback">
-                      *Requerido
-                    </div>
-                   
-                 </div>
-
-                    <div class="form-group">
-                      <label for="usuarioA">Usuario Responsable TI</label>
-                      <select class="form-select" aria-label="Default select example" name="idResponsableTI"
-                       #idResponsableTI="ngModel" 
-                       [(ngModel)]="solicitud.idResponsableTI" 
-                       [ngClass]="{'is-invalid': idResponsableTI.errors && idResponsableTI.touched}">
-                        
-                
-                       <option [value]="item.idFuncionario"  *ngFor="let item of funcionariosTI ">{{item.nombre+"  "+item.apellidos}}  </option>
-                        </select>
-
-                        <div [hidden]="!idResponsableTI.errors?.required" class="invalid-feedback">
-                          *Requerido
-                        </div>
-                     
-                    </div>
-                   </div>
-
-                <div class="form-group">
-                      <label for="fechaInicio">Fecha inicio del proyecto</label>
-                    <input type="date" name="fechaInicio" placeholder="dd-mm-yyyy"
-                    class="form-control"
-                    #fechaIncio="ngModel"
-                    [(ngModel)]="solicitud.fechaInicio"
-                    [ngClass]="{'is-invalid': fechaIncio.errors && fechaIncio.touched}"
-                    required>
-
-                    <div [hidden]="!fechaIncio.errors?.required" class="invalid-feedback">
-                      *Requerido
-                    </div>
-                   
-                 </div>
-
-                  
-                  <div class="form-group">
-                    <label for="fechaFin">Fecha fin del proyecto</label>
-                  <input type="date" name="fechaFin" placeholder="dd-mm-yyyy"
+      <form
+        #solicitudForm="ngForm"
+        (ngSubmit)="agregarSolicitud(solicitudForm)"
+      >
+        <input
+          type="hidden"
+          name="idSolicitud"
+          #idSolicitud="ngModel"
+          [(ngModel)]="solicitud.idSolicitud"
+        />
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="nombre">Nombre del proyecto</label>
+                <input
+                  type="text"
+                  name="nombre"
                   class="form-control"
-                  #fechaFin="ngModel"
-                  [(ngModel)]="solicitud.fechaFin"
-                  [ngClass]="{'is-invalid': fechaFin.errors && fechaFin.touched}"
-                  required>
+                  #nombre="ngModel"
+                  [(ngModel)]="solicitud.nombre"
+                  [ngClass]="{ 'is-invalid': nombre.errors && nombre.touched }"
+                  required
+                />
 
-                  <div [hidden]="!fechaFin.errors?.required" class="invalid-feedback">
-                    *Requerido
-                  </div>
+                <div
+                  [hidden]="!nombre.errors?.required"
+                  class="invalid-feedback"
+                >
+                  *Requerido
                 </div>
-                <div class="form-group">
-                  <label for="usuarioResponsable">Responsable usuario final</label>
-                  <select class="form-select"  name="idResponsableUsuarioFinal" 
-                  #idResponsableUsuarioFinal="ngModel" 
-                  [(ngModel)]="solicitud.idResponsableUsuarioFinal" 
-                  [ngClass]="{'is-invalid': idResponsableUsuarioFinal.errors && idResponsableUsuarioFinal.touched}">
-                    
-                    <option [value]="item.idFuncionario"   *ngFor="let item of funcionarios ">{{item.nombre+"  "+item.apellidos}}  </option>
-                    </select>
+              </div>
 
-                    <div [hidden]="!idResponsableUsuarioFinal.errors?.required" class="invalid-feedback">
-                      *Requerido
-                    </div>
-                 
+              <div class="form-group">
+                <label for="usuarioA">Usuario Responsable TI</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  name="idResponsableTI"
+                  #idResponsableTI="ngModel"
+                  [(ngModel)]="solicitud.idResponsableTI"
+                  [ngClass]="{
+                    'is-invalid':
+                      idResponsableTI.errors && idResponsableTI.touched
+                  }"
+                >
+                  <option
+                    [value]="item.idFuncionario"
+                    *ngFor="let item of funcionariosTI"
+                  >
+                    {{ item.nombre + "  " + item.apellidos }}
+                  </option>
+                </select>
+
+                <div
+                  [hidden]="!idResponsableTI.errors?.required"
+                  class="invalid-feedback"
+                >
+                  *Requerido
                 </div>
-
-                <div class="form-group">
-                  <label for="usuarioResponsable">Documento Acta constitutiva</label>
-                  <input type="file"  class="form-control" name="documentoActaConstitutiva"
-                  alife-file-to-base64
-                  (onFileChanged)="onFileChangedSolicitud($event)"
-                 required>
-                </div>
-
-
-
-                  
-
-                  
               </div>
+            </div>
+
+            <div class="form-group">
+              <label for="fechaInicio">Fecha inicio del proyecto</label>
+              <input
+                type="date"
+                name="fechaInicio"
+                placeholder="dd-mm-yyyy"
+                class="form-control"
+                #fechaIncio="ngModel"
+                [(ngModel)]="solicitud.fechaInicio"
+                [ngClass]="{
+                  'is-invalid': fechaIncio.errors && fechaIncio.touched
+                }"
+                required
+              />
+
+              <div
+                [hidden]="!fechaIncio.errors?.required"
+                class="invalid-feedback"
+              >
+                *Requerido
               </div>
-      
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-agregar" data-toggle="tooltip" data-placement="top" title="Guardar">Guardar</button>
+            </div>
+
+            <div class="form-group">
+              <label for="fechaFin">Fecha fin del proyecto</label>
+              <input
+                type="date"
+                name="fechaFin"
+                placeholder="dd-mm-yyyy"
+                class="form-control"
+                #fechaFin="ngModel"
+                [(ngModel)]="solicitud.fechaFin"
+                [ngClass]="{
+                  'is-invalid': fechaFin.errors && fechaFin.touched
+                }"
+                required
+              />
+
+              <div
+                [hidden]="!fechaFin.errors?.required"
+                class="invalid-feedback"
+              >
+                *Requerido
               </div>
-              </form>
+            </div>
+            <div class="form-group">
+              <label for="usuarioResponsable">Responsable usuario final</label>
+              <select
+                class="form-select"
+                name="idResponsableUsuarioFinal"
+                #idResponsableUsuarioFinal="ngModel"
+                [(ngModel)]="solicitud.idResponsableUsuarioFinal"
+                [ngClass]="{
+                  'is-invalid':
+                    idResponsableUsuarioFinal.errors &&
+                    idResponsableUsuarioFinal.touched
+                }"
+              >
+                <option
+                  [value]="item.idFuncionario"
+                  *ngFor="let item of funcionarios"
+                >
+                  {{ item.nombre + "  " + item.apellidos }}
+                </option>
+              </select>
+
+              <div
+                [hidden]="!idResponsableUsuarioFinal.errors?.required"
+                class="invalid-feedback"
+              >
+                *Requerido
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="usuarioResponsable"
+                >Documento Acta constitutiva</label
+              >
+              <input
+                type="file"
+                class="form-control"
+                name="documentoActaConstitutiva"
+                alife-file-to-base64
+                (onFileChanged)="onFileChangedSolicitud($event)"
+                required
+              />
             </div>
           </div>
-        </div> 
+        </div>
 
+        <div class="modal-footer">
+          <button
+            type="submit"
+            class="btn btn-agregar"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Guardar"
+          >
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-        <div class="modal fade" id="verDetalles">
-          <div class="modal-dialog modal-static">
-            <div class="modal-content">
-              <div class="modal-header bg-custom-2 text-white">
-                <h5 class="modal-title">Detalles Funcionario</h5>
-                <button
-                  class="btn-close btn-close-white"
-                  data-bs-dismiss="modal"
-                  #botonDetalles
-                  (click)="cerrarDetalles()"
-                ></button>
-              </div>
-              <div class="card" style="max-width: 540px;">
-                <div class="row g-0">
-                 
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <div class="card" style="width: 19rem;">
-                        <ul class="list-group list-group-flush">
-                          <li class="list-group-item"><i class="fas fa-check-square bg-custom-2"></i> Nombre: {{funcionario1.nombre}} {{funcionario.apellidos}}</li>
-                          <li class="list-group-item"><i class="fas fa-check-square bg-custom-2"></i> Apellido: {{funcionario1.apellidos}}</li>
-                          <li class="list-group-item"><i class="fas fa-check-square bg-custom-2"></i> Departamento: {{funcionario1.departamento}}</li>
-                          <li class="list-group-item"><i class="fas fa-check-square bg-custom-2"></i> Sexo: {{funcionario1.sexo}}</li>
-            
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+<div class="modal fade" id="verDetalles">
+  <div class="modal-dialog modal-static">
+    <div class="modal-content">
+      <div class="modal-header bg-custom-2 text-white">
+        <h5 class="modal-title">Detalles Funcionario</h5>
+        <button
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          #botonDetalles
+          (click)="cerrarDetalles()"
+        ></button>
+      </div>
+      <div class="card" style="max-width: 540px">
+        <div class="row g-0">
+          <div class="col-md-8">
+            <div class="card-body">
+              <div class="card" style="width: 19rem">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <i class="fas fa-check-square bg-custom-2"></i> Nombre:
+                    {{ funcionario1.nombre }} {{ funcionario.apellidos }}
+                  </li>
+                  <li class="list-group-item">
+                    <i class="fas fa-check-square bg-custom-2"></i> Apellido:
+                    {{ funcionario1.apellidos }}
+                  </li>
+                  <li class="list-group-item">
+                    <i class="fas fa-check-square bg-custom-2"></i>
+                    Departamento: {{ funcionario1.departamento }}
+                  </li>
+                  <li class="list-group-item">
+                    <i class="fas fa-check-square bg-custom-2"></i> Sexo:
+                    {{ funcionario1.sexo }}
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -32,6 +32,9 @@ export class BitacoraComponent implements OnInit,OnDestroy {
   meses:string[]=["Enero","Febrero","Marzo", "Abril","Mayo","Junio","Julio","Agosto","Setiembre","Octubre",
 "Noviembre","Diciembre"];
 
+primerMesSelected:number = 1;
+segundoMesSelected:number = 1;
+
   @ViewChild("filtroForm") filtroForm: NgForm;
   constructor(private bitacoraS: BitacoraService) { }
 

@@ -27,5 +27,8 @@ router.put('/editar/:id',solicitudController.editar);
 
 router.get('/obtenerProyectoTerminadoCancelado',solicitudController.proyectoTerminadoCancelado);
 
+router.delete('/TerminarSolicitud/:id',solicitudController.terminarSolicitud);
+
+
 
 module.exports = router; //exportar porque se usa en index

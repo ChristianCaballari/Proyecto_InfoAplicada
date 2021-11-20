@@ -34,8 +34,9 @@ selectTrimestre:boolean = false;
 @ViewChild('botonCerrar') botonCerrar: ElementRef;
 
 
-dtOptions: DataTables.Settings = {};
-avances: AvanceDetetalle[];
+dtOptions: any = {};
+//dtOptions: DataTables.Settings = {};
+avances:  AvanceDetetalle[];
 
 pdf64:string;
 
@@ -61,9 +62,10 @@ pdf:any;
 
   ngOnInit(): void {
 
-   this.obtenerAvances();
+  
    this.obtenerTrimestres();
    this.getAllSolicitudTI();
+   this.obtenerAvances();
   }
 
 
@@ -164,6 +166,9 @@ pdf:any;
       }
     )
   }
+  vo(){
+    alert("hola");
+  }
   obtenerAvances(){
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -171,22 +176,56 @@ pdf:any;
       language: {
         url: '//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json',
       },
+      processing: true,
+      dom: 'Bfrtip',
+      buttons: [
+      
+        {
+          extend: 'excelHtml5', 
+          
+          title:"Reporte de Avances",
+          text:'<i class="fas fa-file-excel fs-4"></i>',
+          className: 'bg-success text-light rounded-3',
+          filename: 'Reporte de Avances',
+          exportOptions: {
+            columns: [0, 1, 2, 3],
+          },
+        },
+        {
+          extend: 'pdfHtml5',
+          titleAttr: 'Exportar a PDF',
+          title:"Reporte de Avances",
+          text:'<i class="fas fa-file-pdf fs-4"></i>',
+          className: 'bg-danger text-light rounded-3',
+          filename: 'Reporte de Avances',
+          exportOptions: {
+            columns: [0, 1, 2, 3],
+          },
+          
+        },
+      ],
     };
    this.avanceService.getAllAvances().subscribe(
     (result) =>{
       this.avances = result as AvanceDetetalle[];
-      console.log(this.avances[0].nombre);
-      console.log(this.avances[0].apellidos);
-      console.log(this.avances[0].descripcion);
-      console.log(this.avances[0].fechaHora);
-      console.log(this.avances[0].idAvance);
-      console.log(this.avances[0].idSolicitud);
-      console.log(this.avances[0].nombreSolicitud);
       this.tablaTrigger.next();
     }
-   )
-    
+   ) 
   }
+
+  avanceTrimestral(){
+    this.dtableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    dtInstance.destroy();
+    this.avanceService.getAvancesTrimestrales().subscribe(
+      (result) =>{
+        this.avances =  result;
+        
+      }
+      )
+      this.tablaTrigger.next();   
+    }); 
+  }
+
   reload() {
     this.dtableElement.dtInstance.then((dtInstance: DataTables.Api) => {
       // Destroy the table first

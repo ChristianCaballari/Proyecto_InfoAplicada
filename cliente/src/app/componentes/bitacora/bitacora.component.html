@@ -1,56 +1,75 @@
 <div class="containerPer mt-5">
-<div class="border-b p-2">
-
   <form #filtroForm="ngForm" (ngSubmit)="filtroB(filtroForm)">
-    <label for="min">Primer mes:</label>
+    <div class="d-flex">
+      <div class="col-2">
+        <div class="form-group pb-1">
+          <label for="min">Primer mes:</label>
 
-    <select id="mesInicio" name="mesInicio"
-    #mesInicio="ngModel"
-    [(ngModel)]="filtro.mesInicio"
-    >
-    <option [value]="1" >Enero</option>
-    <option [value]="2" >Febrero</option>
-    <option [value]="3" >Marzo</option>
-    <option [value]="4" >Abril</option>
-    <option [value]="5" >Mayo</option>
-    <option [value]="6" >Junio</option>
-    <option [value]="7" >Julio</option>
-    <option [value]="8" >Agosto</option>
-    <option [value]="9" >Setiembre</option>
-    <option [value]="10" >Octubre</option>
-    <option [value]="11" >Noviembre</option>
-    <option [value]="12" >Diciembre</option>
-    </select>
+          <select
+            id="mesInicio"
+            name="mesInicio"
+            #mesInicio="ngModel"
+            [(ngModel)]="filtro.mesInicio"
+            class="form-control"
+            [(ngModel)]="primerMesSelected"
+          >
+            <option [value]="1">Enero</option>
+            <option [value]="2">Febrero</option>
+            <option [value]="3">Marzo</option>
+            <option [value]="4">Abril</option>
+            <option [value]="5">Mayo</option>
+            <option [value]="6">Junio</option>
+            <option [value]="7">Julio</option>
+            <option [value]="8">Agosto</option>
+            <option [value]="9">Setiembre</option>
+            <option [value]="10">Octubre</option>
+            <option [value]="11">Noviembre</option>
+            <option [value]="12">Diciembre</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group p-l pb-1">
+          <label for="max">Último mes:</label>
 
-  <label for="max">Último mes:</label>
-
-  <select id="mesFinal" name="mesFinal"
-    #mesFinal="ngModel"
-    [(ngModel)]="filtro.mesFinal"
-    >
-    <option [value]="1" >Enero</option>
-    <option [value]="2" >Febrero</option>
-    <option [value]="3" >Marzo</option>
-    <option [value]="4" >Abril</option>
-    <option [value]="5" >Mayo</option>
-    <option [value]="6" >Junio</option>
-    <option [value]="7" >Julio</option>
-    <option [value]="8" >Agosto</option>
-    <option [value]="9" >Setiembre</option>
-    <option [value]="10" >Octubre</option>
-    <option [value]="11" >Noviembre</option>
-    <option [value]="12" >Diciembre</option>
-    </select>
-    
-  
-    <button type="submit" class="btn btn-agregar" >Filtrar</button>
+          <select
+            id="mesFinal"
+            name="mesFinal"
+            #mesFinal="ngModel"
+            [(ngModel)]="filtro.mesFinal"
+            class="form-control"
+            [(ngModel)]="segundoMesSelected"
+          >
+            <option [value]="1">Enero</option>
+            <option [value]="2">Febrero</option>
+            <option [value]="3">Marzo</option>
+            <option [value]="4">Abril</option>
+            <option [value]="5">Mayo</option>
+            <option [value]="6">Junio</option>
+            <option [value]="7">Julio</option>
+            <option [value]="8">Agosto</option>
+            <option [value]="9">Setiembre</option>
+            <option [value]="10">Octubre</option>
+            <option [value]="11">Noviembre</option>
+            <option [value]="12">Diciembre</option>
+          </select>
+        </div>
+      </div>
+      
+     <div class="col-2 p-md-4">
+          <button type="submit" class="btn btn-agregar form-control">
+            Filtrar
+          </button>
+      </div>
+    </div>
   </form>
-  <br>
+  <div class="border-b p-2">
+    <br />
     <table
       datatable
       [dtOptions]="dtOptions"
       [dtTrigger]="tablaTrigger"
-      class="table table-striped  row-border hover pt-2"
+      class="table table-striped row-border hover pt-2"
     >
       <thead class="bg-custom-2 text-light">
         <tr>
@@ -59,7 +78,6 @@
           <th>Proyecto</th>
           <th>Fecha y Hora</th>
           <th>Aplicativo</th>
-        
         </tr>
       </thead>
       <tbody>
@@ -68,10 +86,9 @@
           <td>{{ b.transaccion }}</td>
           <td>{{ b.proyecto }}</td>
           <td>{{ b.fechaHora }}</td>
-          <td>{{ b.nombre+" "+b.apellidos }}</td>
-          
+          <td>{{ b.nombre + " " + b.apellidos }}</td>
         </tr>
       </tbody>
     </table>
-</div>
+  </div>
 </div>

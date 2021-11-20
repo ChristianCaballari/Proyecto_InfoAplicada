@@ -16,6 +16,10 @@ export class AvanceService {
     return this.http.get<AvanceDetetalle[]>(`${environment.API_URL}/avance/consultar`);
   }
 
+  getAvancesTrimestrales(): Observable<AvanceDetetalle[]> {
+    return this.http.get<AvanceDetetalle[]>(`${environment.API_URL}/avance/obtenerAvanceTrimestral`);
+  }
+
   getAllAvanceProyectos(): Observable<any[]> {
     return this.http.get<any[]>(`${environment.API_URL}/avance/obtenerAvanceProyecto`);
   }

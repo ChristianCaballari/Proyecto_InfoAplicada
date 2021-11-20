@@ -63,3 +63,10 @@ exports.avanceProyecto = (req, res) =>{
 
     data.transaccion2(transaccion,res);
 }
+exports.avanceTrimestral = (req, res)=>{
+    let data = new Data();
+
+    let transaccion = `EXEC [dbo].[sp_selectAvanceTrimestre]`;
+
+    data.transaccion2(transaccion,res);
+}

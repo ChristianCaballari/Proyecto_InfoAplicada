@@ -12,13 +12,13 @@ import { BitacoraComponent } from './componentes/bitacora/bitacora.component';
 
 const routes: Routes = [
   {path: '',redirectTo:'/login', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent,canActivate:[GuardianGuard]},
+  {path: 'home', component: HomeComponent,/*canActivate:[GuardianGuard]*/},
   {path: 'login', component: LoginComponent },
- {path: 'departamento', component: DepartamentoComponent,canActivate:[GuardianGuard]},
+ {path: 'departamento', component: DepartamentoComponent,/*canActivate:[GuardianGuard]*/},
  // {path: 'departamento', component: DepartamentoComponent},
   {path: 'departamento/editar/:id', component: DepartamentoComponent},
-  {path: 'solicitud', component: SolicitudComponent,canActivate:[GuardianGuard]},
-  {path: 'avance', component: AvanceComponent,canActivate:[GuardianGuard]},
+  {path: 'solicitud', component: SolicitudComponent,/*canActivate:[GuardianGuard]*/},
+  {path: 'avance', component: AvanceComponent,/*canActivate:[GuardianGuard]*/},
   {path: 'bitacora', component: BitacoraComponent},
   {path: 'estadistica', component: EstadisticaComponent,/*canActivate:[GuardianGuard]*/},
   {path: 'pastel', component: ProyectosPastelComponent,/*canActivate:[GuardianGuard]*/},

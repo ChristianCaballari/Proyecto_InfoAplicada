@@ -119,3 +119,12 @@ exports.proyectoTerminadoCancelado = (req, res) =>{
 
     data.transaccion2(transaccion,res);
 }
+
+exports.terminarSolicitud = (req, res) =>{
+    let data = new Data();
+    const idSolicitud = req.params.id;   
+
+    let transaccion = `EXEC [dbo].[sp_TerminarSolicitud] @idSolicitud=N'${idSolicitud}'`;
+
+    data.transaccion2(transaccion,res);
+}

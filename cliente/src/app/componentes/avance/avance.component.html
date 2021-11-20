@@ -11,6 +11,14 @@
       #botonAbrir
       ><i class="fas fa-plus"></i> Agregar
     </a>
+      <a
+      class="btn btn-agregar btn-block m-md-1"
+      data-toggle="tooltip"
+      data-placement="top"
+      title="Avance Trimestral"
+      (click)="avanceTrimestral()"
+      ><i class="fas fa-hourglass-start"></i> Avance Trimestral
+    </a> 
   </div>
   <!-- [dtTrigger]="dtTrigger" -->
   <div class="border-b p-2">
@@ -25,7 +33,7 @@
           <th>Proyecto</th>
           <th>Usuario Aplicativo</th>
           <th>Trimestre</th>
-          <th>Fecha</th>
+          <th>Fecha de Avance</th>
           <th>Acciones</th>
         </tr>
       </thead>
