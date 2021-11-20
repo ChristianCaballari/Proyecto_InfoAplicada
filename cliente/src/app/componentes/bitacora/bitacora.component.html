@@ -1,0 +1,77 @@
+<div class="containerPer mt-5">
+<div class="border-b p-2">
+
+  <form #filtroForm="ngForm" (ngSubmit)="filtroB(filtroForm)">
+    <label for="min">Primer mes:</label>
+
+    <select id="mesInicio" name="mesInicio"
+    #mesInicio="ngModel"
+    [(ngModel)]="filtro.mesInicio"
+    >
+    <option [value]="1" >Enero</option>
+    <option [value]="2" >Febrero</option>
+    <option [value]="3" >Marzo</option>
+    <option [value]="4" >Abril</option>
+    <option [value]="5" >Mayo</option>
+    <option [value]="6" >Junio</option>
+    <option [value]="7" >Julio</option>
+    <option [value]="8" >Agosto</option>
+    <option [value]="9" >Setiembre</option>
+    <option [value]="10" >Octubre</option>
+    <option [value]="11" >Noviembre</option>
+    <option [value]="12" >Diciembre</option>
+    </select>
+
+  <label for="max">Último mes:</label>
+
+  <select id="mesFinal" name="mesFinal"
+    #mesFinal="ngModel"
+    [(ngModel)]="filtro.mesFinal"
+    >
+    <option [value]="1" >Enero</option>
+    <option [value]="2" >Febrero</option>
+    <option [value]="3" >Marzo</option>
+    <option [value]="4" >Abril</option>
+    <option [value]="5" >Mayo</option>
+    <option [value]="6" >Junio</option>
+    <option [value]="7" >Julio</option>
+    <option [value]="8" >Agosto</option>
+    <option [value]="9" >Setiembre</option>
+    <option [value]="10" >Octubre</option>
+    <option [value]="11" >Noviembre</option>
+    <option [value]="12" >Diciembre</option>
+    </select>
+    
+  
+    <button type="submit" class="btn btn-agregar" >Filtrar</button>
+  </form>
+  <br>
+    <table
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="tablaTrigger"
+      class="table table-striped  row-border hover pt-2"
+    >
+      <thead class="bg-custom-2 text-light">
+        <tr>
+          <th>ID</th>
+          <th>Transaccion</th>
+          <th>Proyecto</th>
+          <th>Fecha y Hora</th>
+          <th>Aplicativo</th>
+        
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let b of bitacoras">
+          <td>{{ b.idBitacoraAuditoria }}</td>
+          <td>{{ b.transaccion }}</td>
+          <td>{{ b.proyecto }}</td>
+          <td>{{ b.fechaHora }}</td>
+          <td>{{ b.nombre+" "+b.apellidos }}</td>
+          
+        </tr>
+      </tbody>
+    </table>
+</div>
+</div>

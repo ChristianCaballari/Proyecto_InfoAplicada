@@ -26,6 +26,9 @@ import { AvanceService } from './servicios/avance.service';
 import { AvanceComponent } from './componentes/avance/avance.component';
 import { TrimestreService } from './servicios/trimestre.service';
 import { AlifeFileToBase64Module } from 'alife-file-to-base64';
+import {BitacoraService} from './servicios/bitacora.service'
+import { BitacoraComponent } from './componentes/bitacora/bitacora.component';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +41,7 @@ import { AlifeFileToBase64Module } from 'alife-file-to-base64';
     DepartamentoComponent,
     SolicitudComponent,
     AvanceComponent,
+    BitacoraComponent,
     
   ],
   imports: [
@@ -49,7 +53,7 @@ import { AlifeFileToBase64Module } from 'alife-file-to-base64';
       FormsModule,
       NgbModule
   ],
-  providers: [LoginService,FuncionarioService,DepartamentoService,/*GuardianGuard,*/Swal2,SolicitudService,SexoService,AvanceService,TrimestreService],
+  providers: [LoginService,FuncionarioService,DepartamentoService,/*GuardianGuard,*/Swal2,SolicitudService,SexoService,AvanceService,TrimestreService,BitacoraService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

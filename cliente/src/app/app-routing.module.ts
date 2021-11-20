@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GuardianGuard } from './guards/guardian.guard';
 import { SolicitudComponent } from './componentes/solicitud/solicitud.component';
 import { AvanceComponent } from './componentes/avance/avance.component';
+import { BitacoraComponent } from './componentes/bitacora/bitacora.component';
 
 const routes: Routes = [
   {path: '',redirectTo:'/login', pathMatch: 'full'},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'departamento/editar/:id', component: DepartamentoComponent},
   {path: 'solicitud', component: SolicitudComponent,canActivate:[GuardianGuard]},
   {path: 'avance', component: AvanceComponent,canActivate:[GuardianGuard]},
+  {path: 'bitacora', component: BitacoraComponent},
   //{path: '**', component: PageNotFoundComponent}
 ]
 

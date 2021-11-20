@@ -26,6 +26,7 @@ app.use('/api/sexo', require('./routes/sexo'));
 app.use('/api/trimestre', require('./routes/trimestre'));
 app.use('/api/avance', require('./routes/avance'));
 app.use('/api/solicitud', require('./routes/solicitud'));
+app.use('/api/bitacora', require('./routes/bitacora'));
 app.listen(PORT, () =>{
     console.log('Servidor Activo');
 });

@@ -163,10 +163,10 @@ showPdf(pdf:any) {
         {
           extend: 'excelHtml5', 
           titleAttr: 'Exportar a Excel',
-          title:"Reporte Funcionarios",
+          title:"Reporte proyectos",
           text:'<i class="fas fa-file-excel fs-4"></i>',
           className: 'bg-success text-light rounded-3',
-          filename: 'Reporte de Funcionarios',
+          filename: 'Reporte de proyectos',
           exportOptions: {
             columns: [0, 1, 2, 3, 4],
           },
@@ -174,10 +174,10 @@ showPdf(pdf:any) {
         {
           extend: 'pdfHtml5',
           titleAttr: 'Exportar a PDF',
-          title:"Reporte Funcionarios",
+          title:"Reporte proyectos",
           text:'<i class="fas fa-file-pdf fs-4"></i>',
           className: 'bg-danger text-light rounded-3',
-          filename: 'Reporte de Funcionarios',
+          filename: 'Reporte de proyectos',
           exportOptions: {
             columns: [0, 1, 2, 3, 4],
           },
