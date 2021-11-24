@@ -1,6 +1,7 @@
 import { AvanceService } from './../../servicios/avance.service';
 import { Component, OnInit } from '@angular/core';
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-estadistica',
   templateUrl: './estadistica.component.html',
@@ -9,84 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class EstadisticaComponent implements OnInit {
 
    single: any= [
-    // {
-    //   "name": "Germany",
-    //   "value": 1
-    // },
-    // {
-    //   "name": "USA",
-    //   "value": 2
-    // },
-    // {
-    //   "name": "France",
-    //   "value": 3
-    // },
-    // {
-    //   "name": "Costa Rica",
-    //   "value": 2
-    // }
-  ];
-  
-// multi = [
-//     {
-//       "nombre": "Germany",
-//       "series": [
-//         {
-//           "name": "2010",
-//           "value": 7300000
-//         },
-//         {
-//           "name": "2011",
-//           "value": 8940000
-//         }
-//       ]
-//     },
-  
-//     {
-//       "nombre": "USA",
-//       "series": [
-//         {
-//           "name": "2010",
-//           "value": 7870000
-//         },
-//         {
-//           "name": "2011",
-//           "value": 8270000
-//         }
-//       ]
-//     },
-  
-    // {
-    //   "name": "France",
-    //   "series": [
-    //     {
-    //       "name": "2010",
-    //       "value": 5000002
-    //     },
-    //     {
-    //       "name": "2011",
-    //       "value": 5800000
-    //     }
-    //   ]
-    // },
-     
-    // {
-    //   "name": "Costa Rica",
-    //   "series": [
-    //     {
-    //       "name": "2089",
-    //       "value": 5000002
-    //     },
-    //     {
-    //       "name": "2011",
-    //       "value": 5800000
-    //     }
-    //   ]
-    // },
-  // ];
+   ]
 
   view: any[number] = [800, 300];
 
+  // options
   // options
   showXAxis = true;
   showYAxis = true;
@@ -97,6 +25,8 @@ export class EstadisticaComponent implements OnInit {
   xAxisLabel = 'Proyectos';
   showYAxisLabel = true;
   yAxisLabel = 'Avances';
+  legendPosition: any = 'below';
+  legendTitle: any = 'Avances Proyectos'
 
   colorScheme :any= {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -108,6 +38,42 @@ export class EstadisticaComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.single);
     this.obtenerAllAvancesProyectos();
+  }
+
+  downloadPDF() {
+    // Extraemos el
+    const DATA: any = document.getElementById('htmlData');
+    const doc = new jsPDF('p', 'pt', 'a4');
+    doc.text('Reportes Avances Proyectos', 180,20);
+    const options = {
+      background: 'white',
+      scale: 3,
+    };
+    html2canvas(DATA, options)
+      .then((canvas) => {
+        const img = canvas.toDataURL('image/PNG');
+
+        // Add image Canvas to PDF
+        const bufferX = 30;
+        const bufferY = 30;
+        const imgProps = (doc as any).getImageProperties(img);
+        const pdfWidth = doc.internal.pageSize.getWidth() - 1 * bufferX;
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        doc.addImage(
+          img,
+          'PNG',
+          bufferX,
+          bufferY,
+          pdfWidth,
+          pdfHeight,
+          undefined,
+          'FAST'
+        );
+        return doc;
+      })
+      .then((docResult) => {
+        docResult.save(`Reporte_Avances Proyectos`);
+      });
   }
 
   obtenerAllAvancesProyectos(){

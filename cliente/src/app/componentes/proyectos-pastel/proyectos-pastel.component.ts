@@ -1,6 +1,7 @@
 import { SolicitudService } from './../../servicios/solicitud.service';
 import { Component, OnInit } from '@angular/core';
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-proyectos-pastel',
   templateUrl: './proyectos-pastel.component.html',
@@ -26,12 +27,15 @@ export class ProyectosPastelComponent implements OnInit {
   }
   view: any[number] = [700, 400];
 
-  // options
-  gradient: boolean = true;
-  showLegend: boolean = true;
-  showLabels: boolean = true;
-  isDoughnut: boolean = false;
-  legendPosition: any = 'below';
+   // options
+   gradient: boolean = true;
+   showLegend: boolean = true;
+   showLabels: boolean = true;
+   isDoughnut: boolean = false;
+   maxLabelLength: number = 20;
+   trimLabels: boolean = true;
+   legendTitle: string = 'Proyectos';
+   legendPosition: any = 'below';
 
   colorScheme:any= {
     domain: ['#C7B42C', '#5AA454', '#A10A28']
@@ -47,6 +51,40 @@ export class ProyectosPastelComponent implements OnInit {
 
   onDeactivate(data:any): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
+  downloadPDF() {
+    // Extraemos el
+    const DATA: any = document.getElementById('htmlData');
+    const doc = new jsPDF('p', 'pt', 'a4');
+    doc.text('Reportes Proyectos', 180,20);
+    const options = {
+      background: 'white',
+      scale: 3,
+    };
+    html2canvas(DATA, options)
+      .then((canvas) => {
+        const img = canvas.toDataURL('image/PNG');
+        // Add image Canvas to PDF
+        const bufferX = 30;
+        const bufferY = 30;
+        const imgProps = (doc as any).getImageProperties(img);
+        const pdfWidth = doc.internal.pageSize.getWidth() - 2* bufferX;
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        doc.addImage(
+          img,
+          'PNG',
+          bufferX,
+          bufferY,
+          pdfWidth,
+          pdfHeight,
+          undefined,
+          'FAST'
+        );
+        return doc;
+      })
+      .then((docResult) => {
+        docResult.save(`Reporte_Proyectos`);
+      });
   }
 
 }

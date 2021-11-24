@@ -1,24 +1,43 @@
-<div class="container2">
-     <ul class="nav nav-tabs">
-       <li class="nav-item">
-         <a class="nav-link active" aria-current="page" routerLink="/estadistica">Avances de Proyectos</a>
-       </li>
-       <li><a class="dropdown-item" routerLink="/pastel">Estadisticas de los Proyectos</a></li>
-     </ul>
-     <ngx-charts-bar-vertical
-       [view]="view"
-       [scheme]="colorScheme"
-       [results]="single"
-       [gradient]="gradient"
-       [xAxis]="showXAxis"
-       [yAxis]="showYAxis"
-       [legend]="showLegend"
-       [showXAxisLabel]="showXAxisLabel"
-       [showYAxisLabel]="showYAxisLabel"
-       [xAxisLabel]="xAxisLabel"
-       [yAxisLabel]="yAxisLabel"
-       (select)="onSelect($event)"
-     >
-     </ngx-charts-bar-vertical>
-   </div>
-   
+<div id="htmlData">
+  <div class="container2">
+    <div class="border">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <div class="d-flex">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            routerLink="/estadistica"
+            >Avances de Proyectos</a
+          >
+          <a class="btn btn-primary m-1 nav-link active" (click)=" downloadPDF()">Generar Reporte</a>
+        </div>
+        </li>
+        
+        <li>
+          <a class="dropdown-item" routerLink="/pastel"
+            >Estadisticas de los Proyectos</a
+          >
+        </li>
+      </ul>
+      <div><p class="center containerGrafico">Avance de Proyectos</p></div>
+      <ngx-charts-bar-vertical
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="single"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [legendTitle]="legendTitle"
+        [legendPosition]="legendPosition"
+        (select)="onSelect($event)"
+      >
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>
+</div>

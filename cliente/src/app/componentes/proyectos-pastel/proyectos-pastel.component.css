@@ -1,6 +1,17 @@
 .container2 {
-     max-width: 1200px;
-     margin: 0 auto !important;
-     padding-left: 11rem;
-     padding-top: 3rem;
-   }
+  max-width: 690px;
+  margin: 0 auto !important;
+  padding-top: 2rem;
+}
+.border{
+border: 1px solid;
+}
+
+.containerGrafico{
+max-width: 400px;
+margin: 0 auto;
+padding: 0;
+}
+.center{
+padding-top: 1.5rem;
+}
