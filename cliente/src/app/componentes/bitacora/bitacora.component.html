@@ -1,4 +1,6 @@
 <div class="containerPer mt-5">
+  <div class="d-flex">
+    <div class="col-7">
   <form #filtroForm="ngForm" (ngSubmit)="filtroB(filtroForm)">
     <div class="d-flex">
       <div class="col-2">
@@ -28,7 +30,7 @@
           </select>
         </div>
       </div>
-      <div class="col-2">
+      <div >
         <div class="form-group p-l pb-1">
           <label for="max">Último mes:</label>
 
@@ -56,21 +58,23 @@
         </div>
       </div>
       
-     <div class="col-2 p-md-4">
+     <div class="col-2 padding">
           <button type="submit" class="btn btn-agregar form-control">
             Filtrar
           </button>
       </div>
+    <div  class="col-2 padding">
+      <a  class="btn btn-agregar" (click)="reload()" 
+           data-toggle="tooltip"
+            data-placement="top"
+            title="Refrescar">
+        <i class="fas fa-sync"></i></a>
     </div>
+  </div>
   </form>
-  <div  class="col-1">
-    <a  class="btn btn-agregar btn-block m-2" (click)="reload()" 
-         data-toggle="tooltip"
-          data-placement="top"
-          title="Refrescar">
-      <i class="fas fa-sync"></i></a>
   </div>
 
+</div>
   <div class="border-b p-2">
     <br />
     <table

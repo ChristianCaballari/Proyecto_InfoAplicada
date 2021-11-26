@@ -53,6 +53,7 @@ segundoMesSelected:number = 1;
     
    this.dtOptions = { 
       pagingType: 'full_numbers',
+      sort:false,
       pageLength: 6,
       responsive: true,
      // dom: '<lf<Bt>ip>',
@@ -119,7 +120,9 @@ segundoMesSelected:number = 1;
         dtInstance.destroy();
      this.bitacoraS.getBitacorasFiltro(this.filtro).subscribe(
        (result)=>{
-         this.bitacoras=result; 
+         
+         this.bitacoras=result ;
+         console.log(this.bitacoras); 
          this.tablaTrigger.next();
        }
      

@@ -1,61 +1,65 @@
 <div class="containerPer mt-5">
   <div class="mb-2">
-    <a
-      href="#"
-      class="btn btn-agregar btn-block"
-      data-toggle="tooltip"
-      data-placement="top"
-      title="Agregar Funcionario"
-      data-bs-toggle="modal"
-      data-bs-target="#agregarClienteModal"
-      #botonAbrir
-      ><i class="fas fa-plus"></i> Agregar
-    </a>
-      <a
-      class="btn btn-agregar btn-block m-md-1"
-      data-toggle="tooltip"
-      data-placement="top"
-      title="Avance Trimestral"
-      (click)="avanceTrimestral()"
-      ><i class="fas fa-hourglass-start"></i> Avance Trimestral
-    </a> 
-
-      <form #filtroForm="ngForm" (ngSubmit)="filtroTrimestral(filtroForm)">
-        <div class="d-flex">
-         
-          <div class="col-3">
-            <div class="d-flex">
-            <label for="max">Filtrar solicitud:</label>
-            <select
-            [(ngModel)]="solicitudSelected"
-            class="form-select"
-            aria-label="Solicitud"
-            name="idSolicitud"
-            #idSolicitud="ngModel"
-            [(ngModel)]="avance.idSolicitud"
-            required
-           
-          >
-          <option [value]="-1">Todos</option>
-            <option
-              [value]="item.idSolicitud"
-              *ngFor="let item of solicitudes"
-            >
-              <div *ngIf="item.idSolicitud != '0'">
-                Proyecto {{ item.nombreSolicitud }}
-              </div>
-              <div *ngIf="item.idSolicitud == '0'">
-                {{ item.nombre }} {{ item.apellidos }}
-              </div>
-            </option>
-
-          </select>
-          </div>
-          </div>
-          <button type="submit" class="btn btn-agregar m-md-1">Filtrar</button>
+    <div class="d-flex">
+      <div class="d-flex">
+        <div class="padding">
+          <a
+            href="#"
+            class="btn btn-agregar"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Agregar Funcionario"
+            data-bs-toggle="modal"
+            data-bs-target="#agregarClienteModal"
+            #botonAbrir
+            ><i class="fas fa-plus"></i> Agregar
+          </a>
         </div>
-      </form> 
-    
+        <div class="padding">
+          <a
+            class="btn btn-agregar"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Avance Trimestral"
+            (click)="avanceTrimestral()"
+            ><i class="fas fa-hourglass-start"></i> Avance Trimestral
+          </a>
+        </div>
+      </div>
+      <form #filtroForm="ngForm" (ngSubmit)="filtroTrimestral(filtroForm)" class="padding">
+        <div class="d-flex">
+          <div class="col-10">
+            <div class="d-flex">
+              <select
+                [(ngModel)]="solicitudSelected"
+                class="form-select"
+                aria-label="Solicitud"
+                name="idSolicitud"
+                #idSolicitud="ngModel"
+                [(ngModel)]="avance.idSolicitud"
+                required
+              >
+                <option [value]="-1">Todos</option>
+                <option
+                  [value]="item.idSolicitud"
+                  *ngFor="let item of solicitudes"
+                >
+                  <div *ngIf="item.idSolicitud != '0'">
+                    Proyecto {{ item.nombreSolicitud }}
+                  </div>
+                  <div *ngIf="item.idSolicitud == '0'">
+                    {{ item.nombre }} {{ item.apellidos }}
+                  </div>
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-10 p-l">
+          <button type="submit" class="btn btn-agregar">Filtrar Solicitud</button>
+        </div>
+        </div>
+      </form>
+    </div>
   </div>
   <!-- [dtTrigger]="dtTrigger" -->
   <div class="border-b p-2">
@@ -64,7 +68,6 @@
       [dtOptions]="dtOptions"
       [dtTrigger]="tablaTrigger"
       class="table table-striped row-border hover pt-2"
-     
     >
       <thead class="bg-custom-2 text-light">
         <tr>
@@ -76,7 +79,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let avance of avances" >
+        <tr *ngFor="let avance of avances">
           <td>{{ avance.nombreSolicitud }}</td>
           <td>{{ avance.nombre }} {{ avance.apellidos }}</td>
           <td>{{ avance.descripcion }}</td>

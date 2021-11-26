@@ -15,7 +15,7 @@ export class BitacoraService {
     return this.http.get<Bitacora[]>(`${environment.API_URL}/bitacora/consultar`);
   }
 
-  getBitacorasFiltro(filtro: BitacoraFiltro): Observable<any[]> {
+  getBitacorasFiltro(filtro: BitacoraFiltro): Observable<Bitacora[]> {
     return this.http.post<Bitacora[]>(`${environment.API_URL}/bitacora/filtro`,filtro);
   }
 

@@ -4,10 +4,17 @@ const Bitacora = require("../models/Bitacora");
 
 
 exports.searchMonth = (req, res) => {
-    b = new Bitacora (req.body.mesInicio,req.body.mesFinal) ;
+ //   b = new Bitacora (req.body.mesInicio,req.body.mesFinal) ;
+    
+    const { mesInicio, mesFinal} = req.body;
 
-    let trasaccion = `EXEC [dbo].[searchBitacoraByMonth] @mesInicio=N'${b.mesInicio}',
-    @mesFinal=N'${b.mesFinal}'`;
+    console.log("Inicio");
+    console.log(mesInicio);
+    console.log(mesFinal);
+    console.log("Fin");
+
+    let trasaccion = `EXEC [dbo].[searchBitacoraByMonth] @mesInicio=N'${mesInicio}',
+    @mesFinal=N'${mesFinal}'`;
     let data = new Data();
     data.transaccion2(trasaccion,res);
 } 

@@ -111,3 +111,7 @@ table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dat
 .p-l{
     padding-left: 5px;
 }
+.padding{
+padding-left: 0.2rem;
+padding-top: 1.5rem;
+}
