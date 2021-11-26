@@ -19,6 +19,43 @@
       (click)="avanceTrimestral()"
       ><i class="fas fa-hourglass-start"></i> Avance Trimestral
     </a> 
+
+      <form #filtroForm="ngForm" (ngSubmit)="filtroTrimestral(filtroForm)">
+        <div class="d-flex">
+         
+          <div class="col-3">
+            <div class="d-flex">
+            <label for="max">Filtrar solicitud:</label>
+            <select
+            [(ngModel)]="solicitudSelected"
+            class="form-select"
+            aria-label="Solicitud"
+            name="idSolicitud"
+            #idSolicitud="ngModel"
+            [(ngModel)]="avance.idSolicitud"
+            required
+           
+          >
+          <option [value]="-1">Todos</option>
+            <option
+              [value]="item.idSolicitud"
+              *ngFor="let item of solicitudes"
+            >
+              <div *ngIf="item.idSolicitud != '0'">
+                Proyecto {{ item.nombreSolicitud }}
+              </div>
+              <div *ngIf="item.idSolicitud == '0'">
+                {{ item.nombre }} {{ item.apellidos }}
+              </div>
+            </option>
+
+          </select>
+          </div>
+          </div>
+          <button type="submit" class="btn btn-agregar m-md-1">Filtrar</button>
+        </div>
+      </form> 
+    
   </div>
   <!-- [dtTrigger]="dtTrigger" -->
   <div class="border-b p-2">
@@ -27,6 +64,7 @@
       [dtOptions]="dtOptions"
       [dtTrigger]="tablaTrigger"
       class="table table-striped row-border hover pt-2"
+     
     >
       <thead class="bg-custom-2 text-light">
         <tr>
@@ -38,7 +76,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let avance of avances">
+        <tr *ngFor="let avance of avances" >
           <td>{{ avance.nombreSolicitud }}</td>
           <td>{{ avance.nombre }} {{ avance.apellidos }}</td>
           <td>{{ avance.descripcion }}</td>

@@ -4,6 +4,7 @@ import { SolicitudService } from './../../servicios/solicitud.service';
 import { TrimestreService } from './../../servicios/trimestre.service';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Avance } from 'src/app/modelo/Avance.model';
+
 import { AvanceService } from './../../servicios/avance.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -26,10 +27,13 @@ dtableElement: DataTableDirective;
     idSolicitud: '',
     documento: '',
 };
+
+
 selectSolicitud:boolean = false;
 selectTrimestre:boolean = false;
 
 @ViewChild('avanceForm') avanceForm: NgForm;
+@ViewChild('filtroForm') filtroForm: NgForm;
 @ViewChild('botonAbrir') botonAbrir: ElementRef;
 @ViewChild('botonCerrar') botonCerrar: ElementRef;
 
@@ -44,6 +48,7 @@ trimestres!:any[];
 tablaTrigger = new Subject<any>();
 trimestresSelected:Number;
 solicitudSelected:Number;
+idSolicitud:any;
 
 solicitudes!: any[];
 data:any={
@@ -282,5 +287,23 @@ pdf:any;
       this.avance.idTrimestre='';
       this.avance.idUsuarioAplicativo='';
       this.botonCerrar.nativeElement.click();
+    }
+
+    filtroTrimestral(filtroForm: NgForm){
+
+      if(this.avance.idSolicitud==="-1"){
+        this.reload();
+      }else{
+      this.dtableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      this.avanceService.getAvancesTrimestralesSolicitud(this.avance).subscribe(
+        (result) =>{
+         this.avances=result;
+         this.tablaTrigger.next();
+        }
+      )
+      });
+      }
+      
     }
 }

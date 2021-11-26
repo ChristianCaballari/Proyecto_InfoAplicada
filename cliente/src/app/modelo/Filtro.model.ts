@@ -8,3 +8,4 @@ export interface BitacoraFiltro{
     mesFinal:string;
 }
 
+

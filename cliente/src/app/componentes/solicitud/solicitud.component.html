@@ -14,7 +14,7 @@
           ><i class="fas fa-plus"></i> Agregar
         </a>
       </div>
-      <div class="col-12">
+      <div class="col-10">
         <form #filtroForm="ngForm" (ngSubmit)="filtro(filtroForm)">
           <div class="d-flex">
             <div class="col-3">
@@ -45,17 +45,32 @@
             </div>
             <button type="submit" class="btn btn-agregar m-md-1">Filtrar</button>
           </div>
+         
         </form>
+        
       </div>
+    
     </div>
+
+    
+  </div>
+  <div  class="col-1">
+    <a  class="btn btn-agregar btn-block m-2" (click)="reload()" 
+         data-toggle="tooltip"
+          data-placement="top"
+          title="Refrescar">
+      <i class="fas fa-sync"></i></a>
   </div>
   <div class="border-b p-2">
+   
     <table
       datatable
       [dtOptions]="dtOptions"
       [dtTrigger]="tablaTrigger"
       class="table table-striped row-border hover pt-2"
     >
+    
+    
       <thead class="bg-custom-2 text-light">
         <tr>
           <th>Nombre proyecto</th>

@@ -26,5 +26,6 @@ router.get('/obtenerAvanceProyecto',avanceController.avanceProyecto);
 
 router.get('/obtenerAvanceTrimestral',avanceController.avanceTrimestral);
 
+router.post('/solicitud', avanceController.avanceTrimestralSolicitud);
 
 module.exports = router; //exportar porque se usa en index

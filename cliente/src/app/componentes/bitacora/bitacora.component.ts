@@ -93,6 +93,18 @@ segundoMesSelected:number = 1;
      });
   }
 
+  reload(){
+
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    
+      dtInstance.destroy();
+
+    this.bitacoraS.getAllBitacoras().subscribe((res)=>{
+      this.bitacoras=res;
+      this.tablaTrigger.next();
+     });
+    });
+  }
 
 
   filtroB(filtroForm: NgForm){

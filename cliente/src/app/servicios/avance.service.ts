@@ -8,6 +8,8 @@ import { environment } from '../environment';
 import { Avance } from '../modelo/Avance.model';
 
 
+
+
 @Injectable()
 export class AvanceService {
   constructor(private http: HttpClient) {}
@@ -18,6 +20,10 @@ export class AvanceService {
 
   getAvancesTrimestrales(): Observable<AvanceDetetalle[]> {
     return this.http.get<AvanceDetetalle[]>(`${environment.API_URL}/avance/obtenerAvanceTrimestral`);
+  }
+  getAvancesTrimestralesSolicitud(avance:Avance): Observable<AvanceDetetalle[]> {
+    
+    return this.http.post<AvanceDetetalle[]>(`${environment.API_URL}/avance/solicitud`,avance);
   }
 
   getAllAvanceProyectos(): Observable<any[]> {

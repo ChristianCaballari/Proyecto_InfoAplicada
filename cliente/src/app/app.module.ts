@@ -34,6 +34,7 @@ import { EstadisticaComponent } from './componentes/estadistica/estadistica.comp
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     BitacoraComponent,
     ProyectosPastelComponent,
     EstadisticaComponent,
+    
     
   ],
   imports: [

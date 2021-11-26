@@ -1,4 +1,5 @@
 const Avance = require("../models/Avance"); 
+const Sol = require("../models/idSolicitud"); 
 const Data = require("../dataModel/Data");
 
 exports.crear = (req, res) => {
@@ -69,4 +70,13 @@ exports.avanceTrimestral = (req, res)=>{
     let transaccion = `EXEC [dbo].[sp_selectAvanceTrimestre]`;
 
     data.transaccion2(transaccion,res);
+}
+
+exports.avanceTrimestralSolicitud=(req,res)=>{
+    
+   const avance= req.body.idSolicitud;
+     let transaccion = `EXEC [dbo].[sp_selectAvanceTrimestre2] @idSolicitud =N'${avance}'`;
+     let data = new Data();
+     data.transaccion2(transaccion,res);
+
 }
