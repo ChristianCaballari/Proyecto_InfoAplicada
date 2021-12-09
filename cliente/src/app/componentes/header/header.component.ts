@@ -15,10 +15,6 @@ export class HeaderComponent implements OnInit {
   nombreUser: any;
   imgUser:any;
 
-
-
-
-
   constructor(private loginService:LoginService,
   private  Routerer: Router) {}
 
