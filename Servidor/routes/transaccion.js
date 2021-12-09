@@ -1,23 +1,23 @@
 const express = require('express'); 
 const router = express.Router(); // Usar route de express y express para el servidor
 
-const sexoController = require('../controller/SexoController');
+const transaccionController = require('../controller/TransaccionController');
 
-router.get('/obtenerSexo',
-sexoController.obtenerSexo
+router.get('/consultar',
+transaccionController.obtener
 );
 
 router.delete('/:id',
-sexoController.eliminar
+transaccionController.eliminar
 );
 
 router.put('/editar/:id',
-sexoController.editar
+transaccionController.editar
 );
 
 router.post('/',
 
-sexoController.crear
+transaccionController.crear
    
 );
 
