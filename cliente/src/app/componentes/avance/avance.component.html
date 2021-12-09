@@ -155,7 +155,7 @@
                   </option>
                 </select>
                 <div [hidden]="selectSolicitud" class="invalid-feedback">
-                  Selecione una Solicitud *
+                  Requerido *
                 </div>
               </div>
             </div>
@@ -168,7 +168,13 @@
                   alife-file-to-base64
                   class="form-control"
                   (onFileChanged)="onFileChanged($event)"
+                  [ngClass]="{
+                    'is-invalid': !documentoValido
+                  }"
                 />
+                <div [hidden]="documentoValido" class="invalid-feedback">
+                  Requerido *
+                </div>
               </div>
             </div>
             <div class="col">
@@ -208,7 +214,7 @@
             data-toggle="tooltip"
             data-placement="top"
             title="Guardar"
-            [disabled]="!selectTrimestre || !selectSolicitud"
+            [disabled]="!selectTrimestre || !selectSolicitud || !documentoValido"
           >
             Guardar
           </button>

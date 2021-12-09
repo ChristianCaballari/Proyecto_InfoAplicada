@@ -1,7 +1,7 @@
 <div class="containerPer mt-5">
   <div class="mb-2">
     <div class="d-flex">
-      <div class="col-1">
+      <div class="col-1 padding">
         <a
           href="#"
           class="btn btn-agregar btn-block"
@@ -17,7 +17,7 @@
       <div class="col-10">
         <form #filtroForm="ngForm" (ngSubmit)="filtro(filtroForm)">
           <div class="d-flex">
-            <div class="col-3">
+            <div class="col-3 padding">
             <div class="d-flex">
               <label for="min">Fecha m&iacute;nima:</label>
               <input
@@ -30,7 +30,7 @@
               />
             </div>
             </div>
-            <div class="col-3">
+            <div class="col-3 padding">
               <div class="d-flex">
               <label for="max">Fecha m&aacute;xima:</label>
               <input
@@ -43,23 +43,23 @@
               />
             </div>
             </div>
+            <div  class="col'2 padding">
             <button type="submit" class="btn btn-agregar m-md-1">Filtrar</button>
           </div>
-         
+            <div  class="col'2 padding p-l">
+              <a  class="btn btn-agregar m-1" (click)="reload()" 
+                   data-toggle="tooltip"
+                    data-placement="top"
+                    title="Refrescar">
+                <i class="fas fa-sync"></i></a>
+            </div>
+          </div>
         </form>
         
-      </div>
-    
+      </div>   
     </div>
 
     
-  </div>
-  <div  class="col-1">
-    <a  class="btn btn-agregar btn-block m-2" (click)="reload()" 
-         data-toggle="tooltip"
-          data-placement="top"
-          title="Refrescar">
-      <i class="fas fa-sync"></i></a>
   </div>
   <div class="border-b p-2">
    

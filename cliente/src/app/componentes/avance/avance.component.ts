@@ -31,6 +31,7 @@ dtableElement: DataTableDirective;
 
 selectSolicitud:boolean = false;
 selectTrimestre:boolean = false;
+documentoValido: boolean = false;
 
 @ViewChild('avanceForm') avanceForm: NgForm;
 @ViewChild('filtroForm') filtroForm: NgForm;
@@ -100,7 +101,23 @@ pdf:any;
   }
 
   onFileChanged(e: any) {
+
+    let extencionPermitida = /(.pdf|.doc)$/i;
+    let extencionvalida = e[0].name;
+    if (!extencionPermitida.exec(extencionvalida)) {
+      this.swal.error('Solo se permiten documentos (PDF)');
+      return;
+    } else {
+      e[0].base64 ? (this.documentoValido = true) : (this.documentoValido = false);
+      this.avance.documento = e[0].base64;
+    }
     this.pdf = e[0].base64 
+  }
+
+  onFileData(e: any) {
+    console.log(this.documentoValido);
+    this.documentoValido = false;
+    console.log(this.documentoValido);
   }
   validarSelect(e: any){
 
@@ -171,9 +188,8 @@ pdf:any;
       }
     )
   }
-  vo(){
-    alert("hola");
-  }
+
+  
   obtenerAvances(){
     this.dtOptions = {
       pagingType: 'full_numbers',
