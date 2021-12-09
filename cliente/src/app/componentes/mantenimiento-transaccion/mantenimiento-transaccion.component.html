@@ -1,0 +1,49 @@
+<div class="p-2">
+   
+     <table
+       datatable
+       [dtOptions]="dtOptions"
+       [dtTrigger]="tablaTrigger"
+       class="table table-striped row-border hover pt-2"
+     >
+     
+     
+       <thead class="bg-custom-2 text-light">
+         <tr>
+           <th>Nombre proyecto</th>
+           <th>Fecha y Hora</th>
+           <th>Fecha Incio</th>
+           <th>Fecha Fin</th>
+           <!-- <th>Aplicativo</th>
+           <th>Responsable TI</th>
+           <th>Responsable usuario final</th> -->
+           <th>Acciones</th>
+         </tr>
+       </thead>
+       <tbody>
+            <tr>
+         <!-- <tr *ngFor="let solicitud of solicitudes">
+           <td>{{ solicitud.nombre }}</td>
+           <td>{{ solicitud.fechaHora }}</td>
+           <td>{{ solicitud.fechaInicio }}</td>
+           <td>{{ solicitud.fechaFin }}</td> -->
+        
+            
+
+ 
+           <td>
+ 
+             <a
+               (click)="eliminarTrimestre()"
+               class="btn bg-success spacing text-light"
+             >
+               <i class="fas fa-hourglass-end"></i> Finalizar
+             </a>
+           </td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+
+
+

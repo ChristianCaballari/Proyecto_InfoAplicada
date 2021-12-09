@@ -1,0 +1,79 @@
+<div class="container p-5">
+    
+     <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Trimestres</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Transaccion</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Sexo</button>
+          </li>
+        </ul>
+        <div class="tab-content border-5" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+               <div class="border-dark borderCA">
+               
+
+
+                    <div class="p-2">
+   
+                         <table
+                           datatable
+                           [dtOptions]="dtOptions"
+                           [dtTrigger]="tablaTrigger"
+                           class="table table-striped row-border hover pt-2"
+                         >
+                         
+                         
+                           <thead class="bg-custom-2 text-light">
+                             <tr>
+                               <th>Nombre proyecto</th>
+                               <th>Fecha y Hora</th>
+                               <th>Fecha Incio</th>
+                               <th>Fecha Fin</th>
+                               <!-- <th>Aplicativo</th>
+                               <th>Responsable TI</th>
+                               <th>Responsable usuario final</th> -->
+                               <th>Acciones</th>
+                             </tr>
+                           </thead>
+                           <tbody>
+                                <tr>
+                             <!-- <tr *ngFor="let solicitud of solicitudes">
+                               <td>{{ solicitud.nombre }}</td>
+                               <td>{{ solicitud.fechaHora }}</td>
+                               <td>{{ solicitud.fechaInicio }}</td>
+                               <td>{{ solicitud.fechaFin }}</td> -->
+                            
+                                
+                  
+                     
+                               <td>
+                     
+                                 <a
+                                   (click)="eliminarTransaccion()"
+                                   class="btn bg-success spacing text-light"
+                                 >
+                                   <i class="fas fa-hourglass-end"></i> Finalizar
+                                 </a>
+                               </td>
+                             </tr>
+                           </tbody>
+                         </table>
+                       </div>
+          </div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+               <div class="border-dark borderCA">
+               <app-mantenimiento-transaccion></app-mantenimiento-transaccion>
+          </div>
+          </div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+               <div class="border-dark borderCA">
+               <app-mantenimiento-sexo></app-mantenimiento-sexo>
+          </div>
+          </div>
+        </div>
+</div>

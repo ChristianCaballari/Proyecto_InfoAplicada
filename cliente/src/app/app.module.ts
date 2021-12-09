@@ -1,3 +1,4 @@
+
 import { Swal2 } from './mensajes/mensajes';
 import { GuardianGuard } from './guards/guardian.guard';
 import { NgModule } from '@angular/core';
@@ -32,6 +33,10 @@ import { BitacoraComponent } from './componentes/bitacora/bitacora.component';
 import { ProyectosPastelComponent } from './componentes/proyectos-pastel/proyectos-pastel.component';
 import { EstadisticaComponent } from './componentes/estadistica/estadistica.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MantenimientoComponent } from './componentes/mantenimiento/mantenimiento.component';
+import { MantenimientoTransaccionComponent } from './componentes/mantenimiento-transaccion/mantenimiento-transaccion.component';
+import { MantenimientoSexoComponent } from './componentes/mantenimiento-sexo/mantenimiento-sexo.component';
+import { TransaccionService } from './servicios/transaccion.service';
 
 
 
@@ -49,6 +54,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     BitacoraComponent,
     ProyectosPastelComponent,
     EstadisticaComponent,
+    MantenimientoComponent,
+    MantenimientoTransaccionComponent,
+    MantenimientoSexoComponent,
     
     
   ],
@@ -63,7 +71,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
       FormsModule,
       NgbModule
   ],
-  providers: [LoginService,FuncionarioService,DepartamentoService,/*GuardianGuard,*/Swal2,SolicitudService,SexoService,AvanceService,TrimestreService,BitacoraService],
+  providers: [LoginService,FuncionarioService,DepartamentoService,/*GuardianGuard,*/Swal2,SolicitudService,SexoService,AvanceService,TrimestreService,BitacoraService,TransaccionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
