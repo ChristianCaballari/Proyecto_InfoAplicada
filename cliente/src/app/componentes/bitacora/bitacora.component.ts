@@ -27,13 +27,16 @@ export class BitacoraComponent implements OnInit,OnDestroy {
 
   filtro: BitacoraFiltro={
     mesInicio:'',
-    mesFinal:''
+    mesFinal:'0'
   }
   meses:string[]=["Enero","Febrero","Marzo", "Abril","Mayo","Junio","Julio","Agosto","Setiembre","Octubre",
 "Noviembre","Diciembre"];
 
 primerMesSelected:number = 1;
 segundoMesSelected:number = 1;
+fechaInicio: any;
+fechaFinal: any;
+isDisabled:any=false;
 
   @ViewChild("filtroForm") filtroForm: NgForm;
   constructor(private bitacoraS: BitacoraService) { }
@@ -84,6 +87,9 @@ segundoMesSelected:number = 1;
           exportOptions: {
             columns: [0, 1, 2, 3, 4],
           },
+          customize: function(doc) {
+            doc.content[1].margin = [ 60, 10, 50, 10 ] //left, top, right, bottom
+          }
           
         },
       ],
@@ -109,8 +115,6 @@ segundoMesSelected:number = 1;
 
 
   filtroB(filtroForm: NgForm){
-
-  
     if(filtroForm.valid){
       this.filtro= filtroForm.value;
      
@@ -130,6 +134,20 @@ segundoMesSelected:number = 1;
      }
       )};
    }
+
+   validarMeses(){
+    this.fechaInicio=((document.getElementById("mesInicio") as HTMLInputElement).value);
+    this.fechaFinal=((document.getElementById("mesFinal") as HTMLInputElement).value);
+
+    if( this.fechaInicio>1){
+     //this.isDisabled=true;
+     
+  
+    }else{
+      this.isDisabled=false;
+    }
+   }
+  
 
 
 }

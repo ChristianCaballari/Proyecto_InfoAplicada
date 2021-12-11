@@ -169,6 +169,9 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
           exportOptions: {
             columns: [0, 1, 2, 3, 4],
           },
+          customize: function(doc) {
+            doc.content[1].margin = [ 70, 0, 100, 0 ] //left, top, right, bottom
+          }
           
         },
       ],

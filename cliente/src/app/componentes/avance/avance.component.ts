@@ -209,6 +209,7 @@ pdf:any;
           text:'<i class="fas fa-file-excel fs-4"></i>',
           className: 'bg-success text-light rounded-3',
           filename: 'Reporte de Avances',
+         
           exportOptions: {
             columns: [0, 1, 2, 3],
           },
@@ -223,6 +224,9 @@ pdf:any;
           exportOptions: {
             columns: [0, 1, 2, 3],
           },
+          customize: function(doc) {
+            doc.content[1].margin = [ 60, 0, 0, 0 ] //left, top, right, bottom
+          }
           
         },
       ],

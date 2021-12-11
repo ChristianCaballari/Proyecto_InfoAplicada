@@ -1,88 +1,80 @@
+
+
 <div class="containerPer mt-5">
   <div class="d-flex">
     <div class="col-7">
-  <form #filtroForm="ngForm" (ngSubmit)="filtroB(filtroForm)">
-    <div class="d-flex">
-      <div class="col-2">
-        <div class="form-group pb-1">
-          <label for="min">Primer mes:</label>
+      <form #filtroForm="ngForm" (ngSubmit)="filtroB(filtroForm)">
+        <div class="d-flex">
+          <div class="col-2">
+            <div class="form-group pb-1">
+              <label for="min">Primer mes:</label>
 
-          <select
-            id="mesInicio"
-            name="mesInicio"
-            #mesInicio="ngModel"
-            [(ngModel)]="filtro.mesInicio"
-            class="form-control"
-            [(ngModel)]="primerMesSelected"
-          >
-            <option [value]="1">Enero</option>
-            <option [value]="2">Febrero</option>
-            <option [value]="3">Marzo</option>
-            <option [value]="4">Abril</option>
-            <option [value]="5">Mayo</option>
-            <option [value]="6">Junio</option>
-            <option [value]="7">Julio</option>
-            <option [value]="8">Agosto</option>
-            <option [value]="9">Setiembre</option>
-            <option [value]="10">Octubre</option>
-            <option [value]="11">Noviembre</option>
-            <option [value]="12">Diciembre</option>
-          </select>
-        </div>
-      </div>
-      <div >
-        <div class="form-group p-l pb-1">
-          <label for="max">Último mes:</label>
+              <select id="mesInicio" name="mesInicio" #mesInicio="ngModel" [(ngModel)]="filtro.mesInicio"
+                class="form-control" [(ngModel)]="primerMesSelected">
+                <option [value]="1">Enero</option>
+                <option [value]="2">Febrero</option>
+                <option [value]="3">Marzo</option>
+                <option [value]="4">Abril</option>
+                <option [value]="5">Mayo</option>
+                <option [value]="6">Junio</option>
+                <option [value]="7">Julio</option>
+                <option [value]="8">Agosto</option>
+                <option [value]="9">Setiembre</option>
+                <option [value]="10">Octubre</option>
+                <option [value]="11">Noviembre</option>
+                <option [value]="12">Diciembre</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="form-group p-l pb-1">
+              <label for="max">Último mes:</label>
 
-          <select
-            id="mesFinal"
-            name="mesFinal"
-            #mesFinal="ngModel"
-            [(ngModel)]="filtro.mesFinal"
-            class="form-control"
-            [(ngModel)]="segundoMesSelected"
-          >
-            <option [value]="1">Enero</option>
-            <option [value]="2">Febrero</option>
-            <option [value]="3">Marzo</option>
-            <option [value]="4">Abril</option>
-            <option [value]="5">Mayo</option>
-            <option [value]="6">Junio</option>
-            <option [value]="7">Julio</option>
-            <option [value]="8">Agosto</option>
-            <option [value]="9">Setiembre</option>
-            <option [value]="10">Octubre</option>
-            <option [value]="11">Noviembre</option>
-            <option [value]="12">Diciembre</option>
-          </select>
+              <select id="mesFinal" name="mesFinal" #mesFinal="ngModel" (click)="validarMeses()"
+                [(ngModel)]="filtro.mesFinal" class="form-control" [(ngModel)]="segundoMesSelected">
+              
+              
+
+                <option  [value]="1" [disabled]="isDisabled">Enero</option>
+                <option  [value]="2" [disabled]="isDisabled">Febrero</option>
+                <option  [value]="3" [disabled]="isDisabled">Marzo</option>
+                <option [value]="4" [disabled]="isDisabled">Abril</option>
+                <option [value]="5" [disabled]="isDisabled">Mayo</option>
+                <option [value]="6" [disabled]="isDisabled">Junio</option>
+                <option [value]="7" [disabled]="isDisabled">Julio</option>
+                <option [value]="8" [disabled]="isDisabled">Agosto</option>
+                <option [value]="9" [disabled]="isDisabled">Setiembre</option>
+                <option [value]="10" [disabled]="isDisabled">Octubre</option>
+                <option [value]="11" [disabled]="isDisabled">Noviembre</option>
+                <option [value]="12" [disabled]="isDisabled">Diciembre</option>
+
+          
+            
+              </select>
+
+          
+
+            </div>
+          </div>
+
+          <div class="col-2 padding">
+            <button type="submit" class="btn btn-agregar form-control">
+              Filtrar
+            </button>
+          </div>
+          <div class="col-2 padding">
+            <a class="btn btn-agregar" (click)="reload()" data-toggle="tooltip" data-placement="top" title="Refrescar">
+              <i class="fas fa-sync"></i></a>
+          </div>
         </div>
-      </div>
-      
-     <div class="col-2 padding">
-          <button type="submit" class="btn btn-agregar form-control">
-            Filtrar
-          </button>
-      </div>
-    <div  class="col-2 padding">
-      <a  class="btn btn-agregar" (click)="reload()" 
-           data-toggle="tooltip"
-            data-placement="top"
-            title="Refrescar">
-        <i class="fas fa-sync"></i></a>
+      </form>
     </div>
-  </div>
-  </form>
-  </div>
 
-</div>
+  </div>
   <div class="border-b p-2">
     <br />
-    <table
-      datatable
-      [dtOptions]="dtOptions"
-      [dtTrigger]="tablaTrigger"
-      class="table table-striped row-border hover pt-2"
-    >
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="tablaTrigger"
+      class="table table-striped row-border hover pt-2">
       <thead class="bg-custom-2 text-light">
         <tr>
           <th>ID</th>
