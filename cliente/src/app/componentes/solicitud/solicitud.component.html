@@ -1,7 +1,7 @@
 <div class="containerPer mt-5">
   <div class="mb-2">
     <div class="d-flex">
-      <div class="col-1 padding">
+      <div class="padding">
         <a
           href="#"
           class="btn btn-agregar btn-block"
@@ -215,14 +215,15 @@
                 <label for="usuarioA">Usuario Responsable TI</label>
                 <select
                   class="form-select"
+                  [(ngModel)]="responsableTiSelected"
                   aria-label="Default select example"
                   name="idResponsableTI"
                   #idResponsableTI="ngModel"
                   [(ngModel)]="solicitud.idResponsableTI"
                   [ngClass]="{
-                    'is-invalid':
-                      idResponsableTI.errors && idResponsableTI.touched
+                    'is-invalid': !isUsuarioTi
                   }"
+                  (click)="validarSelectUsuarioTi()"
                 >
                   <option
                     [value]="item.idFuncionario"
@@ -232,11 +233,8 @@
                   </option>
                 </select>
 
-                <div
-                  [hidden]="!idResponsableTI.errors?.required"
-                  class="invalid-feedback"
-                >
-                  *Requerido
+                <div [hidden]="isUsuarioTi" class="invalid-feedback">
+                  Requerido *
                 </div>
               </div>
             </div>
@@ -246,6 +244,7 @@
               <input
                 type="date"
                 name="fechaInicio"
+                id="fechaInicioFor"
                 placeholder="dd-mm-yyyy"
                 class="form-control"
                 #fechaIncio="ngModel"
@@ -270,17 +269,19 @@
                 type="date"
                 name="fechaFin"
                 placeholder="dd-mm-yyyy"
+                [min]="minDate | date:'yyyy-MM-dd'"
                 class="form-control"
-                #fechaFin="ngModel"
+                #fechaFi="ngModel"
+                (click)="validarFechasForm()"
                 [(ngModel)]="solicitud.fechaFin"
                 [ngClass]="{
-                  'is-invalid': fechaFin.errors && fechaFin.touched
+                  'is-invalid': fechaFi.errors && fechaFi.touched
                 }"
                 required
               />
 
               <div
-                [hidden]="!fechaFin.errors?.required"
+                [hidden]="!fechaFi.errors?.required"
                 class="invalid-feedback"
               >
                 *Requerido
@@ -291,13 +292,13 @@
               <select
                 class="form-select"
                 name="idResponsableUsuarioFinal"
+                [(ngModel)]="responsableFinalSelected"
                 #idResponsableUsuarioFinal="ngModel"
                 [(ngModel)]="solicitud.idResponsableUsuarioFinal"
                 [ngClass]="{
-                  'is-invalid':
-                    idResponsableUsuarioFinal.errors &&
-                    idResponsableUsuarioFinal.touched
+                  'is-invalid': !isUsuarioFinal
                 }"
+                (click)="validarUsuarioFinal()"
               >
                 <option
                   [value]="item.idFuncionario"
@@ -307,11 +308,8 @@
                 </option>
               </select>
 
-              <div
-                [hidden]="!idResponsableUsuarioFinal.errors?.required"
-                class="invalid-feedback"
-              >
-                *Requerido
+              <div [hidden]="isUsuarioFinal" class="invalid-feedback">
+                Requerido *
               </div>
             </div>
 
@@ -324,6 +322,7 @@
                 class="form-control"
                 name="documentoActaConstitutiva"
                 alife-file-to-base64
+                (pointerdown)="onFileData($event)"
                 (onFileChanged)="onFileChangedSolicitud($event)"
                 required
               />
@@ -338,7 +337,10 @@
             data-toggle="tooltip"
             data-placement="top"
             title="Guardar"
-          >
+            [disabled]="
+            !solicitudForm.valid || !documentoValido || !isUsuarioFinal || !isUsuarioTi
+          "
+           >
             Guardar
           </button>
         </div>

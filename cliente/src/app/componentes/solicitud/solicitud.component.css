@@ -122,3 +122,10 @@ table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dat
     padding-left: 0.2rem;
     padding-top: 1.5rem;
 }
+.col-2{
+    direction: flex;
+    width: 3%!important;
+}
+.img{
+    color:#ffffff;
+}

@@ -109,8 +109,7 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
    }else{
       this.isDepartSelected = true;
    }
-   console.log(this.isDepartSelected);
-   console.log(this.funcionario.idDepartamento);
+
   }
 
   ngOnInit(): void {
@@ -125,11 +124,16 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
   obtenerDepartamentos() {
     this.departamentoService.getAllDepartament().subscribe((departamentos) => {
       this.departamentos = departamentos;
+      this.departamentos.push(this.deparData);
+      this.departamentSelected = -1;
     });
   }
   obtenerSexo() {
     this.sexoService.getSexo().subscribe((sexo) => {
       this.sexo = sexo;
+      this.sexo.push(this.sexoData);
+      console.log("Debe ser de 4 "+this.sexo.length);
+      this.sexoSeleted = -1;
     });
   }
   obtenerFuncionarios() {

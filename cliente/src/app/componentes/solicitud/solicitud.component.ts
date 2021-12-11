@@ -56,6 +56,17 @@ export class SolicitudComponent implements OnInit, OnDestroy {
     fechaInicio: '',
     fechaFin: '',
   };
+   tiData:any={
+    idFuncionario:'-1',
+    nombre:"Seleccione el ",
+    apellidos:"Responsable de TI"
+
+  }
+  useFinalData:any={
+    idFuncionario:'-1',
+    nombre :"Seleccione el ",
+    apellidos: "usuario Final"
+  }
 
   pdf64: string;
   @ViewChild('solicitudForm') solicitudForm: NgForm;
@@ -71,6 +82,11 @@ export class SolicitudComponent implements OnInit, OnDestroy {
   funcionariosTI!: any[];
   funcionarios!: any[];
   tablaTrigger = new Subject<any>();
+  documentoValido: boolean = false;
+  isUsuarioTi:boolean = false;
+  isUsuarioFinal:boolean = false;
+  responsableTiSelected:number;
+  responsableFinalSelected:number;
 
   constructor(
     private solicitudService: SolicitudService,
@@ -153,6 +169,7 @@ export class SolicitudComponent implements OnInit, OnDestroy {
   }
 
   obtenerSolicitudes() {
+    
     this.dtOptions = {
       pagingType: 'full_numbers',
       sort:false,
@@ -198,7 +215,23 @@ export class SolicitudComponent implements OnInit, OnDestroy {
   }
 
   onFileChangedSolicitud(e: any) {
-    this.solicitud.documentoActaConstitutiva = e[0].base64;
+    let extencionPermitida = /(.pdf|.doc)$/i;
+    let extencionvalida = e[0].name;
+    if (!extencionPermitida.exec(extencionvalida)) {
+      this.swal.error('Solo se permiten Fotos (.pdf y .doc)');
+      return;
+    } else {
+      e[0].base64 ? (this.documentoValido = true) : (this.documentoValido = false);
+
+      this.solicitud.documentoActaConstitutiva = e[0].base64;
+     
+      
+    }
+  }
+  onFileData(e: any) {
+    console.log(this.documentoValido);
+    this.documentoValido = false;
+    console.log(this.documentoValido);
   }
 
   verdocumentoActaconstituvia(sol: Solicitud) {
@@ -250,17 +283,20 @@ export class SolicitudComponent implements OnInit, OnDestroy {
     this.solicitudForm.resetForm();
     this.habilidado = false;
   }
-
   obtenerFuncionariosTI() {
     this.funcionarioService.getFuncionarioTI().subscribe((funcionario) => {
       this.funcionariosTI = funcionario;
-      console.log(this.funcionariosTI);
+      this.funcionariosTI.push(this.tiData);
+      this.responsableTiSelected=-1;
+
     });
   }
 
   obtenerAllFuncionrios() {
     this.funcionarioService.getAllFuncionarios().subscribe((funcionario) => {
       this.funcionarios = funcionario;
+      this.funcionarios.push(this.useFinalData);
+      this.responsableFinalSelected= -1;
     });
   }
 
@@ -345,5 +381,29 @@ export class SolicitudComponent implements OnInit, OnDestroy {
    this.fecha1=((document.getElementById("fechaInicio") as HTMLInputElement).value);
   this.minDate=this.fecha1;
    
+  }
+  validarFechasForm(){
+    this.fecha1=((document.getElementById("fechaInicioFor") as HTMLInputElement).value);
+    console.log(this.fecha1);
+    this.minDate=this.fecha1;
+  }
+  validarSelectUsuarioTi(){
+    if(this.solicitud.idResponsableTI == '-1' || this.solicitud.idResponsableTI == ''){
+       this.isUsuarioTi = false;
+    }else{
+      this.isUsuarioTi = true;
+    }
+    // this.solicitud.idResponsableTI == '-1' || this.solicitud.idResponsableTI == ''?this.isUsuarioTi = false:
+    // this.isUsuarioTi = true;
+    }
+
+  validarUsuarioFinal(){
+    if(this.solicitud.idResponsableUsuarioFinal == '-1' || this.solicitud.idResponsableUsuarioFinal == ''){
+      this.isUsuarioFinal = false;
+   }else{
+      this.isUsuarioFinal = true;
+   }
+  //  this.solicitud.idResponsableUsuarioFinal == '-1' || this.solicitud.idResponsableUsuarioFinal == ''?this.isUsuarioFinal = false:
+  //  this.isUsuarioFinal = true;
   }
 }

@@ -58,9 +58,7 @@ import { TransaccionService } from './servicios/transaccion.service';
     BitacoraComponent,
     ProyectosPastelComponent,
     EstadisticaComponent,
-
     FooterComponent,
-
     MantenimientoComponent,
     MantenimientoTransaccionComponent,
     MantenimientoSexoComponent,
