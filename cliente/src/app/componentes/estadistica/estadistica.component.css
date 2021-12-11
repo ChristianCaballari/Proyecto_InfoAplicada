@@ -15,3 +15,19 @@ padding: 0;
 .center{
 padding-top: 1.5rem;
 }
+.borderCA{
+  border-bottom:  1px  inset #dee2e6 !important;
+  border-left:  1px  inset #dee2e6 !important;
+  border-right:  1px  inset #dee2e6 !important;
+}
+.nav-item button{
+   color:#296d8a !important;
+}
+.containerEsta{
+  max-width: 900px;
+  margin: 0 auto;
+}
+.containerEstaCir{
+  max-width: 600px;
+  margin: 0 auto;
+}

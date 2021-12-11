@@ -54,7 +54,7 @@ export class ProyectosPastelComponent implements OnInit {
   }
   downloadPDF() {
     // Extraemos el
-    const DATA: any = document.getElementById('htmlData');
+    const DATA: any = document.getElementById('htmlData1');
     const doc = new jsPDF('p', 'pt', 'a4');
     doc.text('Reportes Proyectos', 180,20);
     const options = {

@@ -1,0 +1,36 @@
+<div class="p-2">
+   
+     <table
+       datatable
+       [dtOptions]="dtOptions"
+       [dtTrigger]="tablaTrigger"
+       class="table table-striped row-border hover pt-2"
+     >
+     
+     
+       <thead class="bg-custom-2 text-light">
+         <tr>
+           <th>Sexo</th>
+           <th>Acciones</th>
+         </tr>
+       </thead>
+       <tbody>
+          <tr *ngFor="let sexo of sexos">
+           <td>{{ sexo.descripcion }}</td>
+          <td>
+            <a (click)="editarSexo(sexo)"class="btn btn-edit spacing">
+              <i class="fas fa-edit"></i>
+            </a>
+             <a
+               (click)="eliminarSexo(sexo)"
+               class="btn btn-danger">
+               <i class="fas fa-trash-alt"></i>
+             </a>
+           </td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+
+
+

@@ -172,6 +172,7 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
 
     this.funcionarioService.getAllFuncionarios().subscribe((funcionarios) => {
       this.funcionarios = funcionarios;
+      console.log(funcionarios);
       this.tablaTrigger.next();
     });
   }

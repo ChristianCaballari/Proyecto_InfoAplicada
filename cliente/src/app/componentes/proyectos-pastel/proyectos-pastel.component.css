@@ -15,3 +15,11 @@ padding: 0;
 .center{
 padding-top: 1.5rem;
 }
+
+.legend-labels{
+
+}
+ul .legend-labels .horizontal-legend{
+  max-width: 1200px!important;
+  height: 900px;
+}

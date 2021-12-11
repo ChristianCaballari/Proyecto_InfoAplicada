@@ -1,0 +1,98 @@
+<div class="m-2">
+  <a
+  href="#"
+  class="btn btn-agregar btn-block"
+  data-toggle="tooltip" data-placement="top" title="Agregar departamento"
+  data-bs-toggle="modal"
+  data-bs-target="#agregarClienteModal"
+  #botonAbrir
+  ><i class="fas fa-plus"></i> Agregar
+</a>
+</div>
+<div class="p-2">
+     <table
+       datatable
+       [dtOptions]="dtOptions"
+       [dtTrigger]="tablaTrigger"
+       class="table table-striped row-border hover pt-2"
+     >
+     
+     
+       <thead class="bg-custom-2 text-light">
+         <tr>
+           <th>Transaccion</th>
+           <th>Acciones</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr *ngFor="let transaccion of transacciones">
+           <td>{{ transaccion.descripcion }}</td>
+           <td>
+             <a (click)="editarTransaccion(transaccion)" class="btn btn-edit spacing">
+              <i class="fas fa-edit"></i>
+            </a>
+            <a
+            (click)="eliminarTransaccion(transaccion)"
+            class="btn btn-danger">
+              <i class="fas fa-trash-alt"></i>
+          </a>
+           </td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+   <div class="modal fade" id="agregarClienteModal">
+    <div class="modal-dialog modal-lg">
+     <div class="modal-content">
+       <div class="modal-header text-white bg-custom-2">
+         <h5 class="modal-title">Agregar Transaccion</h5>
+         <button
+           class="btn-close btn-close-white"
+           data-bs-dismiss="modal"
+           data-toggle="tooltip" data-placement="top" title="Cerrar"
+           #botonCerrar
+           (click)="cerrarModal()"
+         ></button>
+       </div> 
+ 
+ <form #transaccionForm="ngForm" (ngSubmit)="agregarTransaccion(transaccionForm)">
+ <input type="hidden" name="idTransaccion"
+ #idDepartamento="ngModel"
+ [(ngModel)]="transaccion.idTransaccion"/>
+         <div class="modal-body">
+           <div class="row">
+             <div class="col">
+               <div class="form-group">
+                 <label for="descripcion">Descripci&oacute;n</label>
+                 <input
+                 type="text" 
+                 name="descripcion" 
+                 class="form-control"
+                 #descripcion="ngModel"
+                 [(ngModel)]="transaccion.descripcion"
+                 [ngClass]="{'is-invalid': descripcion.errors && descripcion.touched}"
+                 required
+                 minlength="2" 
+                 placeholder="Ingrese el nombre de la transaccion" 
+                 />
+                 <div [hidden]="!descripcion.errors?.required" class="invalid-feedback">
+                   *Campo requerido
+                 </div> 
+                 <div [hidden]="!descripcion.errors?.minlength" class="invalid-feedback">
+                   Debe contener al menos 2 caracteres
+                 </div>
+               </div>
+             </div>
+             
+         </div>
+         </div>
+ 
+         <div class="modal-footer">
+           <button type="submit" class="btn btn-agregar" data-toggle="tooltip" data-placement="top" title="Guardar"
+           [disabled]="!transaccionForm.valid">Guardar</button>
+         </div>
+         </form>
+       </div>
+     </div>
+   </div> 
+
