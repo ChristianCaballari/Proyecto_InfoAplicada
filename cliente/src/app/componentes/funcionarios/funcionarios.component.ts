@@ -74,18 +74,25 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
     
     let extencionPermitida = /(.png|.jpg)$/i;
     let extencionvalida = e[0].name;
+    
+    console.log("Fotoooo");
+    console.log(e[0].base64);
+
     if (!extencionPermitida.exec(extencionvalida)) {
       this.swal.error('Solo se permiten Fotos (.png y .jpg)');
       return;
     } else {
       e[0].base64 ? (this.fotoValida = true) : (this.fotoValida = false);
+
       this.funcionario.foto = e[0].base64;
+     
+      
     }
   }
   onFileData(e: any) {
-    console.log(this.fotoValida);
+    //console.log(this.fotoValida);
     this.fotoValida = false;
-    console.log(this.fotoValida);
+   // console.log(this.fotoValida);
   }
   validarSelectSexo(){
     if(this.funcionario.idSexo == '-1' || this.funcionario.idSexo == ''){

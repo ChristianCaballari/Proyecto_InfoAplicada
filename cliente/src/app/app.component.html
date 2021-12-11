@@ -3,10 +3,12 @@
 <app-header *ngIf="loginService.getIsLogged() | async"></app-header>
 <app-sidebar *ngIf="loginService.getIsLogged() | async"></app-sidebar>
 
+
+
 <!-- <app-header></app-header>
 <app-sidebar></app-sidebar> -->
 
 <router-outlet></router-outlet>
 
-
+<app-footer *ngIf="loginService.getIsLogged() | async"></app-footer>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>

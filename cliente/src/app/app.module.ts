@@ -32,6 +32,7 @@ import { BitacoraComponent } from './componentes/bitacora/bitacora.component';
 import { ProyectosPastelComponent } from './componentes/proyectos-pastel/proyectos-pastel.component';
 import { EstadisticaComponent } from './componentes/estadistica/estadistica.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { FooterComponent } from './componentes/footer/footer.component';
 
 
 
@@ -49,6 +50,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     BitacoraComponent,
     ProyectosPastelComponent,
     EstadisticaComponent,
+    FooterComponent,
     
     
   ],
