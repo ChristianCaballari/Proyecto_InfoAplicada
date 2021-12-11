@@ -192,6 +192,9 @@ export class SolicitudComponent implements OnInit, OnDestroy {
           exportOptions: {
             columns: [0, 1, 2, 3],
           },
+          customize: function(doc) {
+            doc.content[1].margin = [ 70, 0, 100, 0 ] //left, top, right, bottom
+          }
         },
         {
           extend: 'pdfHtml5',
@@ -203,6 +206,9 @@ export class SolicitudComponent implements OnInit, OnDestroy {
           exportOptions: {
             columns: [0, 1, 2, 3],
           },
+          customize: function(doc) {
+            doc.content[1].margin = [ 70, 0, 100, 0 ] //left, top, right, bottom
+          }
         },
       ],
     };

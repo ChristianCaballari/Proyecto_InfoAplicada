@@ -5,6 +5,8 @@ import { Bitacora } from 'src/app/modelo/Bitacora.model';
 import { BitacoraFiltro } from 'src/app/modelo/Filtro.model';
 import { Subject } from 'rxjs';
 import { NgForm } from '@angular/forms';
+import { forEach } from 'jszip';
+import { ThisReceiver } from '@angular/compiler';
 
 
 @Component({
@@ -32,8 +34,28 @@ export class BitacoraComponent implements OnInit,OnDestroy {
   meses:string[]=["Enero","Febrero","Marzo", "Abril","Mayo","Junio","Julio","Agosto","Setiembre","Octubre",
 "Noviembre","Diciembre"];
 
+ meses1 =[
+  {"name":"Enero","value":1,"activo":false},
+  {"name":"Febrero","value":2,"activo":false},
+  {"name":"Marzo","value":3,"activo":false},
+  {"name":"Abril","value":4,"activo":false},
+  {"name":"Mayo","value":5,"activo":false},
+  {"name":"Junio","value":6,"activo":false},
+  {"name":"Julio","value":7,"activo":false},
+  {"name":"Agosto","value":8,"activo":false},
+  {"name":"Setiembre","value":9,"activo":false},
+  {"name":"Octubre","value":10,"activo":false},
+  {"name":"Noviembre","value":11,"activo":false},
+  {"name":"Diciembre","value":12,"activo":false}
+]
+
+
+
+
+
 primerMesSelected:number = 1;
 segundoMesSelected:number = 1;
+mesSelected:number =1;
 fechaInicio: any;
 fechaFinal: any;
 isDisabled:any=false;
@@ -147,7 +169,20 @@ isDisabled:any=false;
       this.isDisabled=false;
     }
    }
-  
-
-
+   false(){
+    for(let mes of this.meses1){
+      mes.activo=false;
+   }
+   }
+   validarRandoMes(){
+    this.false();
+     console.log(this.mesSelected);
+     let cont= 0;
+    for(let mes of this.meses1){
+       if(cont<this.mesSelected){
+           mes.activo=true;
+       }
+      cont++;
+    }
+   }
 }

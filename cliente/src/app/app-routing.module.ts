@@ -15,19 +15,19 @@ import { MantenimientoSexoComponent } from './componentes/mantenimiento-sexo/man
 
 const routes: Routes = [
   {path: '',redirectTo:'/login', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent,/*canActivate:[GuardianGuard]*/},
+  {path: 'home', component: HomeComponent,canActivate:[GuardianGuard]},
   {path: 'login', component: LoginComponent },
- {path: 'departamento', component: DepartamentoComponent,/*canActivate:[GuardianGuard]*/},
+ {path: 'departamento', component: DepartamentoComponent,canActivate:[GuardianGuard]},
  // {path: 'departamento', component: DepartamentoComponent},
   {path: 'departamento/editar/:id', component: DepartamentoComponent},
-  {path: 'solicitud', component: SolicitudComponent,/*canActivate:[GuardianGuard]*/},
-  {path: 'avance', component: AvanceComponent,/*canActivate:[GuardianGuard]*/},
+  {path: 'solicitud', component: SolicitudComponent,canActivate:[GuardianGuard]},
+  {path: 'avance', component: AvanceComponent,canActivate:[GuardianGuard]},
   {path: 'bitacora', component: BitacoraComponent},
-  {path: 'estadistica', component: EstadisticaComponent,/*canActivate:[GuardianGuard]*/},
-  {path: 'pastel', component: ProyectosPastelComponent,/*canActivate:[GuardianGuard]*/},
-  {path: 'mantenimiento', component: MantenimientoComponent,/*canActivate:[GuardianGuard]*/},
-  {path: 'mantenimientoSexo', component: MantenimientoSexoComponent,/*canActivate:[GuardianGuard]*/},
-  {path: 'mantenimientoTransaccion', component: MantenimientoTransaccionComponent,/*canActivate:[GuardianGuard]*/},
+  {path: 'estadistica', component: EstadisticaComponent,canActivate:[GuardianGuard]},
+  {path: 'pastel', component: ProyectosPastelComponent,canActivate:[GuardianGuard]},
+  {path: 'mantenimiento', component: MantenimientoComponent,canActivate:[GuardianGuard]},
+  {path: 'mantenimientoSexo', component: MantenimientoSexoComponent,canActivate:[GuardianGuard]},
+  {path: 'mantenimientoTransaccion', component: MantenimientoTransaccionComponent,canActivate:[GuardianGuard]},
   //{path: '**', component: PageNotFoundComponent}
 ]
 

@@ -84,6 +84,7 @@
       <div class="border-dark borderCA">
         <a class="btn btn-agregar m-1 nav-link active" (click)=" downloadPDF()">Generar Reporte</a>
         <div id="htmlData">
+          <div class="charts-container">
         <ngx-charts-bar-vertical
         [view]="view"
         [scheme]="colorScheme"
@@ -101,6 +102,7 @@
         (select)="onSelect($event)"
       >
       </ngx-charts-bar-vertical>
+    </div>
     </div>
       </div>
     </div>

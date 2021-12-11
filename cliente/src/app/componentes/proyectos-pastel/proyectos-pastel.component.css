@@ -23,3 +23,12 @@ ul .legend-labels .horizontal-legend{
   max-width: 1200px!important;
   height: 900px;
 }
+
+/* #pie-chart-parent { 
+  display: grid;
+  height: 250px;
+ } */
+ .chart-wrapper { display: flex; overflow: hidden; }
+ .charts-container{
+   height: 370px;
+ }

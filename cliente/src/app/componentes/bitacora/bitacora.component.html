@@ -9,8 +9,11 @@
             <div class="form-group pb-1">
               <label for="min">Primer mes:</label>
 
-              <select id="mesInicio" name="mesInicio" #mesInicio="ngModel" [(ngModel)]="filtro.mesInicio"
-                class="form-control" [(ngModel)]="primerMesSelected">
+              <select id="mesInicio" name="mesInicio" #mesInicio="ngModel"
+                class="form-control"
+                (click)="validarRandoMes()"
+                [(ngModel)]="mesSelected"
+                >
                 <option [value]="1">Enero</option>
                 <option [value]="2">Febrero</option>
                 <option [value]="3">Marzo</option>
@@ -34,8 +37,9 @@
                 [(ngModel)]="filtro.mesFinal" class="form-control" [(ngModel)]="segundoMesSelected">
               
               
-
-                <option  [value]="1" [disabled]="isDisabled">Enero</option>
+                <option [disabled]="item.activo"  [value]="item.value" *ngFor="let item of meses1"
+              >{{ item.name }}</option>
+                <!-- <option  [value]="1" [disabled]="isDisabled">Enero</option>
                 <option  [value]="2" [disabled]="isDisabled">Febrero</option>
                 <option  [value]="3" [disabled]="isDisabled">Marzo</option>
                 <option [value]="4" [disabled]="isDisabled">Abril</option>
@@ -46,7 +50,7 @@
                 <option [value]="9" [disabled]="isDisabled">Setiembre</option>
                 <option [value]="10" [disabled]="isDisabled">Octubre</option>
                 <option [value]="11" [disabled]="isDisabled">Noviembre</option>
-                <option [value]="12" [disabled]="isDisabled">Diciembre</option>
+                <option [value]="12" [disabled]="isDisabled">Diciembre</option> -->
 
           
             

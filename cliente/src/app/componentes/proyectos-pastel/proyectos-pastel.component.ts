@@ -35,7 +35,7 @@ export class ProyectosPastelComponent implements OnInit {
    maxLabelLength: number = 20;
    trimLabels: boolean = true;
    legendTitle: string = 'Proyectos';
-   legendPosition: any = 'below';
+   legendPosition: any = 'right';
 
   colorScheme:any= {
     domain: ['#C7B42C', '#5AA454', '#A10A28']

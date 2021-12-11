@@ -25,7 +25,7 @@ export class EstadisticaComponent implements OnInit {
   xAxisLabel = 'Proyectos';
   showYAxisLabel = true;
   yAxisLabel = 'Avances';
-  legendPosition: any = 'below';
+  legendPosition: any = 'right';
   legendTitle: any = 'Avances Proyectos'
 
   colorScheme :any= {
