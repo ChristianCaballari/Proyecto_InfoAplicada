@@ -4,15 +4,16 @@ exports.crear = (req, res) => {
 
   const {idDepartamento, idSexo, nombre, apellidos, fachaNacimiento, foto, loginName, password} = req.body;
 
-  let transaccion = `EXEC [dbo].[sp_insertFuncionario] @idDepartamento =N'${idDepartamento}',@idSexo =N'${idSexo}',@nombre =N'${nombre}',
-  @apellidos =N'${apellidos}',@fechaNacimiento =N'${fachaNacimiento}',@foto =N'${foto}',
-  @loginName =N'${loginName}',@password =N'${password}'`;
+  console.log(foto);
+  // let transaccion = `EXEC [dbo].[sp_insertFuncionario] @idDepartamento =N'${idDepartamento}',@idSexo =N'${idSexo}',@nombre =N'${nombre}',
+  // @apellidos =N'${apellidos}',@fechaNacimiento =N'${fachaNacimiento}',@foto =N'${foto}',
+  // @loginName =N'${loginName}',@password =N'${password}'`;
 
-  let promise = DataFuncionario.trasaccion(transaccion);
+  // let promise = DataFuncionario.trasaccion(transaccion);
 
-   promise.then((resultado) =>{
-       res.json(resultado);
-   })
+  //  promise.then((resultado) =>{
+  //      res.json(resultado);
+  //  })
 };
 
 

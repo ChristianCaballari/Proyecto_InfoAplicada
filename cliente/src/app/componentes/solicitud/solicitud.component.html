@@ -37,6 +37,8 @@
                 type="date"
                 id="fechaFin"
                 name="fechaFin"
+                (click)="validarFechas()"
+                [min]="minDate | date:'yyyy-MM-dd'"
                 #fechaFin="ngModel"
                 [(ngModel)]="filtro1.fechaFin"
                 class="form-control m-md-1"

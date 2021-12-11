@@ -17,6 +17,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { IRespuesta } from 'src/app/modelo/Respuesta.models';
 
+
 @Component({
   selector: 'app-solicitud',
   templateUrl: './solicitud.component.html',
@@ -64,6 +65,8 @@ export class SolicitudComponent implements OnInit, OnDestroy {
   @ViewChild('botonDetalles') botonDetalles: ElementRef;
 
   dtOptions: any = {};
+  fecha1: any;
+  minDate = new Date();
   solicitudes!: any[];
   funcionariosTI!: any[];
   funcionarios!: any[];
@@ -336,5 +339,11 @@ export class SolicitudComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  validarFechas(){
+   this.fecha1=((document.getElementById("fechaInicio") as HTMLInputElement).value);
+  this.minDate=this.fecha1;
+   
   }
 }

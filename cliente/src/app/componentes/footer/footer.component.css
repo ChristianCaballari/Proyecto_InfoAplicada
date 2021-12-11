@@ -1,0 +1,34 @@
+.pie-pagina{
+    width: 100%;
+    /* background-image: linear-gradient(15deg, #13547a 30%, #80d0c7 0%); */
+    background-color: #13547a;
+    color:white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 18%
+}
+.row{
+    padding-left: 10%;
+}
+
+.pie-pagina .grupo-1{
+    width: 100%;
+    max-width: 1200px;
+    margin:auto;
+    grid-gap: 50px;
+    position: absolute;
+    bottom: 0;
+}
+.imagen{
+    width: 0%;
+    position:relative;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    color: white;
+  }

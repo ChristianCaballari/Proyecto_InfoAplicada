@@ -33,10 +33,14 @@ import { BitacoraComponent } from './componentes/bitacora/bitacora.component';
 import { ProyectosPastelComponent } from './componentes/proyectos-pastel/proyectos-pastel.component';
 import { EstadisticaComponent } from './componentes/estadistica/estadistica.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+
+import { FooterComponent } from './componentes/footer/footer.component';
+
 import { MantenimientoComponent } from './componentes/mantenimiento/mantenimiento.component';
 import { MantenimientoTransaccionComponent } from './componentes/mantenimiento-transaccion/mantenimiento-transaccion.component';
 import { MantenimientoSexoComponent } from './componentes/mantenimiento-sexo/mantenimiento-sexo.component';
 import { TransaccionService } from './servicios/transaccion.service';
+
 
 
 
@@ -54,9 +58,13 @@ import { TransaccionService } from './servicios/transaccion.service';
     BitacoraComponent,
     ProyectosPastelComponent,
     EstadisticaComponent,
+
+    FooterComponent,
+
     MantenimientoComponent,
     MantenimientoTransaccionComponent,
     MantenimientoSexoComponent,
+
     
     
   ],
