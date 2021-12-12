@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'departamento/editar/:id', component: DepartamentoComponent},
   {path: 'solicitud', component: SolicitudComponent,canActivate:[GuardianGuard]},
   {path: 'avance', component: AvanceComponent,canActivate:[GuardianGuard]},
-  {path: 'bitacora', component: BitacoraComponent},
+  {path: 'bitacora', component: BitacoraComponent,canActivate:[GuardianGuard]},
   {path: 'estadistica', component: EstadisticaComponent,canActivate:[GuardianGuard]},
   {path: 'pastel', component: ProyectosPastelComponent,canActivate:[GuardianGuard]},
   {path: 'mantenimiento', component: MantenimientoComponent,canActivate:[GuardianGuard]},
